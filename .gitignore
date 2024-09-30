@@ -60,3 +60,21 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+
+# Ignore temporary files and build artifacts
+*.o
+*.class
+*.tmp
+*.log
+
+# Ignore Xcode derived data
+DerivedData/
+
+# Ignore build folder
+Build/
+
+# Ignore simulator logs
+*.app.dSYM
+
+# Ignore other system files
+.DS_Store
