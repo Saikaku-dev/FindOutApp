@@ -29,13 +29,13 @@ struct OpenView: View {
                     }
                 }
             }
-            .background(
-                NavigationLink(
-                    destination: LoadingView(),
-                    isActive: $isActive,
-                    label: { EmptyView() }
-                )
-            )
+//            .background(
+//                NavigationLink(
+//                    destination: LoadingView(),
+//                    isActive: $isActive,
+//                    label: { EmptyView() }
+//                )
+//            )
         }
 //        .fullScreenCover(isPresented: 
     }
