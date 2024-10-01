@@ -17,7 +17,7 @@ struct ScaleMapView: View {
     
     var body: some View {
         ZStack {
-            Image("6618")
+            Image("basicMap")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
