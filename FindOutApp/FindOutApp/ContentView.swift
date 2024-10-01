@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var MoveToMapView:Bool = false
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
+            Button(action : {
+                MoveToMapView = true
+            }) {
+                Image(systemName: "globe")
+                    .imageScale(.large)
+                    .foregroundStyle(.tint)
+            }
             Text("Hello, world!")
         }
         .padding()
+        .fullScreenCover(isPresented: $MoveToMapView) {
+            ScaleMapView()
+        }
     }
 }
 
