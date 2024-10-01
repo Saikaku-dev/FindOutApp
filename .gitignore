@@ -78,3 +78,4 @@ Build/
 
 # Ignore other system files
 .DS_Store
+*.xcuserstate
