@@ -22,7 +22,7 @@ struct ContentView: View {
         }
         .padding()
         .fullScreenCover(isPresented: $MoveToMapView) {
-            ScaleMapView()
+            BaseMapView()
         }
     }
 }
