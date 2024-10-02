@@ -25,7 +25,7 @@ struct BaseMapView: View {
     
     var body: some View {
         ZStack {
-            Image("basic map H")
+            Image("basic map")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
@@ -53,18 +53,18 @@ struct BaseMapView: View {
             if(showLight){
                 Button(
                     action: {showLight.toggle()
-                        x=defaultOffset.width + dragOffset.width-19
-                        y=defaultOffset.height + dragOffset.height-65
+                        x=defaultOffset.width + dragOffset.width+60
+                        y=defaultOffset.height + dragOffset.height-10
                         showAnimation = true
                         coinAnimation()
                     }, label: {
-                        Image("street light H")
+                        Image("street light")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 43,height: 17)
+                            .frame(width: 18,height: 40)
                      .clipped()
                     })
-                .offset(x:-19,y: -65)
+                .offset(x:60,y: -18)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
                 .gesture(
                     SimultaneousGesture (
@@ -87,23 +87,23 @@ struct BaseMapView: View {
                 )//gesture end
                 
             }//if end
-            
-            //紫色雪人显示判定
+        
+            //紫色雪人显示判定(▶️)
             if(showPurpleScarf){
                 Button(
                     action: {showPurpleScarf.toggle()
-                        x=defaultOffset.width + dragOffset.width+125
-                        y=defaultOffset.height + dragOffset.height-330
+                        x=defaultOffset.width + dragOffset.width+310
+                        y=defaultOffset.height + dragOffset.height+135
                         showAnimation = true
                         coinAnimation()
                     }, label: {
-                        Image("purple scarf H")
+                        Image("purple scarf")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 55,height: 40)
-                            .clipped()
+                            .frame(width: 35,height: 50)
+                     .clipped()
                     })
-                .offset(x:125,y: -330)
+                .offset(x:310,y: 135)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
                 .gesture(
                     SimultaneousGesture (
@@ -131,16 +131,16 @@ struct BaseMapView: View {
                 Button(
                     action: {showBlueScarf.toggle()
                         showAnimation = true
-                        x=defaultOffset.width + dragOffset.width+120
-                        y=defaultOffset.height + dragOffset.height+50
+                        x=defaultOffset.width + dragOffset.width-50
+                        y=defaultOffset.height + dragOffset.height+110
                         coinAnimation()}, label: {
-                        Image("blue scarf H")
+                        Image("blue scarf")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 55,height: 35)
+                            .frame(width: 50,height: 65)
                             .clipped()
                     })
-                .offset(x:120,y: 50)
+                .offset(x:-50,y: 110)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
                 .gesture(
                     SimultaneousGesture (
@@ -167,19 +167,19 @@ struct BaseMapView: View {
             if(showBusLeft){
                 Button(
                     action: {showBusLeft.toggle()
-                        x=defaultOffset.width + dragOffset.width-158
-                        y=defaultOffset.height + dragOffset.height+315
+                        x=defaultOffset.width + dragOffset.width-280
+                        y=defaultOffset.height + dragOffset.height-140
                         showAnimation = true
                         coinAnimation()
                     }, label: {
-                        Image("left bus H")
+                        Image("bus left")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 50,height: 60)
+                            .frame(width: 70,height: 62)
                             .clipped()
                     })
 
-                .offset(x:-158,y:315)
+                .offset(x:-280,y:-140)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
                 .gesture(
                     SimultaneousGesture (
@@ -206,19 +206,19 @@ struct BaseMapView: View {
             if(showBusRight){
                 Button(
                     action: {showBusRight.toggle()
-                        x=defaultOffset.width + dragOffset.width+120
-                        y=defaultOffset.height + dragOffset.height-200
+                        x=defaultOffset.width + dragOffset.width+220
+                        y=defaultOffset.height + dragOffset.height+100
                         showAnimation = true
                         coinAnimation()
                     }, label: {
-                        Image("right bus H")
+                        Image("bus right")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 50,height: 60)
+                            .frame(width: 65,height: 53)
                             .clipped()
                     })
 
-                .offset(x:120,y:-200)
+                .offset(x:220,y:100)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
                 .gesture(
                     SimultaneousGesture (
@@ -244,7 +244,7 @@ struct BaseMapView: View {
 
             //3D动画旋转效果(旋转角度设定)
            if(showAnimation){
-                Image("gold H")
+                Image("gold")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)
