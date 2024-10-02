@@ -205,7 +205,7 @@ struct BaseMapView: View {
             //右斜公交车显示判定
             if(showBusRight){
                 Button(
-                    action: {showBusLeft.toggle()
+                    action: {showBusRight.toggle()
                         x=defaultOffset.width + dragOffset.width+120
                         y=defaultOffset.height + dragOffset.height-200
                         showAnimation = true
