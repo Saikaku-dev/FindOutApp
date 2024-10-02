@@ -88,14 +88,15 @@ struct BaseMapView: View {
                 
             }//if end
         
-            //紫色雪人显示判定(▶️)
+            //紫色雪人显示判定
             if(showPurpleScarf){
                 Button(
                     action: {showPurpleScarf.toggle()
-                        x=defaultOffset.width + dragOffset.width+310
-                        y=defaultOffset.height + dragOffset.height+135
+                       
                         showAnimation = true
                         coinAnimation()
+                        x=defaultOffset.width + dragOffset.width+310
+                        y=defaultOffset.height + dragOffset.height+135
                     }, label: {
                         Image("purple scarf")
                             .resizable()
@@ -105,25 +106,6 @@ struct BaseMapView: View {
                     })
                 .offset(x:310,y: 135)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
-                .gesture(
-                    SimultaneousGesture (
-                    DragGesture ()
-                        .updating($dragOffset) { value, move, _ in
-                            move = value.translation
-                        }
-                        .onEnded { value in
-                            defaultOffset.width += value.translation.width
-                            defaultOffset.height += value.translation.height
-                        },
-                    MagnificationGesture()
-                        .updating($dragScale) { value, scale, _ in
-                            scale = value
-                        }
-                        .onEnded { value in
-                            defaultScale *= value
-                        }
-                    )
-                )//gesture end
             }//if end
     
             //蓝色雪人显示判断
@@ -142,25 +124,6 @@ struct BaseMapView: View {
                     })
                 .offset(x:-50,y: 110)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
-                .gesture(
-                    SimultaneousGesture (
-                    DragGesture ()
-                        .updating($dragOffset) { value, move, _ in
-                            move = value.translation
-                        }
-                        .onEnded { value in
-                            defaultOffset.width += value.translation.width
-                            defaultOffset.height += value.translation.height
-                        },
-                    MagnificationGesture()
-                        .updating($dragScale) { value, scale, _ in
-                            scale = value
-                        }
-                        .onEnded { value in
-                            defaultScale *= value
-                        }
-                    )
-                )//gesture end
             }//if end
             
             //左斜公交车显示判定
@@ -181,25 +144,6 @@ struct BaseMapView: View {
 
                 .offset(x:-280,y:-140)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
-                .gesture(
-                    SimultaneousGesture (
-                    DragGesture ()
-                        .updating($dragOffset) { value, move, _ in
-                            move = value.translation
-                        }
-                        .onEnded { value in
-                            defaultOffset.width += value.translation.width
-                            defaultOffset.height += value.translation.height
-                        },
-                    MagnificationGesture()
-                        .updating($dragScale) { value, scale, _ in
-                            scale = value
-                        }
-                        .onEnded { value in
-                            defaultScale *= value
-                        }
-                    )
-                )//gesture end
             }//if end
             
             //右斜公交车显示判定
@@ -220,34 +164,14 @@ struct BaseMapView: View {
 
                 .offset(x:220,y:100)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
-                .gesture(
-                    SimultaneousGesture (
-                    DragGesture ()
-                        .updating($dragOffset) { value, move, _ in
-                            move = value.translation
-                        }
-                        .onEnded { value in
-                            defaultOffset.width += value.translation.width
-                            defaultOffset.height += value.translation.height
-                        },
-                    MagnificationGesture()
-                        .updating($dragScale) { value, scale, _ in
-                            scale = value
-                        }
-                        .onEnded { value in
-                            defaultScale *= value
-                        }
-                    )
-                )//gesture end
             }//if end
         
-
             //3D动画旋转效果(旋转角度设定)
            if(showAnimation){
                 Image("gold")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 50)
+                    .frame(width: 30)
                     .clipShape(Circle())
                     .overlay(Circle()
                         .stroke(Color.white,lineWidth: 5))
@@ -262,7 +186,6 @@ struct BaseMapView: View {
                     }
                 //获取按钮位置坐标的传值（动画发生的位置）
                     .offset(x:x,y:y)
-                   // .position(x:1000,y:500)
                 }//if end 动画启动判断
 
         }//ZStack end
