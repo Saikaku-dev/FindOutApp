@@ -6,7 +6,8 @@ struct BaseMapView: View {
     @State var showBlueScarf=true//蓝色雪人1判定布尔值
     @State var showBusLeft=true//公交车(左)按钮判定布尔值
     @State var showBusRight=true//公交车(右)按钮判定布尔值
-
+    @State var count : Double=0.0 //更新进度条
+    
     @State var showAnimation=false//3D动画状态布尔值
     @State var animation=0.0//创建变量储存旋转角度
     
@@ -57,6 +58,7 @@ struct BaseMapView: View {
                         y=defaultOffset.height + dragOffset.height-10
                         showAnimation = true
                         coinAnimation()
+                        count+=1
                     }, label: {
                         Image("street light")
                             .resizable()
@@ -87,7 +89,7 @@ struct BaseMapView: View {
                 )//gesture end
                 
             }//if end
-        
+
             //紫色雪人显示判定
             if(showPurpleScarf){
                 Button(
@@ -95,6 +97,7 @@ struct BaseMapView: View {
                        
                         showAnimation = true
                         coinAnimation()
+                        count+=1
                         x=defaultOffset.width + dragOffset.width+310
                         y=defaultOffset.height + dragOffset.height+135
                     }, label: {
@@ -107,7 +110,7 @@ struct BaseMapView: View {
                 .offset(x:310,y: 135)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
             }//if end
-    
+
             //蓝色雪人显示判断
             if(showBlueScarf){
                 Button(
@@ -115,7 +118,8 @@ struct BaseMapView: View {
                         showAnimation = true
                         x=defaultOffset.width + dragOffset.width-50
                         y=defaultOffset.height + dragOffset.height+110
-                        coinAnimation()}, label: {
+                        coinAnimation()
+                        count+=1}, label: {
                         Image("blue scarf")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -125,7 +129,7 @@ struct BaseMapView: View {
                 .offset(x:-50,y: 110)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
             }//if end
-            
+
             //左斜公交车显示判定
             if(showBusLeft){
                 Button(
@@ -134,6 +138,7 @@ struct BaseMapView: View {
                         y=defaultOffset.height + dragOffset.height-140
                         showAnimation = true
                         coinAnimation()
+                        count+=1
                     }, label: {
                         Image("bus left")
                             .resizable()
@@ -145,7 +150,7 @@ struct BaseMapView: View {
                 .offset(x:-280,y:-140)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
             }//if end
-            
+
             //右斜公交车显示判定
             if(showBusRight){
                 Button(
@@ -154,6 +159,7 @@ struct BaseMapView: View {
                         y=defaultOffset.height + dragOffset.height+100
                         showAnimation = true
                         coinAnimation()
+                        count+=1
                     }, label: {
                         Image("bus right")
                             .resizable()
@@ -165,7 +171,20 @@ struct BaseMapView: View {
                 .offset(x:220,y:100)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
             }//if end
-        
+            
+            //圆形进度条
+            Gauge(value: count, in: 0...5){
+               // Text("kg")         //淡白質量引数はずです
+            }
+        currentValueLabel: {
+                Text("\(Int(count))/5")
+            }
+        .gaugeStyle(.accessoryCircularCapacity)
+                           .progressViewStyle(.linear)
+                           .tint(.blue)
+                           .offset(x:-380,y:0)
+            //进度条结束
+
             //3D动画旋转效果(旋转角度设定)
            if(showAnimation){
                 Image("gold")
