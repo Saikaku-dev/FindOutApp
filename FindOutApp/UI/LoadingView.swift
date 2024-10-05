@@ -3,6 +3,8 @@ import SwiftUI
 struct LoadingView: View {
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
+    //主界面迁移
+    @State private var MoveToGameView: Bool = false
 
     var body: some View {
         VStack {
@@ -19,6 +21,12 @@ struct LoadingView: View {
             startProgress()
         }
         .navigationBarBackButtonHidden(true) // 隐藏返回按钮
+//        .navigationDestination(isPresented: $MoveToGameView) {
+//            BaseMapView()
+//        }
+        .fullScreenCover(isPresented: $MoveToGameView) {
+            BaseMapView()
+        }
     }
 
     func startProgress() {
@@ -28,11 +36,14 @@ struct LoadingView: View {
                 progress += 0.025 // 4秒钟内达到1.0
             } else {
                 timer?.invalidate() // 完成时停止计时器
+                MoveToGameView = true
             }
         }
     }
 }
 
 #Preview {
-    LoadingView()
+    NavigationStack {
+        LoadingView()
+    }
 }

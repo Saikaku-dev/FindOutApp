@@ -59,6 +59,7 @@
 		7F27709F2CAAD1D5002CBC45 /* FindOutApp */ = {
 			isa = PBXGroup;
 			children = (
+				7F9366B42CB18DC8001A7A22 /* ItemBar */,
 				7FAEC2AC2CACF49D00F811B0 /* NewMap */,
 				7FB175612CAB985E003ABEA2 /* UI */,
 				7F2770A02CAAD1D5002CBC45 /* FindOutAppApp.swift */,
@@ -84,6 +85,13 @@
 				7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		7F9366B42CB18DC8001A7A22 /* ItemBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ItemBar;
 			sourceTree = "<group>";
 		};
 		7FAEC2AC2CACF49D00F811B0 /* NewMap */ = {
@@ -312,7 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = WPASD3T494;
+				DEVELOPMENT_TEAM = NTA3FA6DCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -325,7 +333,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver2;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -341,7 +349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = WPASD3T494;
+				DEVELOPMENT_TEAM = NTA3FA6DCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -354,7 +362,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver2;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
