@@ -24,6 +24,10 @@ struct BaseMapView: View {
     @State private var x:CGFloat=0
     @State private var y:CGFloat=0
     
+    //itemBarSize
+    @State private var itemBarOpacity:CGFloat = 1.0
+    @State var itemBarButton = false
+    
     var body: some View {
         ZStack {
             Image("basic map")
@@ -174,11 +178,11 @@ struct BaseMapView: View {
             
             //圆形进度条
             Gauge(value: count, in: 0...5){
-                // Text("kg")         //淡白質量引数はずです
+                Text("\(Int(count))/5")
             }
-        currentValueLabel: {
-            Text("\(Int(count))/5")
-        }
+//        currentValueLabel: {
+//            Text("\(Int(count))/5")
+//        }
         .gaugeStyle(.accessoryCircularCapacity)
         .progressViewStyle(.linear)
         .tint(.blue)
@@ -193,10 +197,10 @@ struct BaseMapView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30)
-                    .clipShape(Circle())
-                    .overlay(Circle()
-                        .stroke(Color.white,lineWidth: 5))
-                    .shadow(radius: 20)
+//                    .clipShape(Circle())
+//                    .overlay(Circle()
+//                    .stroke(Color.white,lineWidth: 5))
+//                    .shadow(radius: 20)
                     .rotation3DEffect(
                         .degrees(animation),axis: (x: 0.0, y: 1.0, z: 0.2)
                     )
@@ -209,6 +213,31 @@ struct BaseMapView: View {
                     .offset(x:x,y:y)
             }//if end 动画启动判断
             
+            VStack {
+                if itemBarButton {
+                    Button(action: {
+                        itemBarOpacity = 1.0
+                        itemBarButton = false
+                    }) {
+                        Text("表示")
+                            .foregroundColor(.black)
+                            .padding(.horizontal)
+                            .background(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                Button(action: {
+                    itemBar()
+                }) {
+                    ItemListView()
+                        .padding(.horizontal,5)
+                        .padding(.vertical,10)
+                        .background(.green)
+                        .cornerRadius(50)
+                        .opacity(itemBarOpacity)
+                }
+            }
+            .position(x:UIScreen.main.bounds.width - 50,y:UIScreen.main.bounds.height/2)
         }//ZStack end
         .edgesIgnoringSafeArea(.all)
         .frame(maxWidth: .infinity,maxHeight: .infinity)
@@ -225,6 +254,11 @@ struct BaseMapView: View {
             }
         }
     }//function animation end
+    
+    private func itemBar() {
+            itemBarOpacity = 0.0
+            itemBarButton = true
+    }
 }//struct ScaleMapView end
 
 #Preview {
