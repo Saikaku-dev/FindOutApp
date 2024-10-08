@@ -12,6 +12,7 @@
 		7F2770A52CAAD1D7002CBC45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */; };
 		7F2770A82CAAD1D8002CBC45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */; };
 		7F2770B02CAAD54C002CBC45 /* ScaleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */; };
+		7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40CC052CB4C555009C69D6 /* CloudView.swift */; };
 		7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9366B52CB27EF5001A7A22 /* ItemListView.swift */; };
 		7FAEC2AE2CACF4C900F811B0 /* BaseMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEC2AD2CACF4C900F811B0 /* BaseMapView.swift */; };
 		7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175622CAB9927003ABEA2 /* OpenView.swift */; };
@@ -25,6 +26,7 @@
 		7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleMapView.swift; sourceTree = "<group>"; };
+		7F40CC052CB4C555009C69D6 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		7F9366B52CB27EF5001A7A22 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		7FAEC2AD2CACF4C900F811B0 /* BaseMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMapView.swift; sourceTree = "<group>"; };
 		7FB175622CAB9927003ABEA2 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				7FB175622CAB9927003ABEA2 /* OpenView.swift */,
 				7FB175642CAB9E34003ABEA2 /* LoadingView.swift */,
+				7F40CC052CB4C555009C69D6 /* CloudView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				7F2770B02CAAD54C002CBC45 /* ScaleMapView.swift in Sources */,
 				7F2770A32CAAD1D5002CBC45 /* ContentView.swift in Sources */,
 				7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */,
+				7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */,
 				7FB175652CAB9E34003ABEA2 /* LoadingView.swift in Sources */,
 				7F2770A12CAAD1D5002CBC45 /* FindOutAppApp.swift in Sources */,
 				7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */,
