@@ -2,6 +2,9 @@ import SwiftUI
 
 struct CloudView: View {
     @State private var isOpening = false
+    
+    
+    //initialX,initialY为初始值，offsetX为水平移动量
     private let clouds = [
         (name: "cloud1", width: 1400.0, height: 1400.0, initialX: -200.0, initialY: -350.0, offsetX: -800.0),
         (name: "cloud2", width: 1400.0, height: 1400.0, initialX: -150.0, initialY: -150.0, offsetX: -800.0),
@@ -17,7 +20,7 @@ struct CloudView: View {
 
     var body: some View {
         ZStack {
-            // 设置透明背景
+            
             Color.clear
                 .edgesIgnoringSafeArea(.all)
             
