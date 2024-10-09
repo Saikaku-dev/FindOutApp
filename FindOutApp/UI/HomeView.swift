@@ -38,11 +38,18 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .padding(.top, 20)
 
-                Spacer()
+               // Spacer()
+                Text("地図を選びください！")
+                    .fontWeight(.bold)
+                    .font(.system(size: 17))
+                    .foregroundColor(.blue)
 
                 // 使用 ScrollView 和 ForEach 遍历图片数组
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 20) {
+                ScrollView(.horizontal,
+                    //.vertical,
+                    showsIndicators: false) {
+                    //VStack
+                    LazyHStack(spacing: 20) {
                         ForEach(0..<levelImages.count, id: \.self) { index in
                             ZStack {
                                 // 关卡图片
@@ -51,6 +58,8 @@ struct HomeView: View {
                                     .scaledToFit()
                                     .frame(height: 200)
                                     .cornerRadius(10)
+                                    .shadow(radius: 5)
+
                                 
                                 // 判断是否锁定关卡
                                 if lockedLevels.contains(index + 1) {
@@ -78,11 +87,11 @@ struct HomeView: View {
                                     }
                                     .position(x: UIScreen.main.bounds.width / 2, y: 160)
                                 }
-                            }
+                            }//ZStack end
                         }
                     }
                     .padding(.horizontal)
-                }
+                }//ScrollView end
                 
                 Spacer()
             }
