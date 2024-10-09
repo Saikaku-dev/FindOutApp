@@ -15,7 +15,7 @@ struct LoadingView: View {
                 .padding()
 
             Text("読み込んでいます...")
-        }
+        }//VStack end
         .padding()
         .onAppear {
             startProgress()
@@ -27,7 +27,7 @@ struct LoadingView: View {
         .fullScreenCover(isPresented: $MoveToGameView) {
             BaseMapView()
         }
-    }
+    }//var body end
 
     func startProgress() {
         // 每0.1秒更新一次，持续4秒内走完
@@ -39,7 +39,7 @@ struct LoadingView: View {
                 MoveToGameView = true
             }
         }
-    }
+    }//func startProgress end
 }
 
 #Preview {

@@ -18,6 +18,7 @@ let itemlist = [
     ItemList(img: "blue scarf"),
     ItemList(img: "bus left"),
     ItemList(img: "bus right"),
+    ItemList(img: "house"),
 ]
 
 struct ItemListView: View {
