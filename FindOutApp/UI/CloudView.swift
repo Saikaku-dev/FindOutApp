@@ -21,8 +21,8 @@ struct CloudView: View {
     var body: some View {
         ZStack {
             
-            Color.clear
-                .edgesIgnoringSafeArea(.all)
+//            Color.clear
+//                .edgesIgnoringSafeArea(.all)
             
             ForEach(0..<clouds.count, id: \.self) { index in
                 let cloud = clouds[index]
@@ -42,12 +42,13 @@ struct CloudView: View {
                     )
             }
         }
+//        .frame(maxWidth: .infinity, maxHeight: .infinity)
         // 视图加载后，延时 0.5 秒触发动画
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                isOpening = true
-            }
-        }
+//        .onAppear {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                isOpening = true
+//            }
+//        }
     }
 }
 
