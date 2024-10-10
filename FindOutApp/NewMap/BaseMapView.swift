@@ -18,7 +18,7 @@ struct BaseMapView: View {
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
     //缩放比例
-    @State private var defaultScale: CGFloat = 1.0
+    @State private var defaultScale: CGFloat = 2.0
     @GestureState private var dragScale: CGFloat = 1.0
     //更新动画发生位置的暂存变量
     @State private var x:CGFloat=0
@@ -29,12 +29,13 @@ struct BaseMapView: View {
     @State var itemBarButton = false
     
     var body: some View {
+        ZStack{
         ZStack {
             Image("winter map end")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
-        
+            
             //路灯显示判定
             if(showLight){
                 Button(
@@ -51,11 +52,11 @@ struct BaseMapView: View {
                             .frame(width: 12,height: 28)
                             .clipped()
                     })
-//                .offset(x:255,y: 44)
+                //                .offset(x:255,y: 44)
                 .offset(x: defaultOffset.width + dragOffset.width+255,y: defaultOffset.height + dragOffset.height+44)
                 
             }//if end
-        
+            
             //紫色雪人显示判定
             if(showPurpleScarf){
                 Button(
@@ -73,7 +74,7 @@ struct BaseMapView: View {
                             .frame(width: 25,height: 35)
                             .clipped()
                     })
-//                .offset(x:385,y: 72)
+                //                .offset(x:385,y: 72)
                 .offset(x: defaultOffset.width + dragOffset.width+385,y: defaultOffset.height + dragOffset.height+72)
             }//if end
             
@@ -95,7 +96,7 @@ struct BaseMapView: View {
                             .frame(width: 40,height: 40)
                             .clipped()
                     })
-//                .offset(x:385,y: 72)
+                //                .offset(x:385,y: 72)
                 .offset(x: defaultOffset.width + dragOffset.width+250,y: defaultOffset.height + dragOffset.height+190)
             }//if end
             
@@ -115,7 +116,7 @@ struct BaseMapView: View {
                                 .frame(width: 30,height: 41)
                                 .clipped()
                         })
-//                .offset(x:-50,y: 130)
+                //                .offset(x:-50,y: 130)
                 .offset(x: defaultOffset.width + dragOffset.width-50,y: defaultOffset.height + dragOffset.height+130)
             }//if end
             
@@ -137,7 +138,7 @@ struct BaseMapView: View {
                             .clipped()
                     })
                 
-//                .offset(x:-280,y:-100)
+                //                .offset(x:-280,y:-100)
                 .offset(x: defaultOffset.width + dragOffset.width-280,y: defaultOffset.height + dragOffset.height-100)
             }//if end
             
@@ -159,7 +160,7 @@ struct BaseMapView: View {
                             .clipped()
                     })
                 
-//                .offset(x:238,y:80)
+                //                .offset(x:238,y:80)
                 .offset(x: defaultOffset.width + dragOffset.width+160,y: defaultOffset.height + dragOffset.height+125)
             }//if end
             
@@ -168,15 +169,15 @@ struct BaseMapView: View {
             Gauge(value: count, in: 0...5){
                 Text("\(Int(count))/6")
             }
-//        currentValueLabel: {
-//            Text("\(Int(count))/5")
-//        }
-        .gaugeStyle(.accessoryCircularCapacity)
-        .progressViewStyle(.linear)
-        .tint(.blue)
-        .background(.white)
-        .cornerRadius(35)
-        .offset(x:-UIScreen.main.bounds.width/2 + 50,y:-UIScreen.main.bounds.height/4 - 20)
+            //        currentValueLabel: {
+            //            Text("\(Int(count))/5")
+            //        }
+            .gaugeStyle(.accessoryCircularCapacity)
+            .progressViewStyle(.linear)
+            .tint(.blue)
+            .background(.white)
+            .cornerRadius(35)
+            .offset(x:-UIScreen.main.bounds.width/2 + 50,y:-UIScreen.main.bounds.height/4 - 20)
             //进度条结束
             
             //3D动画旋转效果(旋转角度设定)
@@ -185,10 +186,10 @@ struct BaseMapView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30)
-//                    .clipShape(Circle())
-//                    .overlay(Circle()
-//                    .stroke(Color.white,lineWidth: 5))
-//                    .shadow(radius: 20)
+                //                    .clipShape(Circle())
+                //                    .overlay(Circle()
+                //                    .stroke(Color.white,lineWidth: 5))
+                //                    .shadow(radius: 20)
                     .rotation3DEffect(
                         .degrees(animation),axis: (x: 0.0, y: 1.0, z: 0.2)
                     )
@@ -201,31 +202,8 @@ struct BaseMapView: View {
                     .offset(x:x,y:y)
             }//if end 动画启动判断
             
-            VStack {
-                if itemBarButton {
-                    Button(action: {
-                        itemBarOpacity = 1.0
-                        itemBarButton = false
-                    }) {
-                        Text("表示")
-                            .foregroundColor(.black)
-                            .padding(.horizontal)
-                            .background(.white)
-                            .cornerRadius(10)
-                    }
-                }
-                Button(action: {
-                    itemBar()
-                }) {
-                    ItemListView()
-                        .padding(.horizontal,5)
-                        .padding(.vertical,10)
-                        .background(.green)
-                        .cornerRadius(50)
-                        .opacity(itemBarOpacity)
-                }
-            }
-            .position(x:UIScreen.main.bounds.width - 50,y:UIScreen.main.bounds.height/2)
+            
+            
         }//ZStack end
         .gesture(
             SimultaneousGesture (
@@ -250,6 +228,40 @@ struct BaseMapView: View {
         .frame(maxWidth: .infinity,maxHeight: .infinity)
         .scaledToFill()
         .scaleEffect(defaultScale * dragScale)
+//            VStack {
+//                if itemBarButton {
+//                    Button(action: {
+//                        itemBarOpacity = 1.0
+//                        itemBarButton = false
+//                    }) {
+//                        Text("表示")
+//                            .foregroundColor(.black)
+//                            .padding(.horizontal)
+//                            .background(.white)
+//                            .cornerRadius(10)
+//                    }
+//                }
+//                Button(action: {
+//                    itemBar()
+//                }) {
+//                    ItemListView()
+//                        .padding(.horizontal,5)
+//                        .padding(.vertical,10)
+//                        .background(.green)
+//                        .cornerRadius(50)
+//                        .opacity(itemBarOpacity)
+//                }
+//            }
+//            .frame(width:50,height:100)
+        //结果测试
+        Button(action: {
+            
+        }) {
+            Circle()
+                .fill(.red)
+                .frame(width:100)
+        }
+    }
     }//var body end
     
     //3D动画启动函数（1秒消失）
