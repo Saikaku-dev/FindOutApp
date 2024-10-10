@@ -16,7 +16,7 @@ struct SuccessView: View {
             Color.green.edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
-                Text("通关成功！")
+                Text("クリア成功！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
