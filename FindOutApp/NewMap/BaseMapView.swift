@@ -254,15 +254,15 @@ struct BaseMapView: View {
 //            }
 //            .frame(width:50,height:100)
         //结果测试
-        Button(action: {
-            
-        }) {
-            Circle()
-                .fill(.red)
-                .frame(width:100)
-        }
+//        Button(action: {
+//            
+//        }) {
+//            Circle()
+//                .fill(.red)
+//                .frame(width:100)
+//        }
     }
-    }//var body end
+}//var body end
     
     //3D动画启动函数（1秒消失）
     func coinAnimation(){
