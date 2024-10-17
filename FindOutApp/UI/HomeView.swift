@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var coinCount: Int = 100
-    
+    @State private var MoveToGameView:Bool = false
     // 图片名称数组
     private let levelImages = ["level1", "level2", "level3", "level4"]
     
@@ -39,11 +39,14 @@ struct HomeView: View {
                 .padding(.top, 20)
 
                // Spacer()
-                Text("地図を選びください！")
-                    .fontWeight(.bold)
-                    .font(.system(size: 17))
-                    .foregroundColor(.blue)
-
+                Button(action: {
+                    MoveToGameView = true
+                }) {
+                    Text("地図を選びください！")
+                        .fontWeight(.bold)
+                        .font(.system(size: 17))
+                        .foregroundColor(.blue)
+                }
                 // 使用 ScrollView 和 ForEach 遍历图片数组
                 ScrollView(.horizontal,
                     //.vertical,
@@ -59,7 +62,6 @@ struct HomeView: View {
                                     .frame(height: 200)
                                     .cornerRadius(10)
                                     .shadow(radius: 5)
-
                                 
                                 // 判断是否锁定关卡
                                 if lockedLevels.contains(index + 1) {
@@ -97,6 +99,9 @@ struct HomeView: View {
             }
         }
         .ignoresSafeArea(edges: .bottom) // 忽略底部安全区域
+        .fullScreenCover(isPresented: $MoveToGameView) {
+            testGameView()
+        }
     }
 }
 
