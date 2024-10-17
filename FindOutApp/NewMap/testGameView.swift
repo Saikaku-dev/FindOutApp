@@ -19,22 +19,19 @@ struct testGameView: View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
                                    height: geometry.size.height * defaultScale)
-            let maxOffsetX = (imageSize.width - screenSize.width) / 4
-            // 200 , 100 = 50
-            let maxOffsetY = (imageSize.height - screenSize.height) / 4
-            //
+            let maxOffsetX = (imageSize.width - screenSize.width) / 2
+            let maxOffsetY = (imageSize.height - screenSize.height) / 2
             
             ZStack {
+                //背景图&超出屏幕外的大小&
                 Image("winter map end")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-//                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .aspectRatio(contentMode: .fit)
                     .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
                             y: limitedOffset(defaultOffset.height + dragOffset.height, max: maxOffsetY))
                     .scaleEffect(defaultScale)
-                //
+                    .scaledToFill()
                     .gesture(
-//                        SimultaneousGesture (
                         DragGesture()
                             .updating($dragOffset) { value, state, _ in
                                 state = value.translation
@@ -43,18 +40,9 @@ struct testGameView: View {
                                 defaultOffset.width = limitedOffset(defaultOffset.width + value.translation.width, max: maxOffsetX)
                                 defaultOffset.height = limitedOffset(defaultOffset.height + value.translation.height, max: maxOffsetY)
                             }
-//                        MagnificationGesture()
-//                            .updating($dragScale) { value, scale, _ in
-//                                scale = value
-//                            }
-//                            .onEnded { value in
-//                                defaultScale *= value
-//                            }
-//                        )
                     )
             }
             .edgesIgnoringSafeArea(.all)
-            .scaledToFill()
         }
     }
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
