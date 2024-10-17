@@ -27,6 +27,7 @@ struct BaseMapView: View {
     //itemBarSize
     @State private var itemBarOpacity:CGFloat = 1.0
     @State var itemBarButton = false
+    @State private var cloud:Bool = true
     
     var body: some View {
         ZStack{
@@ -113,7 +114,7 @@ struct BaseMapView: View {
                             Image("blue scarf")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 30,height: 41)
+                                .frame(width: 12,height: 28)
                                 .clipped()
                         })
                 //                .offset(x:-50,y: 130)
@@ -275,8 +276,8 @@ struct BaseMapView: View {
     }//function animation end
     
     private func itemBar() {
-            itemBarOpacity = 0.0
-            itemBarButton = true
+        itemBarOpacity = 0.0
+        itemBarButton = true
     }
 }//struct ScaleMapView end
 
