@@ -26,7 +26,7 @@ struct OpenView: View {
             .background(Color.black) // 整个屏幕背景为黑颜色
             .onAppear {
                 // 4秒后导航到LoadingView
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
                         isActive = true
                     }
