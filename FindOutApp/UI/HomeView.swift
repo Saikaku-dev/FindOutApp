@@ -77,9 +77,10 @@ struct HomeView: View {
                                     }) {
                                         HStack {
                                             Image(systemName: "play.fill")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(.black
+                                                )
                                             Text("开始")
-                                                .foregroundColor(.white)
+                                                .foregroundColor(.black)
                                                 .font(.headline.weight(.bold))
                                         }
                                         .padding(.horizontal, 20)
