@@ -101,7 +101,7 @@ struct HomeView: View {
         }
         .ignoresSafeArea(edges: .bottom) // 忽略底部安全区域
         .fullScreenCover(isPresented: $MoveToGameView) {
-            testGameView()
+            GameView()
         }
     }
 }

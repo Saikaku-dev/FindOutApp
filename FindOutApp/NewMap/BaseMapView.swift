@@ -38,7 +38,8 @@ struct BaseMapView: View {
                 //路灯显示判定
                 if(showLight){
                     Button(
-                        action: {showLight.toggle()
+                        action: {
+                            showLight.toggle()
                             x=defaultOffset.width + dragOffset.width+255
                             y=defaultOffset.height + dragOffset.height+44
                             showAnimation = true
