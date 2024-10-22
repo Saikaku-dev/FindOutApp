@@ -10,7 +10,7 @@ import SwiftUI
 struct GameView: View {
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
-    @State private var defaultScale: CGFloat = 2.0
+    @State private var defaultScale: CGFloat = 1.0
     @GestureState private var dragScale: CGFloat = 1.0
     
     let screenSize = UIScreen.main.bounds.size
@@ -20,8 +20,8 @@ struct GameView: View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
                                    height: geometry.size.height * defaultScale)
-            let maxOffsetX = (imageSize.width - screenSize.width) / 4
-            let maxOffsetY = (imageSize.height - screenSize.height) / 4
+            let maxOffsetX = (imageSize.width - screenSize.width) / 2
+            let maxOffsetY = (imageSize.height - screenSize.height) / 2
             
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
@@ -63,10 +63,17 @@ struct GameView: View {
                                 },
                             MagnificationGesture()
                                 .updating($dragScale) { value, scale, _ in
-                                    scale = value
+                                    let newScale = defaultScale * value
+                                    if newScale < 1.0 {
+                                        scale = 1.0 / defaultScale // 限制最小为1，但保持手势平滑
+                                    } else if newScale > 3.0 {
+                                        scale = 3.0 / defaultScale // 限制最大为5，但保持手势平滑
+                                    } else {
+                                        scale = value // 正常缩放
+                                    }
                                 }
                                 .onEnded { value in
-                                    defaultScale = min(max(defaultScale * value, 1.0), 4.0)
+                                    defaultScale = min(max(defaultScale * value, 1.0), 3.0)
                                 }
                         )
                     )
