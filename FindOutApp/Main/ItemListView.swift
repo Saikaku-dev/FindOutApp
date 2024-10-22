@@ -24,11 +24,11 @@ struct ItemListView: View {
             }
         }
         .padding(10)
-        .background(.white)
-        .cornerRadius(100)
+        .frame(height:300)
+        .border(.blue)
     }
 }
 
-#Preview {
-    ItemListView()
-}
+//#Preview {
+//    ItemListView()
+//}
