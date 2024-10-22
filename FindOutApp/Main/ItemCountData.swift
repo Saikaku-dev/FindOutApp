@@ -11,7 +11,7 @@ class ItemCountData:ObservableObject {
     static var shared = ItemCountData()
     
     let id = UUID()
-    var findedNumber = 0
+    @Published var findedNumber = 0
     var totalNumber = 1
     var imgSize:CGFloat = 30
 }

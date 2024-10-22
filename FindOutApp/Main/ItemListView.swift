@@ -7,23 +7,26 @@
 
 import SwiftUI
 
-struct ItemList: Identifiable {
-    var id = UUID()
-    var img: String
-    var offset: CGSize
+class ItemList: Identifiable, ObservableObject {
+    let id = UUID()
+    @Published var img: String
+    @Published var offset: CGSize
+//    @Published var findedNumber: Int // 添加 number 属性来记录找到的数量
+    
+    init(img: String, offset: CGSize) {
+        self.img = img
+        self.offset = offset
+//        self.findedNumber = findedNumber
+    }
 }
-let itemlist = [ItemList(img: "street light", offset: CGSize(width: 50, height: 100)),
-                ItemList(img: "purple scarf", offset: CGSize(width: 150, height: 100)),
-                ItemList(img: "blue scarf", offset: CGSize(width: 250, height: 100)),
-                ItemList(img: "bus left", offset: CGSize(width: -200, height: 100)),
-                ItemList(img: "bus right", offset: CGSize(width: -300, height: 100)),
-                ItemList(img: "house", offset: CGSize(width: -350, height: 100))
-]
+
 struct ItemListView: View {
     @ObservedObject var itemdata = ItemCountData.shared
+    @Binding var items: [ItemList]
+    
     var body: some View {
         VStack {
-            ForEach(itemlist) { item in
+            ForEach(items) { item in
                 Image(item.img)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
