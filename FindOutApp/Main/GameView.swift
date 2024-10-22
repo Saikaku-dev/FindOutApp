@@ -50,68 +50,71 @@ struct GameView: View {
             
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
-                    ZStack {
-                        Image("GameBackGround")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                        //玩家需要找的元素
-                        ForEach(itemManager.items.indices, id: \.self) { index in
-                            let item = itemManager.items[index]
-                            Button(action: {
-                                shock()
-                                itemManager.items[index].findedCount += 1
-                                findCount += 1
-                                foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
+                ZStack {
+                    Image("GameBackGround")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                    //玩家需要找的元素
+                    ForEach(itemManager.items.indices, id: \.self) { index in
+                        let item = itemManager.items[index]
+                        Button(action: {
+                            shock()
+                            itemManager.items[index].findedCount += 1
+                            findCount += 1
+                            foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
+                            
+                            if findCount == totalCount {
+                                // 游戏结束
                                 
-                                if findCount == totalCount {
-                                    // 游戏结束
-                                
-                                }
-                            }) {
-                                Image(item.img)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: ItemCountData.shared.imgSize,
-                                           height:ItemCountData.shared.imgSize)
                             }
-                            .offset(item.offset)
-                            .disabled(foundItems.contains(item.img))
+                        }) {
+                            Image(item.img)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: ItemCountData.shared.imgSize,
+                                       height:ItemCountData.shared.imgSize)
                         }
+                        .offset(item.offset)
+                        .disabled(foundItems.contains(item.img))
                     }
-                    .scaledToFill()
-                    .scaleEffect(defaultScale * dragScale)
-                    .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
-                            y: limitedOffset(defaultOffset.height + dragOffset.height, max: maxOffsetY))
-                    .gesture(
-                        SimultaneousGesture (
-                            DragGesture()
-                                .updating($dragOffset) { value, state, _ in
-                                    state = value.translation
+                }
+                .scaledToFill()
+                .scaleEffect(defaultScale * dragScale)
+                .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
+                        y: limitedOffset(defaultOffset.height + dragOffset.height, max: maxOffsetY))
+                .gesture(
+                    SimultaneousGesture (
+                        DragGesture()
+                            .updating($dragOffset) { value, state, _ in
+                                state = value.translation
+                            }
+                            .onEnded { value in
+                                defaultOffset.width = limitedOffset(defaultOffset.width + value.translation.width, max: maxOffsetX)
+                                defaultOffset.height = limitedOffset(defaultOffset.height + value.translation.height, max: maxOffsetY)
+                            },
+                        MagnificationGesture()
+                            .updating($dragScale) { value, scale, _ in
+                                let newScale = defaultScale * value
+                                if newScale < 1.0 {
+                                    scale = 1.0 / defaultScale // 限制最小为1，但保持手势平滑
+                                } else if newScale > 3.0 {
+                                    scale = 3.0 / defaultScale // 限制最大为5，但保持手势平滑
+                                } else {
+                                    scale = value // 正常缩放
                                 }
-                                .onEnded { value in
-                                    defaultOffset.width = limitedOffset(defaultOffset.width + value.translation.width, max: maxOffsetX)
-                                    defaultOffset.height = limitedOffset(defaultOffset.height + value.translation.height, max: maxOffsetY)
-                                },
-                            MagnificationGesture()
-                                .updating($dragScale) { value, scale, _ in
-                                    let newScale = defaultScale * value
-                                    if newScale < 1.0 {
-                                        scale = 1.0 / defaultScale // 限制最小为1，但保持手势平滑
-                                    } else if newScale > 3.0 {
-                                        scale = 3.0 / defaultScale // 限制最大为5，但保持手势平滑
-                                    } else {
-                                        scale = value // 正常缩放
-                                    }
-                                }
-                                .onEnded { value in
-                                    defaultScale = min(max(defaultScale * value, 1.0), 3.0)
-                                }
-                        )
+                            }
+                            .onEnded { value in
+                                defaultScale = min(max(defaultScale * value, 1.0), 3.0)
+                            }
                     )
+                )
                 HStack {
                     ItemListView()
                         .frame(height:UIScreen.main.bounds.height)
                         .environmentObject(itemManager)
+                        .onTapGesture {
+                            //
+                        }
                     Spacer()
                 }
             }
