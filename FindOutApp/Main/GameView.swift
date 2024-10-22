@@ -8,6 +8,24 @@
 import SwiftUI
 
 
+struct item :Identifiable{
+    var id = UUID()
+    var img:String
+    var offset:CGSize
+    var findedCount:Int
+}
+
+
+class ItemManager:ObservableObject{
+    @Published var items:[item] = [
+        item(img: "street light", offset: CGSize(width: 50, height: 100),findedCount:0),
+        item(img: "purple scarf", offset: CGSize(width: 150, height: 100),findedCount:0),
+        item(img: "blue scarf", offset: CGSize(width: 250, height: 100),findedCount:0),
+        item(img: "bus left", offset: CGSize(width: -200, height: 100),findedCount:0),
+        item(img: "bus right", offset: CGSize(width: -300, height: 100),findedCount:0),
+        item(img: "house", offset: CGSize(width: -50, height: 50),findedCount:0)
+    ]
+}
 
 
 struct GameView: View {
@@ -17,18 +35,11 @@ struct GameView: View {
     @State private var defaultScale: CGFloat = 1.0
     @GestureState private var dragScale: CGFloat = 1.0
     @ObservedObject var itemdata = ItemCountData.shared
-    
-    @State private var items: [ItemList] = 
-    [
-        ItemList(img: "street light", offset: CGSize(width: 50, height: 100)),
-        ItemList(img: "purple scarf", offset: CGSize(width: 150, height: 100)),
-        ItemList(img: "blue scarf", offset: CGSize(width: 250, height: 100)),
-        ItemList(img: "bus left", offset: CGSize(width: -200, height: 100)),
-        ItemList(img: "bus right", offset: CGSize(width: -300, height: 100)),
-        ItemList(img: "house", offset: CGSize(width: -350, height: 100))
-    ]
-    @State private var finded:Bool = false
+    @ObservedObject var itemManager = ItemManager()
+    @State private var found:Bool = false
     let screenSize = UIScreen.main.bounds.size
+    @State private var findCount:Int = 0
+    @State private var totalCount:Int = 6
     
     var body: some View {
         GeometryReader { geometry in
@@ -44,16 +55,17 @@ struct GameView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         //玩家需要找的元素
-                        ForEach(items) { item in
+                        ForEach(itemManager.items.indices, id: \.self) { index in
+                            let item = itemManager.items[index]
                             Button(action: {
                                 shock()
-                                itemdata.findedNumber += 1
-                                print ("探した数\(itemdata.findedNumber)")
-                                print ("総量\(itemdata.totalNumber)")
+                                itemManager.items[index].findedCount += 1
+                                findCount += 1
                                 foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
-                                if itemdata.findedNumber == itemdata.totalNumber {
-                                    // 找到的元素等于总数时的逻辑
-                                    
+                                
+                                if findCount == totalCount {
+                                    // 游戏结束
+                                
                                 }
                             }) {
                                 Image(item.img)
@@ -97,8 +109,9 @@ struct GameView: View {
                         )
                     )
                 HStack {
-                    ItemListView(items: $items)
+                    ItemListView()
                         .frame(height:UIScreen.main.bounds.height)
+                        .environmentObject(itemManager)
                     Spacer()
                 }
             }
