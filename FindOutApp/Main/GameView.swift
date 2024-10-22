@@ -114,8 +114,8 @@ struct GameView: View {
                     Spacer()
                 }
 //                .frame(height:300)
-                .background(Color.white)
-                .cornerRadius(15)
+//                .background(Color.white)
+//                .cornerRadius(15)
             }
         }
     }
