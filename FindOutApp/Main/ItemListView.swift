@@ -17,18 +17,19 @@ struct ItemListView: View {
                 Image(item.img)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 30,height:30)
+                    .frame(width: 20,height:20)
                 Text("\(item.findedCount)/\(itemdata.totalNumber)")
                     .foregroundColor(.black)
-                    .font(.caption)
+                    .font(.caption2)
             }
+            .background(.white)
+            .cornerRadius(15)
         }
-        .padding(10)
-        .background(.white)
-        .cornerRadius(100)
+//        .padding(10)
+//        .frame(height:300)
     }
 }
 
-#Preview {
-    ItemListView()
-}
+//#Preview {
+//    ItemListView()
+//}

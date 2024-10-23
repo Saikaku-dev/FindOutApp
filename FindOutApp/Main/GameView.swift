@@ -15,7 +15,6 @@ struct item :Identifiable{
     var findedCount:Int
 }
 
-
 class ItemManager:ObservableObject{
     @Published var items:[item] = [
         item(img: "street light", offset: CGSize(width: 50, height: 100),findedCount:0),
@@ -26,7 +25,6 @@ class ItemManager:ObservableObject{
         item(img: "house", offset: CGSize(width: -50, height: 50),findedCount:0)
     ]
 }
-
 
 struct GameView: View {
     @State private var foundItems: Set<String> = [] // 存储已找到的item的imageName
@@ -65,7 +63,6 @@ struct GameView: View {
                             
                             if findCount == totalCount {
                                 // 游戏结束
-                                
                             }
                         }) {
                             Image(item.img)
@@ -110,13 +107,15 @@ struct GameView: View {
                 )
                 HStack {
                     ItemListView()
-                        .frame(height:UIScreen.main.bounds.height)
                         .environmentObject(itemManager)
                         .onTapGesture {
                             //
                         }
                     Spacer()
                 }
+//                .frame(height:300)
+//                .background(Color.white)
+//                .cornerRadius(15)
             }
         }
     }
