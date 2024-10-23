@@ -13,6 +13,7 @@ struct CloudView: View {
         (name: "cloud5", width: 1400.0, height: 1400.0, initialX: 150.0, initialY: -150.0, offsetX: 800.0),
         (name: "cloud6", width: 1400.0, height: 1400.0, initialX: 200.0, initialY: 50.0, offsetX: 800.0),
         (name: "cloud7", width: 1400.0, height: 1400.0, initialX: 50, initialY: 300.0, offsetX: -800.0),
+        //底部中间
         (name: "cloud8", width: 1400.0, height: 1400.0, initialX: 250.0, initialY: 350.0, offsetX: 800.0),
         (name: "cloud9", width: 1400.0, height: 1400.0, initialX: -100, initialY: 50.0, offsetX: -800.0),
         (name: "cloud10", width: 1400.0, height: 1400.0, initialX: 350.0, initialY: 200.0, offsetX: 800.0)
@@ -42,13 +43,13 @@ struct CloudView: View {
                     )
             }
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         // 视图加载后，延时 0.5 秒触发动画
-//        .onAppear {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                isOpening = true
-//            }
-//        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isOpening = true
+            }
+        }
     }
 }
 

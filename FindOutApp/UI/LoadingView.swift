@@ -5,29 +5,47 @@ struct LoadingView: View {
     @State private var timer: Timer?
     //主界面迁移
     @State private var MoveToHomeView: Bool = false
-
+    
     var body: some View {
-        VStack {
+        ZStack{
+            Color.black
+            Image("successbackground")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        
+            VStack {
+            
+            
+            Text("限られた時間内にターゲットを探し出そう！！")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+        
+                    
             ProgressView(value: progress)
+                    .colorInvert()
                 .progressViewStyle(LinearProgressViewStyle())
-                .frame(width: 200, height: 10) // 设定宽度为200，粗细为10
+                .frame(width: 200, height: 15) // 设定宽度为200，粗细为10
                 .scaleEffect(x: 1, y: 2, anchor: .center) // 加倍粗细
                 .padding()
-
+            
+            
             Text("読み込んでいます...")
         }//VStack end
         .padding()
         .onAppear {
             startProgress()
         }
+    }
         .navigationBarBackButtonHidden(true) // 隐藏返回按钮
-//        .navigationDestination(isPresented: $MoveToGameView) {
-//            BaseMapView()
-//        }
+        //        .navigationDestination(isPresented: $MoveToGameView) {
+        //            BaseMapView()
+        //        }
         .fullScreenCover(isPresented: $MoveToHomeView) {
             HomeView()
         }
     }//var body end
+
 
     func startProgress() {
         // 每0.1秒更新一次，持续4秒内走完

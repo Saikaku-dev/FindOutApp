@@ -1,49 +1,56 @@
-//
-//  FailedView.swift
-//  FindOutApp
-//
-//  Created by cmStudent on 2024/10/8.
-//
-
 import SwiftUI
 
+ 
+
+// 失败页面视图
 struct FailedView: View {
+    @State private var showConfetti = true
+
     var body: some View {
         ZStack {
-            Color.red.edgesIgnoringSafeArea(.all)
-
-            VStack(spacing: 20) {
-                Text("クリア失敗")
+            // 背景图片
+            Image("successbackground")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            
+            
+            // 主内容
+            VStack(spacing: 30) {
+                // 显示成功的标题文本
+                Text("残念！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-
-                Image(systemName: "xmark.circle.fill")
-                //最好替换成灰色的关卡图片
+                
+                // 带阴影和圆角效果的图片
+                Image("level2") // 下一关的图片
                     .resizable()
-                    .frame(width: 100, height: 100)
-                    .foregroundColor(.white)
-                
-                
+                    .scaledToFit()
+                    .frame(height: 130)
+                    .padding(.horizontal)
+                    .clipShape(RoundedRectangle(cornerRadius: 20)) // 设置微小圆角
+                    .shadow(color: Color.blue.opacity(0.3), radius: 10, x: 0, y: 10) // 周围添加阴影效果
+                Text("")
 
-                Button(action: {
-                    // 返回主页或重试关卡
-                }) {
-                    Text("ホームに戻る ")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
+                // 返回主页的按钮
+                Button("続ける") {
+                    
                 }
-                .padding(.top, 20)
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.purple)
+                .cornerRadius(25)
             }
         }
+        
+        
     }
 }
-
 #Preview {
-  
-        FailedView()
-        
+    FailedView()
 }
+
+
