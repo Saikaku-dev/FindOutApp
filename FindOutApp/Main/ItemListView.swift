@@ -22,11 +22,10 @@ struct ItemListView: View {
                     .foregroundColor(.black)
                     .font(.caption2)
             }
-            .background(.white)
-            .cornerRadius(15)
         }
-//        .padding(10)
-//        .frame(height:300)
+        .padding(10)
+        .background(.white)
+        .cornerRadius(10)
     }
 }
 

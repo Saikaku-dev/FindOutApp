@@ -30,7 +30,7 @@ struct GameView: View {
     @State private var foundItems: Set<String> = [] // 存储已找到的item的imageName
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
-    @State private var defaultScale: CGFloat = 1.0
+    @State private var defaultScale: CGFloat = 1.5
     @GestureState private var dragScale: CGFloat = 1.0
     @ObservedObject var itemdata = ItemCountData.shared
     @ObservedObject var itemManager = ItemManager()
@@ -63,6 +63,7 @@ struct GameView: View {
                             
                             if findCount == totalCount {
                                 // 游戏结束
+                                
                             }
                         }) {
                             Image(item.img)
@@ -105,6 +106,11 @@ struct GameView: View {
                             }
                     )
                 )
+                VStack {
+                    GameTimeCountView()
+                    Spacer()
+                }
+                    .frame(height:UIScreen.main.bounds.height)
                 HStack {
                     ItemListView()
                         .environmentObject(itemManager)
@@ -113,9 +119,17 @@ struct GameView: View {
                         }
                     Spacer()
                 }
-//                .frame(height:300)
-//                .background(Color.white)
-//                .cornerRadius(15)
+                //
+                Button(action: {
+                    
+                }) {
+                    Text("開始")
+                        .foregroundColor(.white)
+                        .padding()
+                        .padding(.horizontal,30)
+                        .background(Color.black)
+                        .cornerRadius(15)
+                }
             }
         }
     }

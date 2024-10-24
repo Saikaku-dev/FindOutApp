@@ -11,7 +11,7 @@ import SwiftUI
 struct FindOutAppApp: App {
     var body: some Scene {
         WindowGroup {
-            GameView()
+            OpenView()
         }
     }
 }
