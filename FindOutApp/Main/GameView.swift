@@ -38,7 +38,13 @@ struct GameView: View {
     let screenSize = UIScreen.main.bounds.size
     @State private var findCount:Int = 0
     @State private var totalCount:Int = 6
-    
+    @State private var countTimer:Timer?
+    @State private var countNumber: Int = 3
+    @State private var showCount:Bool = false
+    @State private var textChange:Bool = false
+    @State private var gaugeValue:Double = 1
+    @State private var gameFinish:Bool = false
+    @State private var showFailedOpacity:Double = 0
     var body: some View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
@@ -61,8 +67,8 @@ struct GameView: View {
                             findCount += 1
                             foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                             
+                            // 游戏结束
                             if findCount == totalCount {
-                                // 游戏结束
                                 
                             }
                         }) {
@@ -119,18 +125,22 @@ struct GameView: View {
                         }
                     Spacer()
                 }
-                //
-                Button(action: {
+                if showCount {
                     
-                }) {
-                    Text("開始")
-                        .foregroundColor(.white)
-                        .padding()
-                        .padding(.horizontal,30)
-                        .background(Color.black)
-                        .cornerRadius(15)
+                    Text(textChange ? "Start" : "\(countNumber)")
+                        .font(.system(size:150))
+                        .fontWeight(.bold)
                 }
             }
+        }
+        .onAppear() {
+            //開始
+            showCount = true
+            startCount()
+        }
+        if gameFinish {
+            FailedView()
+                .opacity(showFailedOpacity)
         }
     }
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
@@ -142,6 +152,51 @@ struct GameView: View {
         // 类型有 .success .error 和 .warning
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
+    }
+    private func startCount() {
+        countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if countNumber > 1 {
+                countNumber -= 1
+            } else if countNumber <= 1 {
+                countTimer?.invalidate()
+                textChange = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    showCount = false
+                    countDownStart()
+                }
+            }
+        }
+    }
+    private func gaugeChange() -> Color {
+        if gaugeValue == 1.0 {
+        }
+        
+        return Color.blue
+    }
+    private func countDownStart() {
+        if GameTime.shared.countTime > 0 {
+            GameTime.shared.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                withAnimation (.linear(duration: 1)) {
+                    GameTime.shared.countTime -= 1
+                }
+                GameTime.shared.stopCountDownTimer()
+                countDownStop()
+            }
+        } else {
+            GameTime.shared.countDownTimer?.invalidate()
+        }
+    }
+    private func countDownStop() {
+        if GameTime.shared.countTime <= 0 {
+            GameTime.shared.countDownTimer?.invalidate()
+            gameFinish = true
+            showFailedView()
+        }
+    }
+    private func showFailedView() {
+        withAnimation(.linear(duration: 1)) {
+            showFailedOpacity += 1
+        }
     }
 }
 

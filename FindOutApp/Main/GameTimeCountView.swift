@@ -11,7 +11,7 @@ struct GameTimeCountView: View {
     @ObservedObject var gameTime = GameTime.shared
     var body: some View {
         ZStack {
-            Gauge(value: Double(gameTime.countTime), in: 0...60) {
+            Gauge(value: Double(gameTime.countTime), in: 0...5) {
                 //
             }
             .progressViewStyle(LinearProgressViewStyle())
