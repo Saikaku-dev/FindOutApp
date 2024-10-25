@@ -46,17 +46,10 @@ struct SuccessView: View {
                     .foregroundColor(.white)
                 
                 // 带阴影和圆角效果的图片
-                Image("level2") // 下一关的图片
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 130)
-                    .padding(.horizontal)
-                    .clipShape(RoundedRectangle(cornerRadius: 20)) // 设置微小圆角
-                    .shadow(color: Color.blue.opacity(0.3), radius: 10, x: 0, y: 10) // 周围添加阴影效果
-                Text("第２ステージがアンロックされた")
-
+               
                 // 返回主页的按钮
                 Button("続ける") {
+                    
                     // 返回主页操作，游戏完成一定回到主界面
                 }
                 .font(.headline)

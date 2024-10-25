@@ -1,108 +1,93 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var coinCount: Int = 100
-    @State private var MoveToGameView:Bool = false
-    // 图片名称数组
-    private let levelImages = ["level1", "level2", "level3", "level4"]
+    @State private var showCloudView = false // 控制 CloudView 显示状态
+    @State private var showGameView = false // 控制 GameView 显示状态
+    @State private var showSettingView: Bool = false // 控制 SettingView 显示状态
     
-    // 锁定的关卡编号数组，表示这些关卡还未解锁
-    @State private var lockedLevels = [2, 3, 4] // 假设2、3、4关卡锁定
-    
+    // 默认没有锁定关卡
+    @State private var lockedLevels = [Int]() // 解锁所有关卡
+
     var body: some View {
         ZStack {
-            Color.white
-                .edgesIgnoringSafeArea(.all) // 背景色覆盖整个屏幕
-            
-            VStack {
-                // 顶部的设置和金币栏
-                HStack {
-                    HStack(spacing: 5) {
-                        Image(systemName: "circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.yellow)
-                        Text("\(coinCount)")
-                            .font(.headline)
+            if showGameView {
+                GameView() // GameView 显示
+                    .transition(.opacity) // 使用 opacity 动画
+            } else if showCloudView {
+                CloudView(isOpening: $showCloudView, showGameView: $showGameView) // CloudView 显示
+                    .transition(.opacity) // 使用 opacity 动画
+            } else {
+                VStack {
+                    // 顶部的设置和金币栏
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            showSettingView = true // 点击设置按钮时显示 SettingView
+                        }) {
+                            Image(systemName: "gearshape.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.black)
+                        }
                     }
-                    Spacer()
-                    Button(action: {
-                        // 设置按钮操作
-                    }) {
-                        Image(systemName: "gearshape.fill")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                            .foregroundColor(.black)
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.top, 20)
+                    .padding(.horizontal)
+                    .padding(.top, 20)
 
-               // Spacer()
-                Button(action: {
-                    MoveToGameView = true
-                }) {
                     Text("地図を選びください！")
                         .fontWeight(.bold)
-                        .font(.system(size: 17))
+                        .font(.system(size: 30))
                         .foregroundColor(.blue)
-                }
-                // 使用 ScrollView 和 ForEach 遍历图片数组
-                ScrollView(.horizontal,
-                    //.vertical,
-                    showsIndicators: false) {
-                    //VStack
-                    LazyHStack(spacing: 20) {
-                        ForEach(0..<levelImages.count, id: \.self) { index in
+
+                    // 使用 ScrollView 水平滚动的方式显示关卡
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 20) {
+                            // 第一关卡
                             ZStack {
-                                // 关卡图片
-                                Image(levelImages[index])
+                                Image("level1")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 200)
                                     .cornerRadius(10)
                                     .shadow(radius: 5)
-                                
-                                // 判断是否锁定关卡
-                                if lockedLevels.contains(index + 1) {
-                                    // 使用圆形锁图标并设置为白色
-                                    Image(systemName: "lock.fill")
-                                        .resizable()
-                                        .frame(width: 50, height: 50)
-                                        .foregroundColor(.black)
-                                } else {
-                                    // 显示开始按钮
-                                    Button(action: {
-                                        // 点击开始按钮的操作
-                                    }) {
-                                        HStack {
-                                            Image(systemName: "play.fill")
-                                                .foregroundColor(.black
-                                                )
-                                            Text("开始")
-                                                .foregroundColor(.black)
-                                                .font(.headline.weight(.bold))
+
+                                 
+                                    VStack {
+                                        Spacer()
+                                        Button(action: {
+                                            withAnimation(.easeInOut(duration: 1.0)) {
+                                                showCloudView = true // 显示 CloudView
+                                            }
+                                        }) {
+                                            HStack {
+                                                Image(systemName: "play.fill")
+                                                    .foregroundColor(.black)
+                                                Text("開始")
+                                                    .foregroundColor(.black)
+                                                    .font(.headline.weight(.bold))
+                                            }
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 10)
+                                            .background(Color.green)
+                                            .cornerRadius(20)
                                         }
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 10)
-                                        .background(Color.green)
-                                        .cornerRadius(20)
+                                        .padding(.bottom, 20)
+                                        
                                     }
-                                    .position(x: UIScreen.main.bounds.width / 2, y: 160)
-                                }
-                            }//ZStack end
+                                
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
-                }//ScrollView end
-                
-                Spacer()
+
+                    Spacer()
+                }
+                .sheet(isPresented: $showSettingView) {
+                    SettingView() // 显示 SettingView 作为 Sheet
+                }
             }
         }
-        .ignoresSafeArea(edges: .bottom) // 忽略底部安全区域
-        .fullScreenCover(isPresented: $MoveToGameView) {
-            GameView()
-        }
+        .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
+        .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制 GameView 过渡动画
     }
 }
 

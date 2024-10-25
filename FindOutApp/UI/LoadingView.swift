@@ -1,67 +1,65 @@
 import SwiftUI
-//加载条
+
 struct LoadingView: View {
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
-    //主界面迁移
-    @State private var MoveToHomeView: Bool = false
-    
+    @State private var showHomeView = false // 控制 HomeView 的显示
+
     var body: some View {
-        ZStack{
-            Color.black
-            Image("successbackground")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-        
-            VStack {
-            
-            
-            Text("限られた時間内にターゲットを探し出そう！！")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-        
-                    
-            ProgressView(value: progress)
-                    .colorInvert()
-                .progressViewStyle(LinearProgressViewStyle())
-                .frame(width: 200, height: 15) // 设定宽度为200，粗细为10
-                .scaleEffect(x: 1, y: 2, anchor: .center) // 加倍粗细
+        ZStack {
+            if !showHomeView { // 当 showHomeView 为 false 时显示 LoadingView
+                Color.black
+                Image("successbackground")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+
+                VStack {
+                    Text("限られた時間内にターゲットを探し出そう！！")
+                        .font(.title)
+                        .fontWeight(.bold)
+
+                    ProgressView(value: progress)
+                        .colorInvert()
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .frame(width: 200, height: 15)
+                        .scaleEffect(x: 1, y: 2)
+                        .padding()
+
+                    Text("読み込んでいます...")
+                }
                 .padding()
-            
-            
-            Text("読み込んでいます...")
-        }//VStack end
-        .padding()
-        .onAppear {
-            startProgress()
+                .onAppear {
+                    startProgress()
+                }
+            }
+
+            if showHomeView {
+                HomeView()
+                    .transition(.opacity) // 使用 opacity 过渡效果
+                    
+            }
+        }
+        .onDisappear {
+            timer?.invalidate() // 防止内存泄漏
         }
     }
-        .navigationBarBackButtonHidden(true) // 隐藏返回按钮
-        //        .navigationDestination(isPresented: $MoveToGameView) {
-        //            BaseMapView()
-        //        }
-        .fullScreenCover(isPresented: $MoveToHomeView) {
-            HomeView()
-        }
-    }//var body end
-
 
     func startProgress() {
         // 每0.1秒更新一次，持续4秒内走完
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             if progress < 1.0 {
                 progress += 0.025 // 4秒钟内达到1.0
             } else {
                 timer?.invalidate() // 完成时停止计时器
-                MoveToHomeView = true
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showHomeView = true // 动画渐隐到 HomeView
+                }
             }
         }
-    }//func startProgress end
+    }
 }
 
 #Preview {
-    NavigationStack {
-        LoadingView()
-    }
+    LoadingView()
 }
