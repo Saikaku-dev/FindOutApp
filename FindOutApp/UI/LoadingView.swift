@@ -57,6 +57,7 @@ struct LoadingView: View {
                 }
             }
         }
+
     }
 }
 
