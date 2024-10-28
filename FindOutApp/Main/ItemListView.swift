@@ -18,14 +18,18 @@ struct ItemListView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20,height:20)
-                Text("\(item.findedCount)/\(itemdata.totalNumber)")
+                Text("\(item.foundCount)/\(itemdata.totalNumber)")
                     .foregroundColor(.black)
                     .font(.caption2)
             }
         }
         .padding(10)
         .background(.white)
-        .cornerRadius(10)
+        .cornerRadius(15)
+        .overlay(
+            RoundedRectangle(cornerRadius:15)
+                .stroke(Color.black,lineWidth: 2)
+        )
     }
 }
 

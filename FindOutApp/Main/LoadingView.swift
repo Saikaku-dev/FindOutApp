@@ -18,7 +18,7 @@ struct LoadingView: View {
                         .font(.title)
                         .fontWeight(.bold)
 
-                    ProgressView(value: progress)
+                    ProgressView(value: progress,total: 1.0)
                         .colorInvert()
                         .progressViewStyle(LinearProgressViewStyle())
                         .frame(width: 200, height: 15)
@@ -35,7 +35,6 @@ struct LoadingView: View {
             if showHomeView {
                 HomeView()
                     .transition(.opacity) // 使用 opacity 过渡效果
-                    
             }
         }
         .onDisappear {
@@ -55,7 +54,6 @@ struct LoadingView: View {
                 }
             }
         }
-
     }
 }
 
