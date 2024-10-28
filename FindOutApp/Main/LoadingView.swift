@@ -13,7 +13,6 @@ struct LoadingView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
-
                 VStack {
                     Text("限られた時間内にターゲットを探し出そう！！")
                         .font(.title)
@@ -25,7 +24,6 @@ struct LoadingView: View {
                         .frame(width: 200, height: 15)
                         .scaleEffect(x: 1, y: 2)
                         .padding()
-
                     Text("読み込んでいます...")
                 }
                 .padding()

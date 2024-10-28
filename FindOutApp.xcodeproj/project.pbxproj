@@ -12,13 +12,10 @@
 		7F2770A32CAAD1D5002CBC45 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2770A22CAAD1D5002CBC45 /* ContentView.swift */; };
 		7F2770A52CAAD1D7002CBC45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */; };
 		7F2770A82CAAD1D8002CBC45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */; };
-		7F2770B02CAAD54C002CBC45 /* ScaleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */; };
 		7F2AF5BB2CC737A4002651A8 /* ItemCountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */; };
 		7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40CC052CB4C555009C69D6 /* CloudView.swift */; };
 		7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */; };
-		7F8AC0B12CC25038000286F7 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8AC0B02CC25038000286F7 /* SwiftUIView.swift */; };
 		7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9366B52CB27EF5001A7A22 /* ItemListView.swift */; };
-		7FAEC2AE2CACF4C900F811B0 /* BaseMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAEC2AD2CACF4C900F811B0 /* BaseMapView.swift */; };
 		7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175622CAB9927003ABEA2 /* OpenView.swift */; };
 		7FB175652CAB9E34003ABEA2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175642CAB9E34003ABEA2 /* LoadingView.swift */; };
 		7FD192E32CC8C877003F1976 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD192E22CC8C877003F1976 /* SettingView.swift */; };
@@ -34,13 +31,10 @@
 		7F2770A22CAAD1D5002CBC45 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleMapView.swift; sourceTree = "<group>"; };
 		7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCountData.swift; sourceTree = "<group>"; };
 		7F40CC052CB4C555009C69D6 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCountView.swift; sourceTree = "<group>"; };
-		7F8AC0B02CC25038000286F7 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		7F9366B52CB27EF5001A7A22 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
-		7FAEC2AD2CACF4C900F811B0 /* BaseMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMapView.swift; sourceTree = "<group>"; };
 		7FB175622CAB9927003ABEA2 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
 		7FB175642CAB9E34003ABEA2 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7FD192E22CC8C877003F1976 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -79,12 +73,9 @@
 		7F27709F2CAAD1D5002CBC45 /* FindOutApp */ = {
 			isa = PBXGroup;
 			children = (
-				7FB175612CAB985E003ABEA2 /* UI */,
 				7F2770A02CAAD1D5002CBC45 /* FindOutAppApp.swift */,
 				7F2770A22CAAD1D5002CBC45 /* ContentView.swift */,
 				7F2AF5B92CC7281C002651A8 /* Main */,
-				7FAEC2AC2CACF49D00F811B0 /* NewMap */,
-				7F2770AE2CAAD505002CBC45 /* Map */,
 				7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */,
 				7F2770A62CAAD1D8002CBC45 /* Preview Content */,
 			);
@@ -99,46 +90,22 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		7F2770AE2CAAD505002CBC45 /* Map */ = {
-			isa = PBXGroup;
-			children = (
-				7F2770AF2CAAD54C002CBC45 /* ScaleMapView.swift */,
-			);
-			path = Map;
-			sourceTree = "<group>";
-		};
 		7F2AF5B92CC7281C002651A8 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				7F19D2E92CBF5EDD009745DD /* GameView.swift */,
-				7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */,
-				7F9366B52CB27EF5001A7A22 /* ItemListView.swift */,
-				7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		7FAEC2AC2CACF49D00F811B0 /* NewMap */ = {
-			isa = PBXGroup;
-			children = (
-				7FAEC2AD2CACF4C900F811B0 /* BaseMapView.swift */,
-			);
-			path = NewMap;
-			sourceTree = "<group>";
-		};
-		7FB175612CAB985E003ABEA2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				7FB175622CAB9927003ABEA2 /* OpenView.swift */,
 				7FB175642CAB9E34003ABEA2 /* LoadingView.swift */,
 				7FD5F7E22CB4EB1800A9975F /* HomeView.swift */,
-				7F8AC0B02CC25038000286F7 /* SwiftUIView.swift */,
 				7F40CC052CB4C555009C69D6 /* CloudView.swift */,
+				7F19D2E92CBF5EDD009745DD /* GameView.swift */,
+				7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */,
+				7F9366B52CB27EF5001A7A22 /* ItemListView.swift */,
+				7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */,
+				7FD192E22CC8C877003F1976 /* SettingView.swift */,
 				7FD5F7E82CB51F3D00A9975F /* SuccessView.swift */,
 				7FD5F7EA2CB520B800A9975F /* FailedView.swift */,
-				7FD192E22CC8C877003F1976 /* SettingView.swift */,
 			);
-			path = UI;
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,11 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */,
-				7F8AC0B12CC25038000286F7 /* SwiftUIView.swift in Sources */,
 				7FD5F7E32CB4EB1800A9975F /* HomeView.swift in Sources */,
-				7FAEC2AE2CACF4C900F811B0 /* BaseMapView.swift in Sources */,
 				7FD5F7E92CB51F3D00A9975F /* SuccessView.swift in Sources */,
-				7F2770B02CAAD54C002CBC45 /* ScaleMapView.swift in Sources */,
 				7F2770A32CAAD1D5002CBC45 /* ContentView.swift in Sources */,
 				7FD192E32CC8C877003F1976 /* SettingView.swift in Sources */,
 				7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */,
@@ -360,7 +324,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5L822369X6;
+				DEVELOPMENT_TEAM = NTA3FA6DCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -374,7 +338,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver4;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -390,7 +354,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5L822369X6;
+				DEVELOPMENT_TEAM = NTA3FA6DCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -404,7 +368,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver4;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
