@@ -40,6 +40,7 @@ struct GameView: View {
     
     @State private var findCount:Int = 0
     @State private var totalCount:Int = 6
+
     @State private var countNumber:Int = 3
     @State private var successvViewOpacity:Double = 0
     
@@ -48,6 +49,7 @@ struct GameView: View {
     @ObservedObject var gameTime = GameTime.shared
     let screenSize = UIScreen.main.bounds.size
     
+
     var body: some View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
@@ -72,6 +74,7 @@ struct GameView: View {
                             
                             // 成功找到所有items或者时间归零
                             checkGameResult()
+
                         }) {
                             Image(item.img)
                                 .resizable()
@@ -124,6 +127,7 @@ struct GameView: View {
                         .environmentObject(itemManager)
                     Spacer()
                 }
+
                 .offset(y:-40)
                 if isStarted {
                     if countNumber > 0 {
@@ -135,6 +139,7 @@ struct GameView: View {
                             .font(.system(size:50))
                             .fontWeight(.bold)
                     }
+
                 }
             }
             if foundAllitems && GameTime.shared.countTime > 0 {
@@ -145,6 +150,15 @@ struct GameView: View {
         }
         .onAppear() {
             startGame()
+        }
+        .onAppear() {
+            //開始
+            showCount = true
+            startCount()
+        }
+        if gameFinish {
+            FailedView()
+                .opacity(showFailedOpacity)
         }
     }
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
@@ -157,7 +171,7 @@ struct GameView: View {
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
     }
-    
+
     
     private func countDownGauge() {
         if GameTime.shared.countTime >= 0 {
@@ -206,6 +220,7 @@ struct GameView: View {
             foundAllitems = false
             GameTime.shared.countTime = 30
             ItemCountData.shared.gameFinish = false
+
         }
     }
 }
