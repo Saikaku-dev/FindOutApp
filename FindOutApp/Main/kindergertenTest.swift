@@ -48,9 +48,12 @@ struct kindergertenTest: View {
 
                     //获取动画发生位置坐标
     @State private var Position:CGPoint = CGPoint(x:0,y:0)
+    
+    @State private var findCount:Int = 0//已经找到的数量
+
                     //更新动画发生位置的暂存变量
-    @State private var x:CGFloat=0
-    @State private var y:CGFloat=0
+//    @State private var x:CGFloat=0
+//    @State private var y:CGFloat=0
                     
                     //计算偏移量用来计算移动后的当前画面
     @State private var defaultOffset: CGSize = .zero
@@ -89,12 +92,11 @@ struct kindergertenTest: View {
                 ForEach(itemManager2.items.indices, id: \.self) { index in
                     let item2 = itemManager2.items[index]
                     Button(action: {
-                        
-                        
+
                         //                    shock()
                         itemManager2.items[index].foundCount += 1
                         
-                        //                    findCount += 1
+                                            findCount += 1
                         //                    foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                         
                         //1秒更新一次 成功找到所有items或者时间归零

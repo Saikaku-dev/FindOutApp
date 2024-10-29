@@ -39,10 +39,10 @@ struct GameView: View {
     @State private var found:Bool = false
     @State private var foundAllitems:Bool = false
     
-    @State private var findCount:Int = 0
-    @State private var totalCount:Int = 6
+    @State private var findCount:Int = 0//已经找到的数量
+    @State private var totalCount:Int = 6//需要找到的数量
     @State private var countNumber:Int = 3
-    @State private var successvViewOpacity:Double = 0
+    @State private var successvViewOpacity:Double = 0//成功界面透明度
     
     @ObservedObject var itemdata = ItemCountData.shared
     @ObservedObject var itemManager = ItemManager()
@@ -154,8 +154,8 @@ struct GameView: View {
         .onAppear() {
             startGame()
         }
-    }
-    //
+    }//var body end
+    //拖拽边缘设置函数
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
     }

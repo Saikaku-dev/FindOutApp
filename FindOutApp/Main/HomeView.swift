@@ -4,7 +4,7 @@ struct HomeView: View {
     @State private var showCloudView = false // 控制 CloudView 显示状态
     @State private var showGameView = false // 控制 GameView 显示状态
     
-    @State private var showkindergartenView = false // 控制 kindergarten 显示状态
+//    @State private var showkindergartenView = false // 控制 kindergarten 显示状态
 
     @State private var showSettingView: Bool = false // 控制 SettingView 显示状态
     
@@ -32,7 +32,7 @@ struct HomeView: View {
                                 .frame(width: 25, height: 25)
                                 .foregroundColor(.black)
                         }
-                    }
+                    }//HStack end
                     .padding(.horizontal)
                     .padding(.top, 20)
 
@@ -45,8 +45,68 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         LazyHStack(spacing: 20) {
                             // 第一关卡
+//                            ZStack {
+//                                Image("level1")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(height: 200)
+//                                    .cornerRadius(10)
+//                                    .shadow(radius: 5)
+//                                
+//                                VStack {
+//                                    Spacer()
+//                                    Button(action: {
+//                                        withAnimation(.easeInOut(duration: 1.0)) {
+//                                            showCloudView = true // 显示 CloudView
+//                                        }
+//                                    }) {
+//                                        HStack {
+//                                            Image(systemName: "play.fill")
+//                                                .foregroundColor(.black)
+//                                            Text("開始")
+//                                                .foregroundColor(.black)
+//                                                .font(.headline.weight(.bold))
+//                                        }//HStack end
+//                                        .padding(.horizontal, 20)
+//                                        .padding(.vertical, 10)
+//                                        .background(Color.green)
+//                                        .cornerRadius(20)
+//                                    }
+//                                    .padding(.bottom, 20)
+//                                }//VStack end
+//                            }
+                       // 第一关卡
                             ZStack {
                                 Image("level1")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 200)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        withAnimation(.easeInOut(duration: 1.0)) {
+                                            showCloudView = true // 显示 CloudView
+                                        }
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "play.fill")
+                                                .foregroundColor(.black)
+                                            Text("開始")
+                                                .foregroundColor(.black)
+                                                .font(.headline.weight(.bold))
+                                        }//HStack end
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                        .background(Color.green)
+                                        .cornerRadius(20)
+                                    }
+                                    .padding(.bottom, 20)
+                                }//VStack end
+                            }//第二关卡
+                            ZStack {
+                                Image("level2")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 200)
@@ -85,9 +145,10 @@ struct HomeView: View {
                     SettingView() // 显示 SettingView 作为 Sheet
                 }
             }
-        }
+        }//ZStack end
         .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
         .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制 GameView 过渡动画
+//        .animation(.easeInOut(duration: 1.0), value: showkindergartenView) // 控制 GameView 过渡动画
     }
 }
 
