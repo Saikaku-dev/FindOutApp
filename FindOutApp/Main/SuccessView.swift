@@ -22,6 +22,7 @@ struct ConfettiParticle {
 // 成功页面视图
 struct SuccessView: View {
     @State private var showConfetti = true
+    @State private var moveToHomeView:Bool = false
 
     var body: some View {
         ZStack {
@@ -32,15 +33,15 @@ struct SuccessView: View {
                 .ignoresSafeArea()
             
             // 彩带喷发效果
-            if showConfetti {
-                ConfettiView()
-                    .ignoresSafeArea()
-            }
+//            if showConfetti {
+//                ConfettiView()
+//                    .ignoresSafeArea()
+//            }
             
             // 主内容
             VStack(spacing: 30) {
                 // 显示成功的标题文本
-                Text("クリア成功！")
+                Text(ItemCountData.shared.gameFinish ? "残念！" : "クリア成功！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -49,8 +50,8 @@ struct SuccessView: View {
                
                 // 返回主页的按钮
                 Button("続ける") {
-                    
                     // 返回主页操作，游戏完成一定回到主界面
+                    moveToHomeView = true
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -58,13 +59,17 @@ struct SuccessView: View {
                 .background(Color.purple)
                 .cornerRadius(25)
             }
+            .offset(y: -150)
         }
-        .onAppear {
-            // 页面加载后1秒钟后关闭彩带效果
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                showConfetti = false
-            }
+        .fullScreenCover(isPresented: $moveToHomeView ) {
+            HomeView()
         }
+//        .onAppear {
+//            // 页面加载后1秒钟后关闭彩带效果
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                showConfetti = false
+//            }
+//        }
     }
 }
 

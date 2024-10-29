@@ -12,17 +12,17 @@ struct item :Identifiable{
     var id = UUID()
     var img:String
     var offset:CGSize
-    var findedCount:Int
+    var foundCount:Int
 }
 
 class ItemManager:ObservableObject{
     @Published var items:[item] = [
-        item(img: "street light", offset: CGSize(width: 50, height: 100),findedCount:0),
-        item(img: "purple scarf", offset: CGSize(width: 150, height: 100),findedCount:0),
-        item(img: "blue scarf", offset: CGSize(width: 250, height: 100),findedCount:0),
-        item(img: "bus left", offset: CGSize(width: -200, height: 100),findedCount:0),
-        item(img: "bus right", offset: CGSize(width: -300, height: 100),findedCount:0),
-        item(img: "house", offset: CGSize(width: -50, height: 50),findedCount:0)
+        item(img: "street light", offset: CGSize(width: 50, height: 100),foundCount:0),
+        item(img: "purple scarf", offset: CGSize(width: 150, height: 100),foundCount:0),
+        item(img: "blue scarf", offset: CGSize(width: 250, height: 100),foundCount:0),
+        item(img: "bus left", offset: CGSize(width: -200, height: 100),foundCount:0),
+        item(img: "bus right", offset: CGSize(width: -300, height: 100),foundCount:0),
+        item(img: "house", offset: CGSize(width: -50, height: 50),foundCount:0)
     ]
 }
 
@@ -32,19 +32,24 @@ struct GameView: View {
     @GestureState private var dragOffset: CGSize = .zero
     @State private var defaultScale: CGFloat = 1.5
     @GestureState private var dragScale: CGFloat = 1.0
-    @ObservedObject var itemdata = ItemCountData.shared
-    @ObservedObject var itemManager = ItemManager()
+    
+    @State private var isStarted:Bool = true
+    @State private var showFailedView:Bool = false
     @State private var found:Bool = false
-    let screenSize = UIScreen.main.bounds.size
+    @State private var foundAllitems:Bool = false
+    
     @State private var findCount:Int = 0
     @State private var totalCount:Int = 6
-    @State private var countTimer:Timer?
-    @State private var countNumber: Int = 3
-    @State private var showCount:Bool = false
-    @State private var textChange:Bool = false
-    @State private var gaugeValue:Double = 1
-    @State private var gameFinish:Bool = false
-    @State private var showFailedOpacity:Double = 0
+
+    @State private var countNumber:Int = 3
+    @State private var successvViewOpacity:Double = 0
+    
+    @ObservedObject var itemdata = ItemCountData.shared
+    @ObservedObject var itemManager = ItemManager()
+    @ObservedObject var gameTime = GameTime.shared
+    let screenSize = UIScreen.main.bounds.size
+    
+
     var body: some View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
@@ -63,14 +68,13 @@ struct GameView: View {
                         let item = itemManager.items[index]
                         Button(action: {
                             shock()
-                            itemManager.items[index].findedCount += 1
+                            itemManager.items[index].foundCount += 1
                             findCount += 1
                             foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                             
-                            // 游戏结束
-                            if findCount == totalCount {
-                                
-                            }
+                            // 成功找到所有items或者时间归零
+                            checkGameResult()
+
                         }) {
                             Image(item.img)
                                 .resizable()
@@ -116,22 +120,36 @@ struct GameView: View {
                     GameTimeCountView()
                     Spacer()
                 }
-                    .frame(height:UIScreen.main.bounds.height)
+                .frame(height:UIScreen.main.bounds.height)
+                .offset(y:-40)
                 HStack {
                     ItemListView()
                         .environmentObject(itemManager)
-                        .onTapGesture {
-                            //
-                        }
                     Spacer()
                 }
-                if showCount {
-                    
-                    Text(textChange ? "Start" : "\(countNumber)")
-                        .font(.system(size:150))
-                        .fontWeight(.bold)
+
+                .offset(y:-40)
+                if isStarted {
+                    if countNumber > 0 {
+                        Text("\(countNumber)")
+                            .font(.system(size:50))
+                            .fontWeight(.bold)
+                    } else {
+                        Text("START！")
+                            .font(.system(size:50))
+                            .fontWeight(.bold)
+                    }
+
                 }
             }
+            if foundAllitems && GameTime.shared.countTime > 0 {
+                ConfettiView()
+            }
+            SuccessView()
+                .opacity(successvViewOpacity)
+        }
+        .onAppear() {
+            startGame()
         }
         .onAppear() {
             //開始
@@ -153,49 +171,56 @@ struct GameView: View {
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
     }
-    private func startCount() {
-        countTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if countNumber > 1 {
-                countNumber -= 1
-            } else if countNumber <= 1 {
-                countTimer?.invalidate()
-                textChange = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    showCount = false
-                    countDownStart()
-                }
-            }
-        }
-    }
-    private func gaugeChange() -> Color {
-        if gaugeValue == 1.0 {
-        }
-        
-        return Color.blue
-    }
-    private func countDownStart() {
-        if GameTime.shared.countTime > 0 {
-            GameTime.shared.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+
+    
+    private func countDownGauge() {
+        if GameTime.shared.countTime >= 0 {
+            gameTime.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 withAnimation (.linear(duration: 1)) {
                     GameTime.shared.countTime -= 1
                 }
-                GameTime.shared.stopCountDownTimer()
-                countDownStop()
+                checkGameResult()
             }
         } else {
-            GameTime.shared.countDownTimer?.invalidate()
+            gameTime.countDownTimer?.invalidate()
         }
     }
-    private func countDownStop() {
-        if GameTime.shared.countTime <= 0 {
-            GameTime.shared.countDownTimer?.invalidate()
-            gameFinish = true
-            showFailedView()
+    
+    
+    private func startGame() {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
+            if countNumber > 0 {
+                countNumber -= 1
+            } else if countNumber <= 0 {
+                countTimer.invalidate()
+                isStarted = false
+                countNumber = 3
+                countDownGauge()
+            }
         }
     }
-    private func showFailedView() {
-        withAnimation(.linear(duration: 1)) {
-            showFailedOpacity += 1
+    private func showSuccessvView() {
+        withAnimation(.linear(duration:1)) {
+            successvViewOpacity += 1.0
+            initinalData()
+        }
+    }
+    private func checkGameResult() {
+        if findCount == totalCount || GameTime.shared.countTime <= 0 {
+            foundAllitems = true
+            ItemCountData.shared.gameFinish = (findCount == totalCount)
+            showSuccessvView()
+        }
+    }
+    private func initinalData() {
+        if successvViewOpacity == 1.0 {
+            gameTime.countDownTimer?.invalidate()
+            findCount = 0
+            totalCount = 6
+            foundAllitems = false
+            GameTime.shared.countTime = 30
+            ItemCountData.shared.gameFinish = false
+
         }
     }
 }

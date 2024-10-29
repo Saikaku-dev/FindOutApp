@@ -12,28 +12,19 @@ class ItemCountData:ObservableObject {
     let id = UUID()
     var totalNumber = 1
     var imgSize:CGFloat = 30
+    var gameFinish:Bool = false
 }
 
 class GameTime:ObservableObject {
     static var shared = GameTime()
     let id = UUID()
-    @Published var countTime:Int = 5
+
+    @Published var countTime:Int = 30
     var countDownTimer: Timer?
-    
-    func stopCountDownTimer() {
-        if GameTime.shared.countTime <= 0 {
-            GameTime.shared.countDownTimer?.invalidate()
-        }
-    }
-//    func countDown() {
-//        if GameTime.shared.countTime > 0 {
-//            countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//                withAnimation (.linear(duration: 1)) {
-//                    GameTime.shared.countTime -= 1
-//                }
-//            }
-//        } else {
-//            countDownTimer?.invalidate()
+//    
+//    func stopCountDownTimer() {
+//        if GameTime.shared.countTime <= 0 {
+//            GameTime.shared.countDownTimer?.invalidate()
 //        }
 //    }
 }

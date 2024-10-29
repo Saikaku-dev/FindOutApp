@@ -14,8 +14,6 @@ struct FailedView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            
-            
             // 主内容
             VStack(spacing: 30) {
                 // 显示成功的标题文本

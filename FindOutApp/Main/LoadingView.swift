@@ -13,19 +13,17 @@ struct LoadingView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
-
                 VStack {
                     Text("限られた時間内にターゲットを探し出そう！！")
                         .font(.title)
                         .fontWeight(.bold)
 
-                    ProgressView(value: progress)
+                    ProgressView(value: progress,total: 1.0)
                         .colorInvert()
                         .progressViewStyle(LinearProgressViewStyle())
                         .frame(width: 200, height: 15)
                         .scaleEffect(x: 1, y: 2)
                         .padding()
-
                     Text("読み込んでいます...")
                 }
                 .padding()
@@ -37,7 +35,6 @@ struct LoadingView: View {
             if showHomeView {
                 HomeView()
                     .transition(.opacity) // 使用 opacity 过渡效果
-                    
             }
         }
         .onDisappear {
@@ -57,7 +54,6 @@ struct LoadingView: View {
                 }
             }
         }
-
     }
 }
 
