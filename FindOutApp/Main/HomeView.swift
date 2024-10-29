@@ -3,6 +3,9 @@ import SwiftUI
 struct HomeView: View {
     @State private var showCloudView = false // 控制 CloudView 显示状态
     @State private var showGameView = false // 控制 GameView 显示状态
+    
+    @State private var showkindergartenView = false // 控制 kindergarten 显示状态
+
     @State private var showSettingView: Bool = false // 控制 SettingView 显示状态
     
     // 默认没有锁定关卡
