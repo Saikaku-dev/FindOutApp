@@ -12,7 +12,8 @@ class ItemCountData:ObservableObject {
     let id = UUID()
     var totalNumber = 1
     var imgSize:CGFloat = 30
-    var gameFinish:Bool = false
+//    var gameFinish:Bool = false
+    var gameFinish:Bool = true
 }
 
 class GameTime:ObservableObject {

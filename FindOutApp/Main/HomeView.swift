@@ -42,37 +42,39 @@ struct HomeView: View {
                         .foregroundColor(.blue)
 
                     // 使用 ScrollView 水平滚动的方式显示关卡
-ScrollView(.horizontal, showsIndicators: false) {
-LazyHStack(spacing: 20) {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 20) {
                             // 第一关卡
-    ZStack {
-Image("level1")
-.resizable()
-.scaledToFit()
-.frame(height: 200)
-.cornerRadius(10)
-.shadow(radius: 5)
-      VStack {
-          Spacer()
-Button(action: {
-withAnimation(.easeInOut(duration: 1.0)) {
-showCloudView = true // 显示 CloudView
-}
-}) {HStack {
-Image(systemName: "play.fill")
-.foregroundColor(.black)
-Text("開始")
-.foregroundColor(.black)
-.font(.headline.weight(.bold))
-}
-.padding(.horizontal, 20)
-.padding(.vertical, 10)
-.background(Color.green)
-.cornerRadius(20)
-}
-.padding(.bottom, 20)
-}
-}
+                            ZStack {
+                                Image("level1")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 200)
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                                
+                                VStack {
+                                    Spacer()
+                                    Button(action: {
+                                        withAnimation(.easeInOut(duration: 1.0)) {
+                                            showCloudView = true // 显示 CloudView
+                                        }
+                                    }) {
+                                        HStack {
+                                            Image(systemName: "play.fill")
+                                                .foregroundColor(.black)
+                                            Text("開始")
+                                                .foregroundColor(.black)
+                                                .font(.headline.weight(.bold))
+                                        }//HStack end
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                        .background(Color.green)
+                                        .cornerRadius(20)
+                                    }
+                                    .padding(.bottom, 20)
+                                }//VStack end
+                            }
                         }
                         .padding(.horizontal)
                     }

@@ -42,7 +42,7 @@ struct kindergartenMap: View {
 @State var itemBarButton = false
     var body: some View {
         ZStack {
-            Image("kindergartenMap")
+            Image("allKingdergartenMap")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .offset(x: defaultOffset.width + dragOffset.width,y: defaultOffset.height + dragOffset.height)
@@ -264,12 +264,7 @@ Text("\(Int(count))/6")
 .cornerRadius(35)
 .offset(x:-UIScreen.main.bounds.width/2 + 50,y:-UIScreen.main.bounds.height/4 - 20)
 //进度条结束
-                        
-            
-            
-            
-            
-                        //3D动画旋转效果(旋转角度设定)
+    //3D动画旋转效果(旋转角度设定)
                         if(showAnimation){
                             Image("gold")
                                 .resizable()
