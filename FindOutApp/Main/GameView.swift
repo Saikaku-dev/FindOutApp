@@ -15,6 +15,7 @@ struct item :Identifiable{
     var foundCount:Int
 }
 
+//道具栏的类
 class ItemManager:ObservableObject{
     @Published var items:[item] = [
         item(img: "street light", offset: CGSize(width: 50, height: 100),foundCount:0),
@@ -51,7 +52,7 @@ struct GameView: View {
     var body: some View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
-                                   height: geometry.size.height * defaultScale)
+                height: geometry.size.height * defaultScale)
             let maxOffsetX = (imageSize.width - screenSize.width) / 2
             let maxOffsetY = (imageSize.height - screenSize.height) / 2
             
@@ -70,13 +71,14 @@ struct GameView: View {
                             findCount += 1
                             foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                             
-                            // 成功找到所有items或者时间归零
+                            //成功找到所有items或者时间归零
                             checkGameResult()
                             
                         }) {
                             Image(item.img)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .opacity(foundItems.contains(item.img) ? 0:1)
                                 .frame(width: ItemCountData.shared.imgSize,
                                        height:ItemCountData.shared.imgSize)
                         }
@@ -127,6 +129,7 @@ struct GameView: View {
                 }
                 .offset(y:-40)
                 if isStarted {
+                    //开始倒计时
                     if countNumber > 0 {
                         Text("\(countNumber)")
                             .font(.system(size:50))
@@ -138,12 +141,15 @@ struct GameView: View {
                     }
                 }
             }
+//            if foundAllitems && GameTime.shared.countTime > 0 {
+//                ConfettiView()
+//            }
+            SuccessView()
+                .opacity(successvViewOpacity)
             if foundAllitems && GameTime.shared.countTime > 0 {
                 ConfettiView()
             }
-            SuccessView()
-                .opacity(successvViewOpacity)
-        }
+        }//GeometryReader
         .onAppear() {
             startGame()
         }
@@ -158,6 +164,7 @@ struct GameView: View {
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
     }
+    //结果1秒更新一次
     private func countDownGauge() {
         if GameTime.shared.countTime >= 0 {
             gameTime.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -172,6 +179,7 @@ struct GameView: View {
 //            showFailedView = true
         }
     }
+    //开始游戏倒计时
     private func startGame() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
             if countNumber > 0 {
@@ -184,25 +192,28 @@ struct GameView: View {
             }
         }
     }
+    //展示成功界面
     private func showSuccessvView() {
         withAnimation(.linear(duration:1)) {
             successvViewOpacity += 1.0
             initinalData()
         }
     }
+    //判定游戏结束状态
     private func checkGameResult() {
-        if findCount == totalCount || GameTime.shared.countTime <= 0 {
+        if findCount == totalCount && GameTime.shared.countTime >= 0 {
             foundAllitems = true
             ItemCountData.shared.gameFinish = (findCount == totalCount)
             showSuccessvView()
         }
     }
+    //
     private func initinalData() {
         if successvViewOpacity == 1.0 {
             findCount = 0
             totalCount = 6
             foundAllitems = false
-            GameTime.shared.countTime = 30
+            GameTime.shared.countTime = 60
         }
     }
 }

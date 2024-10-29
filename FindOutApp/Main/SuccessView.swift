@@ -41,7 +41,7 @@ struct SuccessView: View {
             // 主内容
             VStack(spacing: 30) {
                 // 显示成功的标题文本
-                Text(ItemCountData.shared.gameFinish ? "クリア成功！" : "残念！")
+                Text(ItemCountData.shared.gameFinish ?  "残念！":"クリア成功！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
