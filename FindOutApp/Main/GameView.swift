@@ -72,7 +72,6 @@ struct GameView: View {
                             
                             // 成功找到所有items或者时间归零
                             checkGameResult()
-                            
                         }) {
                             Image(item.img)
                                 .resizable()
@@ -158,20 +157,22 @@ struct GameView: View {
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
     }
+    
+    
     private func countDownGauge() {
         if GameTime.shared.countTime >= 0 {
             gameTime.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 withAnimation (.linear(duration: 1)) {
                     GameTime.shared.countTime -= 1
                 }
-                gameTime.stopCountDownTimer()
                 checkGameResult()
             }
         } else {
             gameTime.countDownTimer?.invalidate()
-//            showFailedView = true
         }
     }
+    
+    
     private func startGame() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
             if countNumber > 0 {
@@ -199,10 +200,12 @@ struct GameView: View {
     }
     private func initinalData() {
         if successvViewOpacity == 1.0 {
+            gameTime.countDownTimer?.invalidate()
             findCount = 0
             totalCount = 6
             foundAllitems = false
             GameTime.shared.countTime = 30
+            ItemCountData.shared.gameFinish = false
         }
     }
 }
