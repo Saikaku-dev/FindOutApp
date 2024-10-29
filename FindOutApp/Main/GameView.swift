@@ -39,6 +39,7 @@ struct GameView: View {
     @State private var showFailedView:Bool = false
     @State private var found:Bool = false
     @State private var foundAllitems:Bool = false
+    @State private var touchObject:Bool = true
     
     @State private var findCount:Int = 0
     @State private var totalCount:Int = 6
@@ -86,6 +87,7 @@ struct GameView: View {
                         }
                         .offset(item.offset)
                         .disabled(foundItems.contains(item.img))
+                        .disabled(touchObject)
                     }
                 }
                 .scaledToFill()
@@ -123,14 +125,14 @@ struct GameView: View {
                     Spacer()
                 }
                 .frame(height:UIScreen.main.bounds.height)
-                .offset(y:-40)
+                .offset(y:20)
                 HStack {
                     ItemListView()
                         .environmentObject(itemManager)
                     Spacer()
                 }
 
-                .offset(y:-40)
+                .offset(y:-30)
                 if isStarted {
                     if countNumber > 0 {
                         Text("\(countNumber)")
@@ -152,17 +154,7 @@ struct GameView: View {
         }
         .onAppear() {
             startGame()
-            playBackgroundMusic()
-            
-        }
-        .onAppear() {
-            //開始
-            showCount = true
-            startCount()
-        }
-        if gameFinish {
-            FailedView()
-                .opacity(showFailedOpacity)
+//            playBackgroundMusic()
         }
     }
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
@@ -198,6 +190,7 @@ struct GameView: View {
             } else if countNumber <= 0 {
                 countTimer.invalidate()
                 isStarted = false
+                touchObject = false
                 countNumber = 3
                 countDownGauge()
             }
@@ -210,9 +203,14 @@ struct GameView: View {
         }
     }
     private func checkGameResult() {
-        if findCount == totalCount || GameTime.shared.countTime <= 0 {
+        if findCount == totalCount {
             foundAllitems = true
             ItemCountData.shared.gameFinish = (findCount == totalCount)
+            print(ItemCountData.shared.gameFinish)
+            showSuccessvView()
+        } else if GameTime.shared.countTime <= 0 {
+            ItemCountData.shared.gameFinish = (findCount != totalCount)
+            print(ItemCountData.shared.gameFinish)
             showSuccessvView()
         }
     }
@@ -224,25 +222,25 @@ struct GameView: View {
             foundAllitems = false
             GameTime.shared.countTime = 30
             ItemCountData.shared.gameFinish = false
-
+            touchObject = true
         }
     }
     
-    func playBackgroundMusic() {
-        guard let url = Bundle.main.url(forResource: "bgm1", withExtension: "mp3") else {
-            print("背景音乐文件未找到")
-            return
-        }
-        
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.numberOfLoops = -1 // 循环播放
-            audioPlayer?.volume = 0.3
-            audioPlayer?.play()
-        } catch {
-            print("无法播放背景音乐: \(error.localizedDescription)")
-        }
-    }
+//    func playBackgroundMusic() {
+//        guard let url = Bundle.main.url(forResource: "bgm1", withExtension: "mp3") else {
+//            print("背景音乐文件未找到")
+//            return
+//        }
+//        
+//        do {
+//            audioPlayer = try AVAudioPlayer(contentsOf: url)
+//            audioPlayer?.numberOfLoops = -1 // 循环播放
+//            audioPlayer?.volume = 0.3
+//            audioPlayer?.play()
+//        } catch {
+//            print("无法播放背景音乐: \(error.localizedDescription)")
+//        }
+//    }
 }
 
 #Preview {
