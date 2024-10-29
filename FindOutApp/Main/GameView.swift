@@ -15,7 +15,7 @@ struct item :Identifiable{
     var foundCount:Int
 }
 
-//道具栏的类
+//第一张地图道具栏的类
 class ItemManager:ObservableObject{
     @Published var items:[item] = [
         item(img: "street light", offset: CGSize(width: 50, height: 100),foundCount:0),
@@ -71,9 +71,8 @@ struct GameView: View {
                             findCount += 1
                             foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                             
-                            //成功找到所有items或者时间归零
+     //1秒更新一次 成功找到所有items或者时间归零
                             checkGameResult()
-                            
                         }) {
                             Image(item.img)
                                 .resizable()
@@ -117,6 +116,7 @@ struct GameView: View {
                     )
                 )
                 VStack {
+                    //
                     GameTimeCountView()
                     Spacer()
                 }
@@ -128,6 +128,7 @@ struct GameView: View {
                     Spacer()
                 }
                 .offset(y:-40)
+                //游戏开始倒计时
                 if isStarted {
                     //开始倒计时
                     if countNumber > 0 {
@@ -139,7 +140,7 @@ struct GameView: View {
                             .font(.system(size:50))
                             .fontWeight(.bold)
                     }
-                }
+                }//if isStarted end
             }
 //            if foundAllitems && GameTime.shared.countTime > 0 {
 //                ConfettiView()
@@ -154,9 +155,11 @@ struct GameView: View {
             startGame()
         }
     }
+    //
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
     }
+    //震动函数
     private func shock() {
         let shockOfFound = UINotificationFeedbackGenerator()
         shockOfFound.prepare()
@@ -192,13 +195,7 @@ struct GameView: View {
             }
         }
     }
-    //展示成功界面
-    private func showSuccessvView() {
-        withAnimation(.linear(duration:1)) {
-            successvViewOpacity += 1.0
-            initinalData()
-        }
-    }
+    
     //判定游戏结束状态
     private func checkGameResult() {
         if findCount == totalCount && GameTime.shared.countTime >= 0 {
@@ -207,6 +204,15 @@ struct GameView: View {
             showSuccessvView()
         }
     }
+    
+    //展示成功界面
+    private func showSuccessvView() {
+        withAnimation(.linear(duration:1)) {
+            successvViewOpacity += 1.0
+            initinalData()
+        }
+    }
+
     //
     private func initinalData() {
         if successvViewOpacity == 1.0 {

@@ -16,6 +16,7 @@
 		7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40CC052CB4C555009C69D6 /* CloudView.swift */; };
 		7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */; };
 		7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9366B52CB27EF5001A7A22 /* ItemListView.swift */; };
+		7F964AB42CD0BC7000404BE0 /* kindergartenMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */; };
 		7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175622CAB9927003ABEA2 /* OpenView.swift */; };
 		7FB175652CAB9E34003ABEA2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175642CAB9E34003ABEA2 /* LoadingView.swift */; };
 		7FD192E32CC8C877003F1976 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD192E22CC8C877003F1976 /* SettingView.swift */; };
@@ -35,6 +36,7 @@
 		7F40CC052CB4C555009C69D6 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCountView.swift; sourceTree = "<group>"; };
 		7F9366B52CB27EF5001A7A22 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kindergartenMap.swift; sourceTree = "<group>"; };
 		7FB175622CAB9927003ABEA2 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
 		7FB175642CAB9E34003ABEA2 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7FD192E22CC8C877003F1976 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				7FD192E22CC8C877003F1976 /* SettingView.swift */,
 				7FD5F7E82CB51F3D00A9975F /* SuccessView.swift */,
 				7FD5F7EA2CB520B800A9975F /* FailedView.swift */,
+				7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			files = (
 				7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */,
 				7FD5F7E32CB4EB1800A9975F /* HomeView.swift in Sources */,
+				7F964AB42CD0BC7000404BE0 /* kindergartenMap.swift in Sources */,
 				7FD5F7E92CB51F3D00A9975F /* SuccessView.swift in Sources */,
 				7F2770A32CAAD1D5002CBC45 /* ContentView.swift in Sources */,
 				7FD192E32CC8C877003F1976 /* SettingView.swift in Sources */,
