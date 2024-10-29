@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 
 struct item :Identifiable{
@@ -27,6 +28,7 @@ class ItemManager:ObservableObject{
 }
 
 struct GameView: View {
+    @State private var audioPlayer: AVAudioPlayer?//创建播放音乐的实例
     @State private var foundItems: Set<String> = [] // 存储已找到的item的imageName
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
@@ -150,6 +152,8 @@ struct GameView: View {
         }
         .onAppear() {
             startGame()
+            playBackgroundMusic()
+            
         }
         .onAppear() {
             //開始
@@ -221,6 +225,22 @@ struct GameView: View {
             GameTime.shared.countTime = 30
             ItemCountData.shared.gameFinish = false
 
+        }
+    }
+    
+    func playBackgroundMusic() {
+        guard let url = Bundle.main.url(forResource: "bgm1", withExtension: "mp3") else {
+            print("背景音乐文件未找到")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = -1 // 循环播放
+            audioPlayer?.volume = 0.3
+            audioPlayer?.play()
+        } catch {
+            print("无法播放背景音乐: \(error.localizedDescription)")
         }
     }
 }

@@ -18,7 +18,7 @@ struct HomeView: View {
                     .transition(.opacity) // 使用 opacity 动画
             } else {
                 VStack {
-                    // 顶部的设置和金币栏
+                    
                     HStack {
                         Spacer()
                         Button(action: {
@@ -47,8 +47,8 @@ struct HomeView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 200)
-                                    .cornerRadius(10)
-                                    .shadow(radius: 5)
+                                    .cornerRadius(30)
+                                    .shadow(radius: 10)
 
                                  
                                     VStack {
@@ -73,6 +73,41 @@ struct HomeView: View {
                                         .padding(.bottom, 20)
                                         
                                     }
+                                
+                                
+                            }
+                            ZStack {
+                                Image("level2")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: 200)
+                                    .cornerRadius(30)
+                                    .shadow(radius: 10)
+
+                                 
+                                    VStack {
+                                        Spacer()
+                                        Button(action: {
+                                            withAnimation(.easeInOut(duration: 1.0)) {
+                                                showCloudView = true // 显示 CloudView
+                                            }
+                                        }) {
+                                            HStack {
+                                                Image(systemName: "play.fill")
+                                                    .foregroundColor(.black)
+                                                Text("開始")
+                                                    .foregroundColor(.black)
+                                                    .font(.headline.weight(.bold))
+                                            }
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 10)
+                                            .background(Color.green)
+                                            .cornerRadius(20)
+                                        }
+                                        .padding(.bottom, 20)
+                                        
+                                    }
+                                
                                 
                             }
                         }
