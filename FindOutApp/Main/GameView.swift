@@ -36,13 +36,18 @@ struct GameView: View {
     
     @State private var isStarted:Bool = true
     @State private var showFailedView:Bool = false
+    @State private var showSuccessView:Bool = false
+    
     @State private var found:Bool = false
     @State private var foundAllitems:Bool = false
     
     @State private var findCount:Int = 0//已经找到的数量
     @State private var totalCount:Int = 6//需要找到的数量
     @State private var countNumber:Int = 3
-    @State private var successvViewOpacity:Double = 0//成功界面透明度
+    
+    @State private var shouldShowGameView: Bool = true  // 控制是否显示GameVie
+    
+    @State private var touchObject: Bool = true
     
     @ObservedObject var itemdata = ItemCountData.shared
     @ObservedObject var itemManager = ItemManager()
@@ -52,7 +57,7 @@ struct GameView: View {
     var body: some View {
         GeometryReader { geometry in
             let imageSize = CGSize(width: geometry.size.width * defaultScale,
-                height: geometry.size.height * defaultScale)
+                                   height: geometry.size.height * defaultScale)
             let maxOffsetX = (imageSize.width - screenSize.width) / 2
             let maxOffsetY = (imageSize.height - screenSize.height) / 2
             
@@ -71,7 +76,7 @@ struct GameView: View {
                             findCount += 1
                             foundItems.insert(item.img) // 将找到的item的imageName添加到集合中
                             
-     //1秒更新一次 成功找到所有items或者时间归零
+                            //1秒更新一次 成功找到所有items或者时间归零
                             checkGameResult()
                         }) {
                             Image(item.img)
@@ -148,11 +153,12 @@ struct GameView: View {
                 }//if isStarted end
                 
             }//ZStack end
-/
+            
         }//GeometryReader
         .onAppear() {
             startGame()
         }
+        
         .fullScreenCover(isPresented: $showSuccessView) {
             SuccessView(onReturnHome: {
                 resetGame()
@@ -165,10 +171,11 @@ struct GameView: View {
                 shouldShowGameView = false
             })
         }
-    } else {
+        } else {
         HomeView() // 控制从 HomeView 返回 GameView
     }
-    }//var body end
+}//var body end
+
     //拖拽边缘设置函数
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
@@ -181,61 +188,54 @@ struct GameView: View {
         //分别对应通知,错误和警告
         shockOfFound.notificationOccurred(.warning)
     }
-    //结果1秒更新一次
-    private func countDownGauge() {
-        if GameTime.shared.countTime >= 0 {
+
+private func countDownGauge() {
             gameTime.countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                withAnimation (.linear(duration: 1)) {
+                withAnimation(.linear(duration: 1)) {
                     GameTime.shared.countTime -= 1
                 }
-                gameTime.stopCountDownTimer()
                 checkGameResult()
             }
-        } else {
-            gameTime.countDownTimer?.invalidate()
-//            showFailedView = true
         }
-    }
-    //开始游戏倒计时
+    
     private func startGame() {
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
-            if countNumber > 0 {
-                countNumber -= 1
-            } else if countNumber <= 0 {
-                countTimer.invalidate()
-                isStarted = false
-                countNumber = 3
-                countDownGauge()
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
+                if countNumber > 0 {
+                    countNumber -= 1
+                } else {
+                    countTimer.invalidate()
+                    isStarted = false
+                    touchObject = false
+                    countDownGauge()
+                }
             }
         }
-    }
     
-    //判定游戏结束状态
+    
     private func checkGameResult() {
-        if findCount == totalCount && GameTime.shared.countTime >= 0 {
-            foundAllitems = true
-            ItemCountData.shared.gameFinish = (findCount == totalCount)
-            showSuccessvView()
+            if findCount == totalCount {
+                gameTime.countDownTimer?.invalidate()
+                showSuccessView = true
+                foundAllitems = true
+            } else if GameTime.shared.countTime <= 0 {
+                gameTime.countDownTimer?.invalidate()
+                showFailedView = true
+                foundAllitems = true
+            }
         }
-    }
-    
-    //展示成功界面
-    private func showSuccessvView() {
-        withAnimation(.linear(duration:1)) {
-            successvViewOpacity += 1.0
-            initinalData()
-        }
-    }
 
-    //
-    private func initinalData() {
-        if successvViewOpacity == 1.0 {
+        
+    private func resetGame() {
+            gameTime.countDownTimer?.invalidate()
             findCount = 0
             totalCount = 6
             foundAllitems = false
-            GameTime.shared.countTime = 60
+            GameTime.shared.countTime = 30
+            touchObject = true
+            isStarted = true
+            showSuccessView = false
+            showFailedView = false
         }
-    }
 }
 
 #Preview {
