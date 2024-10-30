@@ -72,8 +72,8 @@ struct GameView: View {
                             let item = itemManager.items[index]
                             Button(action: {
                                 shock()
-                                itemManager.items[index].foundCount += 1
                                 findCount += 1
+                                itemManager.items[index].foundCount += 1
                                 foundItems.insert(item.img)
                                 checkGameResult()
                             }) {

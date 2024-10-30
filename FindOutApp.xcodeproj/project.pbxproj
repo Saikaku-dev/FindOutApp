@@ -16,6 +16,7 @@
 		7F3DABEB2CD0EFBB00F7A5D8 /* kindergertenTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3DABEA2CD0EFBB00F7A5D8 /* kindergertenTest.swift */; };
 		7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40CC052CB4C555009C69D6 /* CloudView.swift */; };
 		7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */; };
+		7F5789D62CD2B0F800BDEC62 /* balloonMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5789D52CD2B0F800BDEC62 /* balloonMap.swift */; };
 		7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9366B52CB27EF5001A7A22 /* ItemListView.swift */; };
 		7F964AB42CD0BC7000404BE0 /* kindergartenMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */; };
 		7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175622CAB9927003ABEA2 /* OpenView.swift */; };
@@ -37,6 +38,7 @@
 		7F3DABEA2CD0EFBB00F7A5D8 /* kindergertenTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kindergertenTest.swift; sourceTree = "<group>"; };
 		7F40CC052CB4C555009C69D6 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCountView.swift; sourceTree = "<group>"; };
+		7F5789D52CD2B0F800BDEC62 /* balloonMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = balloonMap.swift; sourceTree = "<group>"; };
 		7F9366B52CB27EF5001A7A22 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kindergartenMap.swift; sourceTree = "<group>"; };
 		7FB175622CAB9927003ABEA2 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				7FD5F7EA2CB520B800A9975F /* FailedView.swift */,
 				7F964AB32CD0BC7000404BE0 /* kindergartenMap.swift */,
 				7F3DABEA2CD0EFBB00F7A5D8 /* kindergertenTest.swift */,
+				7F5789D52CD2B0F800BDEC62 /* balloonMap.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F5789D62CD2B0F800BDEC62 /* balloonMap.swift in Sources */,
 				7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */,
 				7FD5F7E32CB4EB1800A9975F /* HomeView.swift in Sources */,
 				7F964AB42CD0BC7000404BE0 /* kindergartenMap.swift in Sources */,
@@ -332,7 +336,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5L822369X6;
+				DEVELOPMENT_TEAM = WPASD3T494;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "名探偵は君だ";
@@ -347,7 +351,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver1;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -363,7 +367,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = 5L822369X6;
+				DEVELOPMENT_TEAM = WPASD3T494;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "名探偵は君だ";
@@ -378,7 +382,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver1;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.ac.jec.cm0139.FindOutApp1.ver01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

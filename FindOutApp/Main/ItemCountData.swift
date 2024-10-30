@@ -11,7 +11,7 @@ class ItemCountData:ObservableObject {
     static var shared = ItemCountData()//
     let id = UUID()
     var totalNumber = 1
-    var imgSize:CGFloat = 30
+    var imgSize:CGFloat = 40
 //    var gameFinish:Bool = false
     var gameFinish:Bool = true
 }
