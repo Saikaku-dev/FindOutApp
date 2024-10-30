@@ -1,9 +1,9 @@
 import SwiftUI
 
+
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode // 用于关闭视图
-    @State var isSound = true
-    @State var musicVolume: Double = 0.5 // 音量进度条的初始值，范围为0到1
+    @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例
     @State private var showContactSheet = false // 用于显示联系方式选项
     
     var body: some View {
@@ -41,16 +41,26 @@ struct SettingView: View {
 
             VStack {
                 List {
-                    // 音乐开关
-                    Toggle(isOn: $isSound) {
+                    // 🎶 音乐开关
+                    Toggle(isOn: $audioManager.isMusicOn) { // 使用 AudioManager 的 isMusicOn 状态
                         Label("音楽", systemImage: "music.note")
                     }
+                    .onChange(of: audioManager.isMusicOn) { isOn in
+                        if isOn {
+                            audioManager.playBackgroundMusic(for: 1) // 开启时播放背景音乐
+                        } else {
+                            audioManager.stopMusic() // 关闭时停止音乐
+                        }
+                    }
 
-                    // 音量进度条
+                    // 🎶 音量进度条
                     VStack(alignment: .leading, spacing: 10) {
                         Label("音量", systemImage: "speaker.wave.2.fill")
-                        Slider(value: $musicVolume, in: 0...1) // 音量进度条，范围从0到1
+                        Slider(value: $audioManager.volume, in: 0...1) // 控制音量
                             .accentColor(.blue) // 设置进度条颜色
+                            .onChange(of: audioManager.volume) { newVolume in
+                                audioManager.updateVolume(to: Float(newVolume)) // 更新音量
+                            }
                     }
                     .padding(.vertical, 10)
 
@@ -81,9 +91,6 @@ struct SettingView: View {
             )
         }
     }
-    
-   
-    
 }
 
 #Preview {

@@ -1,10 +1,3 @@
-//
-//  testGameView.swift
-//  FindOutApp
-//
-//  Created by cmStudent on 2024/10/16.
-//
-
 import SwiftUI
 import AVFoundation
 
@@ -26,12 +19,8 @@ class ItemManager: ObservableObject {
     ]
 }
 
-
-
-
-
 struct GameView: View {
-    @State private var audioPlayer: AVAudioPlayer?
+    @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例，用于管理背景音乐
     @State private var foundItems: Set<String> = []
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
@@ -141,7 +130,11 @@ struct GameView: View {
                 }
             }
             .onAppear {
+                audioManager.playBackgroundMusic(for: 1) // 🎶 在 GameView 加载时播放背景音乐
                 startGame()
+            }
+            .onDisappear {
+                audioManager.stopMusic() // 🎶 离开 GameView 时停止背景音乐
             }
             .fullScreenCover(isPresented: $showSuccessView) {
                 SuccessView(onReturnHome: {
@@ -160,6 +153,8 @@ struct GameView: View {
         }
     }
     
+    // 其他现有代码保持不变...
+
     private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
     }

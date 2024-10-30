@@ -45,7 +45,7 @@ struct HomeView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 200)
-                                    .cornerRadius(10)
+                                    .cornerRadius(20)
                                     .shadow(radius: 5)
                                 VStack {
                                     Spacer()
@@ -79,7 +79,7 @@ struct HomeView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: 200)
-                                    .cornerRadius(10)
+                                    .cornerRadius(20)
                                     .shadow(radius: 5)
                                 VStack {
                                     Spacer()

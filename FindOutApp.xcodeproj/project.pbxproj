@@ -16,6 +16,8 @@
 		7F40CC062CB4C555009C69D6 /* CloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F40CC052CB4C555009C69D6 /* CloudView.swift */; };
 		7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */; };
 		7F84A18C2CD2B02C0051C2E4 /* kindergartenText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F84A18B2CD2B02C0051C2E4 /* kindergartenText.swift */; };
+		7F84A18E2CD2B4230051C2E4 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F84A18D2CD2B4230051C2E4 /* AudioManager.swift */; };
+		7F84A1902CD2B98F0051C2E4 /* bgm2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7F84A18F2CD2B98F0051C2E4 /* bgm2.mp3 */; };
 		7F8CA6B32CD20ACD0045446E /* bgm1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7F8CA6B22CD20ACD0045446E /* bgm1.mp3 */; };
 		7F9366B62CB27EF5001A7A22 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9366B52CB27EF5001A7A22 /* ItemListView.swift */; };
 		7FB175632CAB9927003ABEA2 /* OpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB175622CAB9927003ABEA2 /* OpenView.swift */; };
@@ -37,6 +39,8 @@
 		7F40CC052CB4C555009C69D6 /* CloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudView.swift; sourceTree = "<group>"; };
 		7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCountView.swift; sourceTree = "<group>"; };
 		7F84A18B2CD2B02C0051C2E4 /* kindergartenText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kindergartenText.swift; sourceTree = "<group>"; };
+		7F84A18D2CD2B4230051C2E4 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		7F84A18F2CD2B98F0051C2E4 /* bgm2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgm2.mp3; path = ../../bgm2.mp3; sourceTree = "<group>"; };
 		7F8CA6B22CD20ACD0045446E /* bgm1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bgm1.mp3; path = ../../bgm1.mp3; sourceTree = "<group>"; };
 		7F9366B52CB27EF5001A7A22 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		7FB175622CAB9927003ABEA2 /* OpenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 				7F2770A22CAAD1D5002CBC45 /* ContentView.swift */,
 				7F2AF5B92CC7281C002651A8 /* Main */,
 				7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */,
+				7F84A18F2CD2B98F0051C2E4 /* bgm2.mp3 */,
 				7F8CA6B22CD20ACD0045446E /* bgm1.mp3 */,
 				7F2770A62CAAD1D8002CBC45 /* Preview Content */,
 			);
@@ -100,6 +105,7 @@
 			children = (
 				7FB175622CAB9927003ABEA2 /* OpenView.swift */,
 				7FB175642CAB9E34003ABEA2 /* LoadingView.swift */,
+				7F84A18D2CD2B4230051C2E4 /* AudioManager.swift */,
 				7FD5F7E22CB4EB1800A9975F /* HomeView.swift */,
 				7F84A18B2CD2B02C0051C2E4 /* kindergartenText.swift */,
 				7F40CC052CB4C555009C69D6 /* CloudView.swift */,
@@ -174,6 +180,7 @@
 			files = (
 				7F2770A82CAAD1D8002CBC45 /* Preview Assets.xcassets in Resources */,
 				7F2770A52CAAD1D7002CBC45 /* Assets.xcassets in Resources */,
+				7F84A1902CD2B98F0051C2E4 /* bgm2.mp3 in Resources */,
 				7F8CA6B32CD20ACD0045446E /* bgm1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +195,7 @@
 				7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */,
 				7FD5F7E32CB4EB1800A9975F /* HomeView.swift in Sources */,
 				7FD5F7E92CB51F3D00A9975F /* SuccessView.swift in Sources */,
+				7F84A18E2CD2B4230051C2E4 /* AudioManager.swift in Sources */,
 				7F2770A32CAAD1D5002CBC45 /* ContentView.swift in Sources */,
 				7F84A18C2CD2B02C0051C2E4 /* kindergartenText.swift in Sources */,
 				7FD192E32CC8C877003F1976 /* SettingView.swift in Sources */,
