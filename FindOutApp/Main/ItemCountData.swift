@@ -8,11 +8,12 @@
 import Foundation
 
 class ItemCountData:ObservableObject {
-    static var shared = ItemCountData()
+    static let shared = ItemCountData()
     let id = UUID()
     var totalNumber = 1
     var imgSize:CGFloat = 30
-    var gameFinish:Bool = false
+    @Published var GameWin:Bool = false
+    @Published var GameLose:Bool = false
 }
 
 class GameTime:ObservableObject {

@@ -54,7 +54,7 @@ struct HomeView: View {
                                     VStack {
                                         Spacer()
                                         Button(action: {
-                                            withAnimation(.easeInOut(duration: 1.0)) {
+                                            withAnimation(.easeInOut(duration: 0.5)) {
                                                 showCloudView = true // 显示 CloudView
                                             }
                                         }) {
@@ -76,6 +76,8 @@ struct HomeView: View {
                                 
                                 
                             }
+                            .animation(.easeInOut(duration: 0.5), value: showCloudView) // 控制 CloudView 过渡动画
+                            .animation(.easeInOut(duration: 0.5), value: showGameView) // 控制 GameView 过渡动画
                             ZStack {
                                 Image("level2")
                                     .resizable()
@@ -110,6 +112,8 @@ struct HomeView: View {
                                 
                                 
                             }
+                            .animation(.easeInOut(duration: 0.5), value: showCloudView) // 控制 CloudView 过渡动画
+                            .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制
                         }
                         .padding(.horizontal)
                     }
@@ -121,8 +125,7 @@ struct HomeView: View {
                 }
             }
         }
-        .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
-        .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制 GameView 过渡动画
+        
     }
 }
 
