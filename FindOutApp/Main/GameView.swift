@@ -86,7 +86,7 @@ struct GameView: View {
                             .disabled(foundItems.contains(item.img))
                             .disabled(touchObject)
                         }
-                    }
+                    }//ZStack end
                     .scaledToFill()
                     .scaleEffect(defaultScale * dragScale)
                     .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
@@ -110,7 +110,7 @@ struct GameView: View {
                                     defaultScale = min(max(defaultScale * value, 1.0), 3.0)
                                 }
                         )
-                    )
+                    )//gesture end
                     
                     VStack {
                         GameTimeCountView()  // 确保倒计时显示
@@ -137,8 +137,10 @@ struct GameView: View {
                                 .fontWeight(.bold)
                         }
                     }
-                }
-            }
+                    
+                }//ZStack end
+            }//GeometryReader end
+            
             .onAppear {
                 startGame()
             }
@@ -154,10 +156,11 @@ struct GameView: View {
                     shouldShowGameView = false
                 })
             }
-        } else {
+        }
+        else {
             HomeView() // 控制从 HomeView 返回 GameView
         }
-    }
+    }//var body end
     
     private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
@@ -214,7 +217,8 @@ struct GameView: View {
         showSuccessView = false
         showFailedView = false
     }
-}
+    
+}//struct GameView end
 
 #Preview{
     GameView()
