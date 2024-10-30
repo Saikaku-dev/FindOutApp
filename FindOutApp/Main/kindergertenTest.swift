@@ -56,20 +56,18 @@ class ItemManager23:ObservableObject{
     ]
 }
 
-
-//第二张三张图道具栏
+//第二张三个物品图道具栏
 struct item2z :Identifiable{
     var id = UUID()
     var img:String
-    var foundCount:Int
-    
+//    var foundCount:Int
 }
 //地图按钮的类
 class ItemManager2z:ObservableObject{
     @Published var items:[item2z] = [
-        item2z(img: "yellowKid02", foundCount: 2),
-        item2z(img: "blackKid04", foundCount: 4),
-        item2z(img: "brownKid03", foundCount: 4)
+        item2z(img: "yellowKid02"),
+        item2z(img: "blackKid04"),
+        item2z(img: "brownKid03")
     ]
 }
 

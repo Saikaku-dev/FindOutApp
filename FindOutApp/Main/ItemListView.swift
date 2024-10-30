@@ -128,35 +128,41 @@ struct ItemListView2z: View {
 
     var body: some View {
         VStack {
-            ForEach(itemManager2z.items) { item2z in
-                Image(item2z.img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20,height:20)
-            
-            
-            
-            
-//            yellowKid02", foundCount: 2),
-//            item2z(img: "blackKid04", foundCount: 4),
-//            item2z(img: "brownKid03", foundCount: 4)
-                
-//                
-//                Image("yellowKid02")
+//            ForEach(itemManager2z.items) { item2z in
+//                Image(item2z.img)
 //                    .resizable()
 //                    .aspectRatio(contentMode: .fit)
 //                    .frame(width: 20,height:20)
-//                if item2z[index] = 0 {
-//                    
-//                }
-//                Text("\()/\(item2z.foundCount)")
+////                
+////                Image("yellowKid02")
+////                    .resizable()
+////                    .aspectRatio(contentMode: .fit)
+////                    .frame(width: 20,height:20)
+////                Text("\()/\(item2z.foundCount)")
+//
+//                Text("\(foundCounty)/\(item2z.foundCount)")
+////                    .foregroundColor(.black)
+////                    .font(.caption2)
+//            }
+            Image("yellowKid02")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20,height:20)
+            Text("\(foundCounty)/2")
+            
+            Image("blackKid04")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20,height:20)
+            Text("\(foundCountb)/4")
+            
+            Image("brownKid03")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20,height:20)
+            Text("\(foundCountg)/4")
 
-                
-                Text("\(foundCounty)/\(item2z.foundCount)")
-//                    .foregroundColor(.black)
-//                    .font(.caption2)
-//                
-            }
+          
         }
         .padding(10)
         .background(.white)
