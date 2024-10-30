@@ -33,94 +33,99 @@ struct ItemListView: View {
     }
 }
 
-struct ItemListView21: View {
-    @ObservedObject var itemdata21 = ItemCountData.shared
-    @EnvironmentObject var itemManager21:ItemManager21
+//struct ItemListView21: View {
+//    @ObservedObject var itemdata21 = ItemCountData.shared
+//    @EnvironmentObject var itemManager21:ItemManager21
+//
+//    var body: some View {
+//        VStack {
+//            ForEach(itemManager21.items) { item21 in
+//                Image(item21.img)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 20,height:20)
+//                Text("\(item21.foundCount1)/\(itemdata21.totalNumber)")
+//                    .foregroundColor(.black)
+//                    .font(.caption2)
+//            }
+//        }
+//        .padding(10)
+//        .background(.white)
+//        .cornerRadius(15)
+//        .overlay(
+//            RoundedRectangle(cornerRadius:15)
+//                .stroke(Color.black,lineWidth: 2)
+//        )
+//    }
+//}
+//
+//
+//
+//struct ItemListView22: View {
+//    @ObservedObject var itemdata22 = ItemCountData.shared
+//    @EnvironmentObject var itemManager22:ItemManager22
+//
+//    var body: some View {
+//        VStack {
+//            ForEach(itemManager22.items) { item22 in
+//                Image(item22.img)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 20,height:20)
+//                Text("\(item22.foundCount2)/\(itemdata22.totalNumber)")
+//                    .foregroundColor(.black)
+//                    .font(.caption2)
+//            }
+//        }
+//        .padding(10)
+//        .background(.white)
+//        .cornerRadius(15)
+//        .overlay(
+//            RoundedRectangle(cornerRadius:15)
+//                .stroke(Color.black,lineWidth: 2)
+//        )
+//    }
+//}
 
-    var body: some View {
-        VStack {
-            ForEach(itemManager21.items) { item21 in
-                Image(item21.img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20,height:20)
-                Text("\(item21.foundCount1)/\(itemdata21.totalNumber)")
-                    .foregroundColor(.black)
-                    .font(.caption2)
-            }
-        }
-        .padding(10)
-        .background(.white)
-        .cornerRadius(15)
-        .overlay(
-            RoundedRectangle(cornerRadius:15)
-                .stroke(Color.black,lineWidth: 2)
-        )
-    }
-}
 
 
-
-struct ItemListView22: View {
-    @ObservedObject var itemdata22 = ItemCountData.shared
-    @EnvironmentObject var itemManager22:ItemManager22
-
-    var body: some View {
-        VStack {
-            ForEach(itemManager22.items) { item22 in
-                Image(item22.img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20,height:20)
-                Text("\(item22.foundCount2)/\(itemdata22.totalNumber)")
-                    .foregroundColor(.black)
-                    .font(.caption2)
-            }
-        }
-        .padding(10)
-        .background(.white)
-        .cornerRadius(15)
-        .overlay(
-            RoundedRectangle(cornerRadius:15)
-                .stroke(Color.black,lineWidth: 2)
-        )
-    }
-}
-
-
-
-struct ItemListView23: View {
-    @ObservedObject var itemdata23 = ItemCountData.shared
-    @EnvironmentObject var itemManager23:ItemManager23
-
-    var body: some View {
-        VStack {
-            ForEach(itemManager23.items) { item23 in
-                Image(item23.img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 20,height:20)
-                Text("\(item23.foundCount3)/\(itemdata23.totalNumber)")
-                    .foregroundColor(.black)
-                    .font(.caption2)
-            }
-        }
-        .padding(10)
-        .background(.white)
-        .cornerRadius(15)
-        .overlay(
-            RoundedRectangle(cornerRadius:15)
-                .stroke(Color.black,lineWidth: 2)
-        )
-    }
-}
+//struct ItemListView23: View {
+//    @ObservedObject var itemdata23 = ItemCountData.shared
+//    @EnvironmentObject var itemManager23:ItemManager23
+//
+//    var body: some View {
+//        VStack {
+//            ForEach(itemManager23.items) { item23 in
+//                Image(item23.img)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 20,height:20)
+//                
+//                Text("\(item23.foundCount3)/\(itemdata23.totalNumber)")
+//                    .foregroundColor(.black)
+//                    .font(.caption2)
+//            }
+//        }
+//        .padding(10)
+//        .background(.white)
+//        .cornerRadius(15)
+//        .overlay(
+//            RoundedRectangle(cornerRadius:15)
+//                .stroke(Color.black,lineWidth: 2)
+//        )
+//    }
+//}
 
 
 
 struct ItemListView2z: View {
     @ObservedObject var itemdata2z = ItemCountData.shared
-    @EnvironmentObject var itemManager2z:ItemManager2z
-    
+//    @EnvironmentObject var itemManager2z:ItemManager2z
+    var itemManager2z:ItemManager2z = ItemManager2z()
+    @Binding var foundCounty:Int
+    @Binding var foundCountb:Int
+    @Binding var foundCountg:Int
+
     var body: some View {
         VStack {
             ForEach(itemManager2z.items) { item2z in
@@ -128,20 +133,29 @@ struct ItemListView2z: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 20,height:20)
+            
+            
+            
+            
+//            yellowKid02", foundCount: 2),
+//            item2z(img: "blackKid04", foundCount: 4),
+//            item2z(img: "brownKid03", foundCount: 4)
+                
 //                
-//                if(itemManager2z[0]==0){
-//                    Text("\(item21.foundCount1)/2")
+//                Image("yellowKid02")
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 20,height:20)
+//                if item2z[index] = 0 {
+//                    
 //                }
-//                else if(itemManager2z[1]==1){
-//                    Text("\(item22.foundCount2)/4")
-//                }
-//                else{Text("\(item23.foundCount3)/4")
-//                }
+//                Text("\()/\(item2z.foundCount)")
+
                 
-//                Text("\(item23.foundCount)/\(itemdata23.totalNumber)")
-                
-                    .foregroundColor(.black)
-                    .font(.caption2)
+                Text("\(foundCounty)/\(item2z.foundCount)")
+//                    .foregroundColor(.black)
+//                    .font(.caption2)
+//                
             }
         }
         .padding(10)
@@ -160,6 +174,9 @@ struct ItemListView2z: View {
 
 
 
+#Preview {
+    ItemListView2z(foundCounty:Binding.constant(0), foundCountb: Binding.constant(0), foundCountg: Binding.constant(0))
+}
 //#Preview {
-//    ItemListView()
+//    ItemListView23()
 //}
