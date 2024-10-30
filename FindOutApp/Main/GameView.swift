@@ -148,18 +148,26 @@ struct GameView: View {
                 }//if isStarted end
                 
             }//ZStack end
-//            if foundAllitems && GameTime.shared.countTime > 0 {
-//                ConfettiView()
-//            }
-            SuccessView()
-                .opacity(successvViewOpacity)
-            if foundAllitems && GameTime.shared.countTime > 0 {
-                ConfettiView()
-            }
+/
         }//GeometryReader
         .onAppear() {
             startGame()
         }
+        .fullScreenCover(isPresented: $showSuccessView) {
+            SuccessView(onReturnHome: {
+                resetGame()
+                shouldShowGameView = false
+            })
+        }
+        .fullScreenCover(isPresented: $showFailedView) {
+            FailedView(onReturnHome: {
+                resetGame()
+                shouldShowGameView = false
+            })
+        }
+    } else {
+        HomeView() // 控制从 HomeView 返回 GameView
+    }
     }//var body end
     //拖拽边缘设置函数
     func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
