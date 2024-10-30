@@ -1,16 +1,10 @@
-//
-//  SettingView.swift
-//  FindOutApp
-//
-//  Created by cmStudent on 2024/10/23.
-//
-
 import SwiftUI
 
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode // 用于关闭视图
     @State var isSound = true
-    @State var isMusic = true
+    @State var musicVolume: Double = 0.5 // 音量进度条的初始值，范围为0到1
+    @State private var showContactSheet = false // 用于显示联系方式选项
     
     var body: some View {
         VStack {
@@ -32,7 +26,7 @@ struct SettingView: View {
                 Spacer()
 
                 // 标题
-                Text("Setting")
+                Text("設置")
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
@@ -47,23 +41,49 @@ struct SettingView: View {
 
             VStack {
                 List {
+                    // 音乐开关
                     Toggle(isOn: $isSound) {
                         Label("音楽", systemImage: "music.note")
                     }
-                    Toggle(isOn: $isMusic) {
-                        Label("サウンド", systemImage: "speaker.wave.2.fill")
+
+                    // 音量进度条
+                    VStack(alignment: .leading, spacing: 10) {
+                        Label("音量", systemImage: "speaker.wave.2.fill")
+                        Slider(value: $musicVolume, in: 0...1) // 音量进度条，范围从0到1
+                            .accentColor(.blue) // 设置进度条颜色
                     }
-                    HStack(spacing: 20) {
-                        Image(systemName: "envelope.fill")
-                            .foregroundColor(.blue)
-                        Text("お問い合わせ")
+                    .padding(.vertical, 10)
+
+                    // 联系方式
+                    Button(action: {
+                        showContactSheet = true // 点击按钮时显示联系方式
+                    }) {
+                        HStack(spacing: 20) {
+                            Image(systemName: "envelope.fill")
+                                .foregroundColor(.blue)
+                            Text("お問い合わせ")
+                        }
                     }
                 }
-
                 Spacer()
             }
         }
+        .actionSheet(isPresented: $showContactSheet) {
+            ActionSheet(
+                title: Text("お問い合わせ"),
+                message: Text("以下のメールアドレスからご連絡ください。"),
+                buttons: [
+                    .default(Text("王瑛琦 24CM0105@gmail.jec.ac.jp")) ,
+                    .default(Text("李宰赫 24CM0139@gmail.jec.ac.jp")) ,
+                    .default(Text("趙普湘 24CM0123@gmail.jec.ac.jp")) ,
+                    .cancel()
+                ]
+            )
+        }
     }
+    
+   
+    
 }
 
 #Preview {

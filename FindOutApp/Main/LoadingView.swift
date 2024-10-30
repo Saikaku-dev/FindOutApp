@@ -14,6 +14,9 @@ struct LoadingView: View {
                     .scaledToFill()
                     .ignoresSafeArea()
                 VStack {
+                    Image("logo")
+                        .resizable()
+                        .frame(width: 220,height: 240)
                     Text("限られた時間内にターゲットを探し出そう！！")
                         .font(.title)
                         .fontWeight(.bold)
@@ -49,7 +52,7 @@ struct LoadingView: View {
                 progress += 0.025 // 4秒钟内达到1.0
             } else {
                 timer?.invalidate() // 完成时停止计时器
-                withAnimation(.easeInOut(duration: 0.5)) {
+                withAnimation(.easeInOut(duration: 1.5)) {
                     showHomeView = true // 动画渐隐到 HomeView
                 }
             }
