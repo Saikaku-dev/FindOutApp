@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @State private var showCloudView = false // 控制 CloudView 显示状态
     @State private var showGameView = false // 控制 GameView 显示状态
+    @State private var showkindergartenView = false
     
 //    @State private var showkindergartenView = false // 控制 kindergarten 显示状态
 
@@ -105,6 +106,9 @@ struct HomeView: View {
                                     .padding(.bottom, 20)
                                 }//VStack end
                             }//第二关卡
+                            .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
+                            .animation(.easeInOut(duration: 1.0), value: showkindergartenView) // 控制 GameView 过渡动画
+                    //        .animation(.easeInOut(duration: 1.0), value: showkindergartenView) // 控制 GameView 过渡动画
                             ZStack {
                                 Image("level2")
                                     .resizable()
@@ -135,6 +139,9 @@ struct HomeView: View {
                                     .padding(.bottom, 20)
                                 }//VStack end
                             }
+                            .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
+                            .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制 GameView 过渡动画
+                    //        .animation(.easeInOut(duration: 1.0), value: showkindergartenView) // 控制 GameView 过渡动画
                         }
                         .padding(.horizontal)
                     }
@@ -146,9 +153,7 @@ struct HomeView: View {
                 }
             }
         }//ZStack end
-        .animation(.easeInOut(duration: 2.0), value: showCloudView) // 控制 CloudView 过渡动画
-        .animation(.easeInOut(duration: 1.0), value: showGameView) // 控制 GameView 过渡动画
-//        .animation(.easeInOut(duration: 1.0), value: showkindergartenView) // 控制 GameView 过渡动画
+        
     }
 }
 

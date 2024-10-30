@@ -115,6 +115,7 @@ struct GameView: View {
                             }
                     )
                 )
+                //时间进度条
                 VStack {
                     //
                     GameTimeCountView()
@@ -122,12 +123,15 @@ struct GameView: View {
                 }
                 .frame(height:UIScreen.main.bounds.height)
                 .offset(y:-40)
+                
+                //道具栏
                 HStack {
                     ItemListView()
                         .environmentObject(itemManager)
                     Spacer()
                 }
                 .offset(y:-40)
+                
                 //游戏开始倒计时
                 if isStarted {
                     //开始倒计时
