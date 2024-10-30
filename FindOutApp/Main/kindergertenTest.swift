@@ -96,12 +96,17 @@ struct kindergertenTest: View {
                     //itemBarSize
     @State private var itemBarOpacity:CGFloat = 1.0
     @State var itemBarButton = false
-    
+    @State private var isStarted:Bool = true//游戏开始倒计时
+    @State private var countNumber:Int = 3//游戏开始倒计时长度3秒
+
+
     @State private var foundItems: Set<String> = [] // 存储已找到的item的imageName
     @ObservedObject var itemManager2z = ItemManager2z()
     @ObservedObject var itemManager21 = ItemManager21()
     @ObservedObject var itemManager22 = ItemManager22()
     @ObservedObject var itemManager23 = ItemManager23()
+    
+    @ObservedObject var gameTime = GameTime.shared
 
 //    @ObservedObject var itemdata = ItemCountData.shared
 
@@ -128,9 +133,8 @@ struct kindergertenTest: View {
                 ForEach(itemManager21.items.indices, id: \.self) { index in
                     let item21 = itemManager21.items[index]
                     Button(action: {
-
                         itemManager21.items[index].foundCount1 += 1
-                                            findCount += 1
+                        findCount += 1
                     }) {
                         Image(item21.img)
                             .resizable()
@@ -219,13 +223,35 @@ struct kindergertenTest: View {
                 )
             )//gesture end
             
+            //时间进度条
+            VStack {
+                GameTimeCountView()
+                Spacer()
+            }
+            .frame(height:UIScreen.main.bounds.height)
+            .offset(y:40)
+            
             //道具栏
             HStack {
                 ItemListView2z()
-                    .environmentObject(ItemManager2z)
+                    .environmentObject(itemManager2z)
                 Spacer()
             }
-            .offset(y:-40)
+            .offset(y:150)
+            
+            //游戏开始倒计时
+            if isStarted {
+                //开始倒计时
+                if countNumber > 0 {
+                    Text("\(countNumber)")
+                        .font(.system(size:50))
+                        .fontWeight(.bold)
+                } else {
+                    Text("START！")
+                        .font(.system(size:50))
+                        .fontWeight(.bold)
+                }
+            }//if isStarted end
             
             
         }//GeometryReader end

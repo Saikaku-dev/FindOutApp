@@ -115,6 +115,7 @@ struct GameView: View {
                             }
                     )
                 )
+                
                 //时间进度条
                 VStack {
                     //
@@ -145,7 +146,8 @@ struct GameView: View {
                             .fontWeight(.bold)
                     }
                 }//if isStarted end
-            }
+                
+            }//ZStack end
 //            if foundAllitems && GameTime.shared.countTime > 0 {
 //                ConfettiView()
 //            }

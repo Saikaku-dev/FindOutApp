@@ -28,3 +28,16 @@ class GameTime:ObservableObject {
         }
     }
 }
+
+class GameTime2:ObservableObject {
+    static var shared = GameTime()
+    let id = UUID()
+    @Published var countTime:Int = 20
+    var countDownTimer: Timer?
+    
+    func stopCountDownTimer() {
+        if GameTime.shared.countTime <= 0 {
+            GameTime.shared.countDownTimer?.invalidate()
+        }
+    }
+}
