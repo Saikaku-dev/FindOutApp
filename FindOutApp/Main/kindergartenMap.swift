@@ -147,7 +147,6 @@ struct kindergartenMap: View {
                                         .frame(width: 12,height: 28)
                                         .clipped()
                                 })
-            //                .offset(x:255,y: 44)
                             .offset(x: defaultOffset.width + dragOffset.width+255,y: defaultOffset.height + dragOffset.height+44)
                         }//if end
                         

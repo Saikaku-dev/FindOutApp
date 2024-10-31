@@ -31,31 +31,31 @@ struct ItemListView: View {
 }
 
 
-struct balloonListView: View {
-    @ObservedObject var balloon = ItemCountData.shared
-    @EnvironmentObject var balloonManager:BalloonManager
-
-    var body: some View {
-        VStack {
-            ForEach(balloonManager.items) { itemb in
-                Image(itemb.img)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 40,height:40)
-                Text("\(itemb.foundCount)/\(balloon.totalNumber)")
-                    .foregroundColor(.black)
-                    .font(.caption2)
-            }
-        }
-        .padding(10)
-        .background(.white)
-        .cornerRadius(15)
-        .overlay(
-            RoundedRectangle(cornerRadius:15)
-                .stroke(Color.black,lineWidth: 2)
-        )
-    }
-}
+//struct balloonListView: View {
+//    @ObservedObject var balloon = ItemCountData.shared
+//    @EnvironmentObject var balloonManager:BalloonManager
+//
+//    var body: some View {
+//        VStack {
+//            ForEach(balloonManager.items) { itemb in
+//                Image(itemb.img)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//                    .frame(width: 40,height:40)
+//                Text("\(itemb.foundCount)/\(balloon.totalNumber)")
+//                    .foregroundColor(.black)
+//                    .font(.caption2)
+//            }
+//        }
+//        .padding(10)
+//        .background(.white)
+//        .cornerRadius(15)
+//        .overlay(
+//            RoundedRectangle(cornerRadius:15)
+//                .stroke(Color.black,lineWidth: 2)
+//        )
+//    }
+//}
 
 //struct ItemListView21: View {
 //    @ObservedObject var itemdata21 = ItemCountData.shared

@@ -127,7 +127,6 @@ struct GameView: View {
                                 .fontWeight(.bold)
                         }
                     }
-                    .offset(y: -30)
                     
                     if isStarted {
                         if countNumber > 0 {
