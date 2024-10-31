@@ -4,7 +4,8 @@ struct CloudView: View {
     @Binding var isOpening: Bool // 控制 CloudView 的显示状态
     @Binding var showGameView: Bool // 控制 GameView 的显示状态
     @Binding var showKindergartenView: Bool // 控制 KindergartenView 的显示状态
-    @Binding var selectedLevel: Int? // 👈 记录选择的关卡
+
+    @Binding var selectedLevel: Int? //  记录选择的关卡
     @State private var cloudsOpening = false // 控制云彩动画
 
     private let clouds = [

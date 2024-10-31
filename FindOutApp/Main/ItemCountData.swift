@@ -8,25 +8,26 @@
 import Foundation
 
 class ItemCountData:ObservableObject {
-    static var shared = ItemCountData()//
+    static let shared = ItemCountData()
     let id = UUID()
     var totalNumber = 1
-    var imgSize:CGFloat = 40
-//    var gameFinish:Bool = false
-    var gameFinish:Bool = true
+    var imgSize:CGFloat = 30
+    @Published var GameWin:Bool = false
+    @Published var GameLose:Bool = false
 }
 
 class GameTime:ObservableObject {
     static var shared = GameTime()
     let id = UUID()
+
     @Published var countTime:Int = 30
     var countDownTimer: Timer?
-    
-    func stopCountDownTimer() {
-        if GameTime.shared.countTime <= 0 {
-            GameTime.shared.countDownTimer?.invalidate()
-        }
-    }
+//    
+//    func stopCountDownTimer() {
+//        if GameTime.shared.countTime <= 0 {
+//            GameTime.shared.countDownTimer?.invalidate()
+//        }
+//    }
 }
 
 class GameTime2:ObservableObject {

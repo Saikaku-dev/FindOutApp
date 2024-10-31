@@ -1,10 +1,3 @@
-//
-//  testGameView.swift
-//  FindOutApp
-//
-//  Created by cmStudent on 2024/10/16.
-//
-
 import SwiftUI
 import AVFoundation
 
@@ -30,7 +23,8 @@ import SwiftUI
 import AVFoundation
 
 struct GameView: View {
-    @State private var audioPlayer: AVAudioPlayer?
+
+    @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例，用于管理背景音乐
     @State private var foundItems: Set<String> = []
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
@@ -44,7 +38,7 @@ struct GameView: View {
     @State private var findCount: Int = 0
     @State private var totalCount: Int = 6
     @State private var countNumber: Int = 3
-    
+
     @State private var showSuccessView: Bool = false
     @State private var showFailedView: Bool = false
     @State private var shouldShowGameView: Bool = true  // 控制是否显示GameView
@@ -72,8 +66,8 @@ struct GameView: View {
                             let item = itemManager.items[index]
                             Button(action: {
                                 shock()
-                                findCount += 1
                                 itemManager.items[index].foundCount += 1
+                                findCount += 1
                                 foundItems.insert(item.img)
                                 checkGameResult()
                             }) {
@@ -86,7 +80,7 @@ struct GameView: View {
                             .disabled(foundItems.contains(item.img))
                             .disabled(touchObject)
                         }
-                    }//ZStack end
+                    }
                     .scaledToFill()
                     .scaleEffect(defaultScale * dragScale)
                     .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
@@ -110,19 +104,28 @@ struct GameView: View {
                                     defaultScale = min(max(defaultScale * value, 1.0), 3.0)
                                 }
                         )
-                    )//gesture end
-                    //倒计时显示
+                    )
                     VStack {
                         GameTimeCountView()  // 确保倒计时显示
                         Spacer()
                     }
                     .frame(height: UIScreen.main.bounds.height)
-                    .offset(y: 20)
-                    //道具栏
                     HStack {
                         ItemListView()  // 确保 item 列表显示
                             .environmentObject(itemManager)
                         Spacer()
+                    }
+                    
+                    if isStarted {
+                        if countNumber > 0 {
+                            Text("\(countNumber)")
+                                .font(.system(size: 50))
+                                .fontWeight(.bold)
+                        } else {
+                            Text("START！")
+                                .font(.system(size: 50))
+                                .fontWeight(.bold)
+                        }
                     }
                     .offset(y: -30)
                     
@@ -144,6 +147,13 @@ struct GameView: View {
             .onAppear {
                 startGame()
             }
+            .onAppear {
+                audioManager.playBackgroundMusic(for: 1) // 🎶 在 GameView 加载时播放背景音乐
+                startGame()
+            }
+            .onDisappear {
+                audioManager.stopMusic() // 🎶 离开 GameView 时停止背景音乐
+            }
             .fullScreenCover(isPresented: $showSuccessView) {
                 SuccessView(onReturnHome: {
                     resetGame()
@@ -156,12 +166,13 @@ struct GameView: View {
                     shouldShowGameView = false
                 })
             }
-        }//if end
-        else {
+
+        } else {
             HomeView() // 控制从 HomeView 返回 GameView
         }
-    }//var body end
+    }
     
+
     private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)
     }
