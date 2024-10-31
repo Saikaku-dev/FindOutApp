@@ -22,9 +22,10 @@ struct ConfettiParticle {
 // 成功页面视图
 struct SuccessView: View {
     @State private var showConfetti = true
-    @State private var moveToHomeView:Bool = false
-    @ObservedObject var itemdata = ItemCountData.shared
-    
+
+    @State  var moveToHomeView:Bool = false
+    var onReturnHome: (() -> Void)?
+
     var body: some View {
         ZStack {
             // 背景图片
@@ -33,26 +34,34 @@ struct SuccessView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            // 彩带喷发效果
-//            if showConfetti {
-//                ConfettiView()
-//                    .ignoresSafeArea()
-//            }
+         //    彩带喷发效果
+            if showConfetti {
+                ConfettiView()
+                    .ignoresSafeArea()
+            }
             
             // 主内容
-            VStack(spacing: 30) {
+            VStack(spacing: 0) {
                 // 显示成功的标题文本
-                Text(ItemCountData.shared.gameFinish ? "クリア成功！" : "残念！")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+                Image("彩带")
+                    .resizable()
+                    .frame(width: 530,height: 130)
+
                 
+                     
                 // 带阴影和圆角效果的图片
                
+                
+                Image("奖杯")
+                    .resizable()
+                    .frame(width: 130,height: 130)
+                    .padding()
                 // 返回主页的按钮
                 Button("続ける") {
+                    
                     // 返回主页操作，游戏完成一定回到主界面
                     moveToHomeView = true
+                    onReturnHome?() // 调用重置闭包
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -60,17 +69,12 @@ struct SuccessView: View {
                 .background(Color.purple)
                 .cornerRadius(25)
             }
-            .offset(y: -150)
+
         }
         .fullScreenCover(isPresented: $moveToHomeView ) {
             HomeView()
         }
-//        .onAppear {
-//            // 页面加载后1秒钟后关闭彩带效果
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                showConfetti = false
-//            }
-//        }
+
     }
 }
 
@@ -79,8 +83,8 @@ struct ConfettiView: View {
     @State private var particles: [ConfettiParticle] = [] // 粒子数组
     @State private var animationTimer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect() // 定时器控制动画更新
     
-    let particleCount = 200 // 粒子数量
-
+    let particleCount = 500 // 粒子数量
+    
     var body: some View {
         GeometryReader { geometry in
             // 使用 Canvas 绘制彩带效果
@@ -95,13 +99,13 @@ struct ConfettiView: View {
                     let elapsedTime = Date().timeIntervalSinceReferenceDate - particle.lifetime
                     let opacity = max(0, 1 - elapsedTime) // 不透明度逐渐降低
                     let scale = max(0.3, 1 - elapsedTime / 2) // 缩放粒子，逐渐变小
-                    
-                    if elapsedTime < 1 { // 粒子在寿命内显示
+
+                    if elapsedTime < 3 { // 粒子在寿命内显示
                         context.opacity = opacity // 应用不透明度
                         context.transform = CGAffineTransform(translationX: transformedParticle.position.x, y: transformedParticle.position.y)
                             .rotated(by: transformedParticle.rotation.radians)
                             .scaledBy(x: scale, y: scale) // 缩放效果
-                        
+
                         // 绘制粒子路径
                         let path = Path(CGRect(x: -transformedParticle.size.width / 2, y: -transformedParticle.size.height / 2, width: transformedParticle.size.width, height: transformedParticle.size.height))
                         context.fill(path, with: .color(transformedParticle.color)) // 填充粒子颜色
@@ -109,7 +113,7 @@ struct ConfettiView: View {
                 }
             }
             .onAppear {
-                // 生成初始的彩带粒子
+                // 生成初始的彩带粒子，覆盖整个屏幕区域
                 particles = createParticles(count: particleCount, in: geometry.size)
             }
             .onReceive(animationTimer) { _ in
@@ -124,6 +128,7 @@ struct ConfettiView: View {
                     return updatedParticle
                 }.filter { Date().timeIntervalSinceReferenceDate - $0.lifetime < 1 } // 移除超过寿命的粒子
             }
+            .ignoresSafeArea() // 全屏覆盖
         }
     }
 
@@ -133,7 +138,7 @@ struct ConfettiView: View {
         var particles: [ConfettiParticle] = []
 
         for _ in 0..<count {
-            let position = CGPoint(x: size.width / 2, y: size.height * 0.4 + CGFloat.random(in: -10...10)) // 横屏中上方喷发
+            let position = CGPoint(x: CGFloat.random(in: 0...size.width), y: CGFloat.random(in: 0...size.height)) // 全屏随机生成位置
             let velocity = randomVShapeVelocity(for: size) // 随机生成速度
             let color = colors.randomElement() ?? .red
             let size = CGSize(width: CGFloat.random(in: 5...10), height: CGFloat.random(in: 20...40)) // 随机生成尺寸
@@ -145,7 +150,7 @@ struct ConfettiView: View {
 
         return particles
     }
-    
+
     // 随机生成 V 字形的速度
     func randomVShapeVelocity(for size: CGSize) -> CGSize {
         let horizontalSpeed = CGFloat.random(in: -300...300)
@@ -153,6 +158,7 @@ struct ConfettiView: View {
         return CGSize(width: horizontalSpeed, height: upwardSpeed)
     }
 }
+
 
 #Preview {
     SuccessView()
