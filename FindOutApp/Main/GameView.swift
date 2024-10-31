@@ -26,6 +26,7 @@ struct GameView: View {
 
     @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例，用于管理背景音乐
     @State private var foundItems: Set<String> = []
+    
     @State private var defaultOffset: CGSize = .zero
     @GestureState private var dragOffset: CGSize = .zero
     @State private var defaultScale: CGFloat = 1.5
@@ -62,6 +63,7 @@ struct GameView: View {
                         Image("GameBackGround")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
+                        
                         ForEach(itemManager.items.indices, id: \.self) { index in
                             let item = itemManager.items[index]
                             Button(action: {
@@ -80,7 +82,7 @@ struct GameView: View {
                             .disabled(foundItems.contains(item.img))
                             .disabled(touchObject)
                         }
-                    }
+                    }//ZStack end
                     .scaledToFill()
                     .scaleEffect(defaultScale * dragScale)
                     .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
@@ -105,29 +107,19 @@ struct GameView: View {
                                 }
                         )
                     )
+                    
                     VStack {
                         GameTimeCountView()  // 确保倒计时显示
                         Spacer()
                     }
                     .frame(height: UIScreen.main.bounds.height)
+                    
                     HStack {
                         ItemListView()  // 确保 item 列表显示
                             .environmentObject(itemManager)
                         Spacer()
                     }
-                    
-                    if isStarted {
-                        if countNumber > 0 {
-                            Text("\(countNumber)")
-                                .font(.system(size: 50))
-                                .fontWeight(.bold)
-                        } else {
-                            Text("START！")
-                                .font(.system(size: 50))
-                                .fontWeight(.bold)
-                        }
-                    }
-                    
+                                        
                     if isStarted {
                         if countNumber > 0 {
                             Text("\(countNumber)")
@@ -169,7 +161,7 @@ struct GameView: View {
         } else {
             HomeView() // 控制从 HomeView 返回 GameView
         }
-    }
+    }//var body end
     
 
     private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
@@ -221,7 +213,7 @@ struct GameView: View {
         findCount = 0
         totalCount = 6
         foundAllitems = false
-        GameTime.shared.countTime = 30
+        GameTime.shared.countTime = 60
         touchObject = true
         isStarted = true
         showSuccessView = false

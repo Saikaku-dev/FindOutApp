@@ -17,8 +17,8 @@ struct item21 :Identifiable{
 //地图按钮的类黄色
 class ItemManager21:ObservableObject{
     @Published var items:[item21] = [
-        item21(img: "yellowKid01", offset: CGSize(width: -280, height: -125),imgSize: 15,foundCount1:0),
-        item21(img: "yellowKid02", offset: CGSize(width: -180, height: -130),imgSize: 10,foundCount1:0)
+        item21(img: "yellowKid01", offset: CGSize(width: -280, height: -125),imgSize: 20,foundCount1:0),
+        item21(img: "yellowKid02", offset: CGSize(width: -180, height: -130),imgSize: 20,foundCount1:0)
     ]
 }
 
@@ -39,7 +39,6 @@ class ItemManager22:ObservableObject{
         item22(img: "blackKid04", offset: CGSize(width: -50, height: -180),imgSize: 15,foundCount2:0)
     ]
 }
-
 
 struct item23 :Identifiable{
     var id = UUID()
@@ -64,7 +63,7 @@ struct item2z :Identifiable{
     var img:String
 //    var foundCount:Int
 }
-//地图按钮的类
+//道具栏的类
 class ItemManager2z:ObservableObject{
     @Published var items:[item2z] = [
         item2z(img: "yellowKid02"),
@@ -125,14 +124,12 @@ struct kindergertenTest: View {
     var body: some View {
         if shouldShowKindergartenView {
             
-            GeometryReader { geometry in
-                let imageSize = CGSize(width: geometry.size.width * defaultScale, height: geometry.size.height * defaultScale)
+            GeometryReader {  geometry in
+                let imageSize = CGSize(width: geometry.size.width * defaultScale,height: geometry.size.height * defaultScale)
                 let maxOffsetX = (imageSize.width - screenSize.width) / 2
                 let maxOffsetY = (imageSize.height - screenSize.height) / 2
-                
-                ZStack {
-                    Color.black.edgesIgnoringSafeArea(.all)
-                    ZStack{
+
+                ZStack{
                         Image("allKingdergartenMap")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -144,17 +141,23 @@ struct kindergertenTest: View {
                             Button(action: {
                                 foundCount1 += 1
                                 findCount += 1
+                                checkGameResult()
+                                //bool型 =true
                             }) {
                                 Image(item21.img)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .opacity(foundItems.contains(item21.img) ? 0:1)
-                                //                                .frame(width: ItemCountData.shared.imgSize,
-                                //                                      height:ItemCountData.shared.imgSize)
+                                    .opacity(foundItems.contains(item21.img) ? 0 : 1)
+//                                    .frame(width: (item21.imgSize ?? 20) * defaultScale) // 缩放大小
                                     .frame(width: item21.imgSize)
                             }
                             .offset(item21.offset)
-                            //                    .disabled(foundItems.contains(item.img))
+                            .offset(
+                                    x: (item21.offset.width * defaultScale) + defaultOffset.width + dragOffset.width,
+                                    y: (item21.offset.height * defaultScale) + defaultOffset.height + dragOffset.height
+                                ) // 动态偏移
+                            .disabled(foundItems.contains(item21.img))
+                            .disabled(touchObject)
                         }
                         
                         //玩家需要找的元素黑色4
@@ -163,88 +166,94 @@ struct kindergertenTest: View {
                             Button(action: {
                                 foundCount2 += 1
                                 findCount += 1
+                                checkGameResult()
                             }) {
                                 Image(item22.img)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .opacity(foundItems.contains(item22.img) ? 0:1)
+//                                    .opacity(foundItems.contains(item22.img) ?
+//                                             0:1)
+//                                    .frame(width: (item22.imgSize ?? 20) * defaultScale) // 缩放大小
                                     .frame(width: item22.imgSize)
                                 
-                                //                                .frame(width: ItemCountData.shared.imgSize,
-                                //                                       height:ItemCountData.shared.imgSize)
                             }
+                            .offset(
+                                    x: (item22.offset.width * defaultScale) + defaultOffset.width + dragOffset.width,
+                                    y: (item22.offset.height * defaultScale) + defaultOffset.height + dragOffset.height
+                                ) // 动态偏移
+                            
                             .offset(item22.offset)
-                            //                .disabled(foundItems.contains(item.img))
+                            .disabled(foundItems.contains(item22.img))
+                            .disabled(touchObject)
                         }
                         
                         //玩家需要找的元素棕色4
                         ForEach(itemManager23.items.indices, id: \.self) { index in
                             let item23 = itemManager23.items[index]
                             Button(action: {
-                                
                                 //                        itemManager23.items[index].
                                 foundCount3 += 1
                                 findCount += 1
+                                checkGameResult()
                             }) {
                                 Image(item23.img)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .opacity(foundItems.contains(item23.img) ? 0:1)
-                                //                                .frame(width: item23.imgSize)
+//                                    .opacity(foundItems.contains(item23.img) ? 0:1)
+//                                    .frame(width: (item23.imgSize ?? 20) * defaultScale) // 缩放大小
+                                                                .frame(width: item23.imgSize)
                                 
-                                    .frame(width: ItemCountData.shared.imgSize,
-                                           height:ItemCountData.shared.imgSize)
+//                                    .frame(width: ItemCountData.shared.imgSize,
+//                                           height:ItemCountData.shared.imgSize)
                             }
+                            .offset(
+                                    x: (item23.offset.width * defaultScale) + defaultOffset.width + dragOffset.width,
+                                    y: (item23.offset.height * defaultScale) + defaultOffset.height + dragOffset.height
+                                ) // 动态偏移
                             .offset(item23.offset)
-                            
-                            //                .disabled(foundItems.contains(item.img))
+                            .disabled(touchObject)
+                            .disabled(foundItems.contains(item23.img))
                         }
                         
                     }//ZStack end
-                    .scaledToFill()
-                    .scaleEffect(defaultScale * dragScale)
-                    .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
-                            y: limitedOffset(defaultOffset.height + dragOffset.height, max: maxOffsetY))
-                    .gesture(
-                        SimultaneousGesture (
-                            DragGesture()
-                                .updating($dragOffset) { value, state, _ in
-                                    state = value.translation
-                                }
-                                .onEnded { value in
-                                    defaultOffset.width = limitedOffset(defaultOffset.width + value.translation.width, max: maxOffsetX)
-                                    defaultOffset.height = limitedOffset(defaultOffset.height + value.translation.height, max: maxOffsetY)
-                                },
-                            MagnificationGesture()
-                                .updating($dragScale) { value, scale, _ in
-                                    let newScale = defaultScale * value
-                                    if newScale < 1.0 {
-                                        scale = 1.0 / defaultScale // 限制最小为1，但保持手势平滑
-                                    } else if newScale > 3.0 {
-                                        scale = 3.0 / defaultScale // 限制最大为5，但保持手势平滑
-                                    } else {
-                                        scale = value // 正常缩放
-                                    }
-                                }
-                                .onEnded { value in
-                                    defaultScale = min(max(defaultScale * value, 1.0), 3.0)
-                                }
-                        )
-                    )//gesture end
+                .scaledToFill()
+                .scaleEffect(defaultScale * dragScale)
+                .offset(x: limitedOffset(defaultOffset.width + dragOffset.width, max: maxOffsetX),
+                        y: limitedOffset(defaultOffset.height + dragOffset.height, max: maxOffsetY))
+                .gesture(
+                    SimultaneousGesture (
+                        DragGesture()
+                            .updating($dragOffset) { value, state, _ in
+                                state = value.translation
+                            }
+                            .onEnded { value in
+                                defaultOffset.width = limitedOffset(defaultOffset.width + value.translation.width, max: maxOffsetX)
+                                defaultOffset.height = limitedOffset(defaultOffset.height + value.translation.height, max: maxOffsetY)
+                            },
+                        MagnificationGesture()
+                            .updating($dragScale) { value, scale, _ in
+                                let newScale = defaultScale * value
+                                scale = (newScale < 1.0) ? 1.0 / defaultScale : min(3.0 / defaultScale, value)
+                            }
+                            .onEnded { value in
+                                defaultScale = min(max(defaultScale * value, 1.0), 3.0)
+                            }
+                    )
+                )
                     //时间进度条
                     VStack {
                         GameTimeCountView()
                         Spacer()
                     }
                     .frame(height:UIScreen.main.bounds.height)
-                    .offset(y:40)
+//                    .offset(y:40)
                     //道具栏
                     HStack {
                         ItemListView2z(foundCounty: $foundCount1,foundCountb: $foundCount2,foundCountg:$foundCount3)
                             .environmentObject(itemManager2z)
                         Spacer()
                     }
-                    .offset(y:150)
+//                    .offset(y:150)
                     //游戏开始倒计时
                     if isStarted {
                         //开始倒计时
@@ -258,8 +267,7 @@ struct kindergertenTest: View {
                                 .fontWeight(.bold)
                         }
                     }//if isStarted end
-                    
-                }//ZStack end
+           
             }//GeometryReader end
             
             .onAppear {
@@ -284,6 +292,10 @@ struct kindergertenTest: View {
         }
 
     }//var body end
+    
+    private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
+        return max(min(offset, limit), -limit)
+    }
     
     private func startGame() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { countTimer in
@@ -331,9 +343,9 @@ struct kindergertenTest: View {
         showFailedView = false
     }
     
-    func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
-        return max(min(offset, limit), -limit)
-    }
+//    func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
+//        return max(min(offset, limit), -limit)
+//    }
     
     
 }

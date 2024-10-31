@@ -20,7 +20,7 @@ class GameTime:ObservableObject {
     static var shared = GameTime()
     let id = UUID()
 
-    @Published var countTime:Int = 30
+    @Published var countTime:Int = 60
     var countDownTimer: Timer?
 //    
 //    func stopCountDownTimer() {
