@@ -111,14 +111,14 @@ struct GameView: View {
                                 }
                         )
                     )//gesture end
-                    
+                    //倒计时显示
                     VStack {
                         GameTimeCountView()  // 确保倒计时显示
                         Spacer()
                     }
                     .frame(height: UIScreen.main.bounds.height)
                     .offset(y: 20)
-                    
+                    //道具栏
                     HStack {
                         ItemListView()  // 确保 item 列表显示
                             .environmentObject(itemManager)
@@ -156,7 +156,7 @@ struct GameView: View {
                     shouldShowGameView = false
                 })
             }
-        }
+        }//if end
         else {
             HomeView() // 控制从 HomeView 返回 GameView
         }
