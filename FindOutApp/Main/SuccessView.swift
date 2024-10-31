@@ -42,12 +42,13 @@ struct SuccessView: View {
             // 主内容
             VStack(spacing: 0) {
                 // 显示成功的标题文本
+
                 Image("彩带")
                     .resizable()
                     .frame(width: 530,height: 130)
 
                 
-                    
+                  
                 
                 // 带阴影和圆角效果的图片
                

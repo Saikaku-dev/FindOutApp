@@ -186,7 +186,21 @@ struct GameView: View {
     }
     
     private func checkGameResult() {
+<<<<<<< HEAD
+        if findCount == totalCount && GameTime.shared.countTime > 0 {
+            foundAllitems = true
+            ItemCountData.shared.gameFinish = true
+            showSuccessvView()
+        } else if GameTime.shared.countTime <= 0 {
+            ItemCountData.shared.gameFinish = false
+            showSuccessvView()
+        }
+    }
+    private func initinalData() {
+        if successvViewOpacity == 1.0 {
+=======
         if findCount == totalCount {
+>>>>>>> 14a4e16fe4de3cee03d2fc53584f8d8a83574d1d
             gameTime.countDownTimer?.invalidate()
             showSuccessView = true
             foundAllitems = true
