@@ -13,7 +13,6 @@ struct GameTimeCountView: View {
         ZStack {
             HStack {
                 Gauge(value: Double(gameTime.countTime), in: 0...60) {
-                    //
                 }
                 .progressViewStyle(LinearProgressViewStyle())
                 .tint(LinearGradient(colors: [.red,.orange,.yellow], startPoint: .leading, endPoint: .trailing))
