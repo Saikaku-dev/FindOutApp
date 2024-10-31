@@ -12,14 +12,14 @@ class ItemCountData:ObservableObject {
     let id = UUID()
     var totalNumber = 1
     var imgSize:CGFloat = 30
-    var gameFinish:Bool = false
+    @Published var gameFinish:Bool = false
 }
 
 class GameTime:ObservableObject {
     static var shared = GameTime()
     let id = UUID()
 
-    @Published var countTime:Int = 30
+    @Published var countTime:Int = 10
     var countDownTimer: Timer?
 //    
 //    func stopCountDownTimer() {

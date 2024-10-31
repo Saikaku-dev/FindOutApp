@@ -23,7 +23,8 @@ struct ConfettiParticle {
 struct SuccessView: View {
     @State private var showConfetti = true
     @State private var moveToHomeView:Bool = false
-
+    @ObservedObject var itemdata = ItemCountData.shared
+    
     var body: some View {
         ZStack {
             // 背景图片
@@ -41,7 +42,7 @@ struct SuccessView: View {
             // 主内容
             VStack(spacing: 30) {
                 // 显示成功的标题文本
-                Text(ItemCountData.shared.gameFinish ? "残念！" : "クリア成功！")
+                Text(ItemCountData.shared.gameFinish ? "クリア成功！" : "残念！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

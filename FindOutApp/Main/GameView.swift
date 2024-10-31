@@ -203,14 +203,12 @@ struct GameView: View {
         }
     }
     private func checkGameResult() {
-        if findCount == totalCount {
+        if findCount == totalCount && GameTime.shared.countTime > 0 {
             foundAllitems = true
-            ItemCountData.shared.gameFinish = (findCount == totalCount)
-            print(ItemCountData.shared.gameFinish)
+            ItemCountData.shared.gameFinish = true
             showSuccessvView()
         } else if GameTime.shared.countTime <= 0 {
-            ItemCountData.shared.gameFinish = (findCount != totalCount)
-            print(ItemCountData.shared.gameFinish)
+            ItemCountData.shared.gameFinish = false
             showSuccessvView()
         }
     }

@@ -12,6 +12,7 @@ struct FindOutAppApp: App {
     var body: some Scene {
         WindowGroup {
             OpenView()
+                .environmentObject(ItemCountData())
         }
     }
 }
