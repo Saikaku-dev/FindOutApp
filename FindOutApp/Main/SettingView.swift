@@ -1,16 +1,10 @@
-//
-//  SettingView.swift
-//  FindOutApp
-//
-//  Created by cmStudent on 2024/10/23.
-//
-
 import SwiftUI
+
 
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode // 用于关闭视图
-    @State var isSound = true
-    @State var isMusic = true
+    @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例
+    @State private var showContactSheet = false // 用于显示联系方式选项
     
     var body: some View {
         VStack {
@@ -32,7 +26,7 @@ struct SettingView: View {
                 Spacer()
 
                 // 标题
-                Text("Setting")
+                Text("設置")
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
@@ -47,21 +41,54 @@ struct SettingView: View {
 
             VStack {
                 List {
-                    Toggle(isOn: $isSound) {
+                    // 🎶 音乐开关
+                    Toggle(isOn: $audioManager.isMusicOn) { // 使用 AudioManager 的 isMusicOn 状态
                         Label("音楽", systemImage: "music.note")
                     }
-                    Toggle(isOn: $isMusic) {
-                        Label("サウンド", systemImage: "speaker.wave.2.fill")
+                    .onChange(of: audioManager.isMusicOn) { isOn in
+                        if isOn {
+                            audioManager.playBackgroundMusic(for: 1) // 开启时播放背景音乐
+                        } else {
+                            audioManager.stopMusic() // 关闭时停止音乐
+                        }
                     }
-                    HStack(spacing: 20) {
-                        Image(systemName: "envelope.fill")
-                            .foregroundColor(.blue)
-                        Text("お問い合わせ")
+
+                    // 🎶 音量进度条
+                    VStack(alignment: .leading, spacing: 10) {
+                        Label("音量", systemImage: "speaker.wave.2.fill")
+                        Slider(value: $audioManager.volume, in: 0...1) // 控制音量
+                            .accentColor(.blue) // 设置进度条颜色
+                            .onChange(of: audioManager.volume) { newVolume in
+                                audioManager.updateVolume(to: Float(newVolume)) // 更新音量
+                            }
+                    }
+                    .padding(.vertical, 10)
+
+                    // 联系方式
+                    Button(action: {
+                        showContactSheet = true // 点击按钮时显示联系方式
+                    }) {
+                        HStack(spacing: 20) {
+                            Image(systemName: "envelope.fill")
+                                .foregroundColor(.blue)
+                            Text("お問い合わせ")
+                        }
                     }
                 }
-
                 Spacer()
             }
+        }
+        .actionSheet(isPresented: $showContactSheet) {
+            ActionSheet(
+                title: Text("お問い合わせ"),
+                message: Text("以下のメールアドレスからご連絡ください。"),
+                buttons: [
+                    .default(Text("王瑛琦 24CM0105@gmail.jec.ac.jp")) ,
+                    .default(Text("李宰赫 24CM0139@gmail.jec.ac.jp")) ,
+                    .default(Text("趙普湘 24CM0123@gmail.jec.ac.jp")) ,
+                    .cancel()
+                ]
+            )
         }
     }
 }

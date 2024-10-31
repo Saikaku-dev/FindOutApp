@@ -22,9 +22,15 @@ struct ConfettiParticle {
 // 成功页面视图
 struct SuccessView: View {
     @State private var showConfetti = true
+<<<<<<< HEAD
     @State private var moveToHomeView:Bool = false
     @ObservedObject var itemdata = ItemCountData.shared
     
+=======
+    @State  var moveToHomeView:Bool = false
+    var onReturnHome: (() -> Void)?
+
+>>>>>>> 14a4e16fe4de3cee03d2fc53584f8d8a83574d1d
     var body: some View {
         ZStack {
             // 背景图片
@@ -33,26 +39,36 @@ struct SuccessView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            // 彩带喷发效果
-//            if showConfetti {
-//                ConfettiView()
-//                    .ignoresSafeArea()
-//            }
+         //    彩带喷发效果
+            if showConfetti {
+                ConfettiView()
+                    .ignoresSafeArea()
+            }
             
             // 主内容
             VStack(spacing: 30) {
                 // 显示成功的标题文本
+<<<<<<< HEAD
                 Text(ItemCountData.shared.gameFinish ? "クリア成功！" : "残念！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+=======
+                
+                    Text(  "クリア！")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+>>>>>>> 14a4e16fe4de3cee03d2fc53584f8d8a83574d1d
                 
                 // 带阴影和圆角效果的图片
                
                 // 返回主页的按钮
                 Button("続ける") {
+                    
                     // 返回主页操作，游戏完成一定回到主界面
                     moveToHomeView = true
+                    onReturnHome?() // 调用重置闭包
                 }
                 .font(.headline)
                 .foregroundColor(.white)
@@ -60,7 +76,7 @@ struct SuccessView: View {
                 .background(Color.purple)
                 .cornerRadius(25)
             }
-            .offset(y: -150)
+//            .offset(y: -150)
         }
         .fullScreenCover(isPresented: $moveToHomeView ) {
             HomeView()
