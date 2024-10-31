@@ -22,6 +22,7 @@ struct ConfettiParticle {
 // 成功页面视图
 struct SuccessView: View {
     @State private var showConfetti = true
+
     @State  var moveToHomeView:Bool = false
     var onReturnHome: (() -> Void)?
 
@@ -47,8 +48,7 @@ struct SuccessView: View {
                     .frame(width: 530,height: 130)
 
                 
-                    
-                
+                     
                 // 带阴影和圆角效果的图片
                
                 

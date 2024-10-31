@@ -191,6 +191,7 @@ struct GameView: View {
             showSuccessView = true
             foundAllitems = true
         } else if GameTime.shared.countTime <= 0 {
+
             gameTime.countDownTimer?.invalidate()
             showFailedView = true
             foundAllitems = true
