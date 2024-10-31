@@ -63,11 +63,12 @@ struct SuccessView: View {
                     moveToHomeView = true
                     onReturnHome?() // 调用重置闭包
                 }
+                .frame(width: 200)
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.purple)
-                .cornerRadius(25)
+                .cornerRadius(20)
             }
 
         }
