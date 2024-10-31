@@ -20,10 +20,11 @@ struct ConfettiParticle {
 }
 
 // 成功页面视图
-struct SuccessView: View {
-    @State private var showConfetti = true
+import SwiftUI
 
-    @State  var moveToHomeView:Bool = false
+struct SuccessView: View {
+    @Environment(\.dismiss) var dismiss  // 使用 dismiss 环境变量控制视图消失
+    @State private var showConfetti = true
     var onReturnHome: (() -> Void)?
 
     var body: some View {
@@ -34,7 +35,7 @@ struct SuccessView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-         //    彩带喷发效果
+            // 彩带喷发效果
             if showConfetti {
                 ConfettiView()
                     .ignoresSafeArea()
@@ -42,26 +43,22 @@ struct SuccessView: View {
             
             // 主内容
             VStack(spacing: 0) {
-                // 显示成功的标题文本
                 Image("彩带")
                     .resizable()
-                    .frame(width: 530,height: 130)
-
-                
-                     
-                // 带阴影和圆角效果的图片
-               
+                    .frame(width: 530, height: 130)
                 
                 Image("奖杯")
                     .resizable()
-                    .frame(width: 130,height: 130)
+                    .frame(width: 130, height: 130)
                     .padding()
+                
                 // 返回主页的按钮
                 Button("続ける") {
-                    
-                    // 返回主页操作，游戏完成一定回到主界面
-                    moveToHomeView = true
-                    onReturnHome?() // 调用重置闭包
+                    // 调用回调函数以返回主页，动画不立即消失
+                    onReturnHome?()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        dismiss()  // 延迟 dismiss，以保留动画
+                    }
                 }
                 .frame(width: 200)
                 .font(.headline)
@@ -70,14 +67,10 @@ struct SuccessView: View {
                 .background(Color.purple)
                 .cornerRadius(20)
             }
-
         }
-        .fullScreenCover(isPresented: $moveToHomeView ) {
-            HomeView()
-        }
-
     }
 }
+
 
 // 彩带喷发效果视图
 struct ConfettiView: View {

@@ -1,11 +1,7 @@
 import SwiftUI
 
- 
-
-import SwiftUI
-
 struct FailedView: View {
-    @State private var moveToHomeView: Bool = false
+    @Environment(\.dismiss) var dismiss
     var onReturnHome: (() -> Void)?
     
     var body: some View {
@@ -15,23 +11,23 @@ struct FailedView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            VStack (spacing:20){
-                
+            VStack(spacing: 20) {
                 Text("残念！")
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2)
-)
-                    
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
+                
                 Image("裂开的奖杯")
                     .resizable()
-                    .frame(width: 160,height: 160)
+                    .frame(width: 160, height: 160)
+                
                 Text("次はもっと上手くいくはずだよ！")
                 
                 Button("続ける") {
-                    onReturnHome?() // 调用重置闭包
-                    moveToHomeView = true
+                    onReturnHome?()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        dismiss()  // 延迟返回
+                    }
                 }
                 .frame(width: 200)
                 .font(.headline)
@@ -39,17 +35,7 @@ struct FailedView: View {
                 .padding()
                 .background(Color.purple)
                 .cornerRadius(20)
-               
             }
-        }
-        .fullScreenCover(isPresented: $moveToHomeView) {
-            HomeView()
         }
     }
 }
-
-#Preview {
-    FailedView()
-}
-
-

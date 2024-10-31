@@ -203,7 +203,7 @@ struct GameView: View {
         findCount = 0
         totalCount = 6
         foundAllitems = false
-        GameTime.shared.countTime = 30
+        GameTime.shared.countTime = 60
         touchObject = true
         isStarted = true
         showSuccessView = false
