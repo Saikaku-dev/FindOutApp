@@ -107,14 +107,12 @@ struct GameView: View {
                         Spacer()
                     }
                     .frame(height: UIScreen.main.bounds.height)
-                    .offset(y: 20)
                     
                     HStack {
                         ItemListView()  // 确保 item 列表显示
                             .environmentObject(itemManager)
                         Spacer()
                     }
-                    .offset(y: -30)
                     
                     if isStarted {
                         if countNumber > 0 {
@@ -153,7 +151,7 @@ struct GameView: View {
         }
     }
     
-    // 其他现有代码保持不变...
+   
 
     private func limitedOffset(_ offset: CGFloat, max limit: CGFloat) -> CGFloat {
         return max(min(offset, limit), -limit)

@@ -26,7 +26,7 @@ struct LoadingView: View {
                         .progressViewStyle(LinearProgressViewStyle())
                         .frame(width: 200, height: 15)
                         .scaleEffect(x: 1, y: 2)
-                        .padding()
+                        
                     Text("読み込んでいます...")
                 }
                 .padding()

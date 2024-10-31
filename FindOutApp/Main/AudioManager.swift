@@ -13,7 +13,7 @@ class AudioManager: ObservableObject {
     private var audioPlayer: AVAudioPlayer?
     
     @Published var isMusicOn: Bool = true // 控制音乐开关
-    @Published var volume: Float = 0.3 // 默认音量
+    @Published var volume: Float = 0.5 // 默认音量
 
     private init() {}
 
