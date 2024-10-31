@@ -152,8 +152,8 @@ struct kindergertenTest: View {
                                     .aspectRatio(contentMode: .fit)
                                     .opacity(foundItems.contains(item21.img) ? 0 : 1)
                                     .frame(width: (item21.imgSize ?? 20) * defaultScale) // 缩放大小
-                                //.frame(width: ItemCountData.shared.imgSize,
-                                //height:ItemCountData.shared.imgSize)
+//                                    .opacity(foundItems.contains(item21.img) ? 0 : 1) // 根据是否找到该物品设置透明度
+
                                     .frame(width: item21.imgSize)
                             }
                             //.offset(item21.offset)

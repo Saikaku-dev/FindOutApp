@@ -10,12 +10,12 @@ struct item: Identifiable {
 
 class ItemManager: ObservableObject {
     @Published var items: [item] = [
-        item(img: "street light", offset: CGSize(width: 50, height: 100), foundCount: 0),
-        item(img: "purple scarf", offset: CGSize(width: 150, height: 100), foundCount: 0),
-        item(img: "blue scarf", offset: CGSize(width: 250, height: 100), foundCount: 0),
-        item(img: "bus left", offset: CGSize(width: -200, height: 100), foundCount: 0),
-        item(img: "bus right", offset: CGSize(width: -300, height: 100), foundCount: 0),
-        item(img: "house", offset: CGSize(width: -50, height: 50), foundCount: 0)
+        item(img: "street light", offset: CGSize(width: 64, height: 5), foundCount: 0),
+        item(img: "purple scarf", offset: CGSize(width: -160, height: -100), foundCount: 0),
+        item(img: "blue scarf", offset: CGSize(width: -50, height: 125), foundCount: 0),
+        item(img: "bus left", offset: CGSize(width: -180, height: -30), foundCount: 0),
+        item(img: "bus right", offset: CGSize(width: 200, height: 100), foundCount: 0),
+        item(img: "house", offset: CGSize(width: -80, height: 80), foundCount: 0)
     ]
 }
 
@@ -55,7 +55,7 @@ struct GameView: View {
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
                     ZStack {
-                        Image("GameBackGround")
+                        Image("gameBackground")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                         ForEach(itemManager.items.indices, id: \.self) { index in
@@ -72,6 +72,8 @@ struct GameView: View {
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30)
                             }
+                            .opacity(foundItems.contains(item.img) ? 0 : 1) // 根据是否找到该物品设置透明度
+
                             .offset(item.offset)
                             .disabled(foundItems.contains(item.img))
                             .disabled(touchObject)
