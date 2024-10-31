@@ -40,13 +40,14 @@ struct SuccessView: View {
             }
             
             // 主内容
-            VStack(spacing: 30) {
+            VStack(spacing: 0) {
                 // 显示成功的标题文本
+                Image("彩带")
+                    .resizable()
+                    .frame(width: 530,height: 130)
+
                 
-                    Text(  "クリア！")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                    
                 
                 // 带阴影和圆角效果的图片
                
@@ -68,17 +69,12 @@ struct SuccessView: View {
                 .background(Color.purple)
                 .cornerRadius(25)
             }
-//            .offset(y: -150)
+
         }
         .fullScreenCover(isPresented: $moveToHomeView ) {
             HomeView()
         }
-//        .onAppear {
-//            // 页面加载后1秒钟后关闭彩带效果
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                showConfetti = false
-//            }
-//        }
+
     }
 }
 
