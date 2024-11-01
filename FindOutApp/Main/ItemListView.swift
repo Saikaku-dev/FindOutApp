@@ -10,12 +10,11 @@ import SwiftUI
 struct ItemListView: View {
     @ObservedObject var itemdata = ItemCountData.shared
     @EnvironmentObject var itemManager: ItemManager
-    @State private var isExpanded = false
+    @State private var isExpanded = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) { // Reduced spacing from 10 to 8
             // Header Button
-//            VStack {
                 Button(action: {
                     withAnimation(.spring()) {
                         isExpanded.toggle()
@@ -37,6 +36,7 @@ struct ItemListView: View {
                 
                 // Expandable Content
                 if isExpanded {
+                    
                     VStack(alignment: .leading, spacing: 8) { // Reduced spacing from 15 to 8
                         ForEach(itemManager.items) { item in
                             itemGroup(
@@ -48,14 +48,14 @@ struct ItemListView: View {
                         }
                     }
                     .padding(8) // Reduced from default padding()
-                    .background(Color.black.opacity(0.4))
+                    .background(Color.black.opacity(0.6))
                     .cornerRadius(12)
                     .transition(.scale.combined(with: .opacity))
+                    
                 }
-//            }
             Spacer()
         }
-        .frame(width:200,height: 200) // Reduced from 220
+        .frame(width:200,height: 250) // Reduced from 220
     }
     
     private func itemGroup(image: String, foundCount: Int, totalCount: Int, color: Color) -> some View {
