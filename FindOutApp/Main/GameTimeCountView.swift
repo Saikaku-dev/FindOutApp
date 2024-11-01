@@ -22,7 +22,7 @@ struct GameTimeCountView: View {
                 .shadow(color: gameTime.countTime <= 10 ? .red.opacity(0.8) : .clear, radius: gameTime.countTime <= 10 ? 8 : 0)
                 .animation(gameTime.countTime <= 10 ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true) : .linear(duration: 1), value: gameTime.countTime)
                 .animation(.linear(duration: 1), value: gameTime.countTime)  // 平滑过渡
-
+                .offset(y:-20)
                 // 倒计时数字和闹钟图标
                 ZStack {
                     Image("alarm")

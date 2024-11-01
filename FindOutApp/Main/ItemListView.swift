@@ -15,44 +15,47 @@ struct ItemListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) { // Reduced spacing from 10 to 8
             // Header Button
-            Button(action: {
-                withAnimation(.spring()) {
-                    isExpanded.toggle()
-                }
-            }) {
-                HStack {
-                    Image(systemName: "list.bullet")
-                        .font(.system(size: 18)) // Reduced from 20
-                    Text("ターゲット")
-                        .font(.subheadline) // Changed from headline to subheadline
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                }
-                .foregroundColor(.white)
-                .padding(.vertical, 6) // Reduced from 8
-                .padding(.horizontal, 10) // Reduced from 12
-                .background(Color.black.opacity(0.6))
-                .cornerRadius(8) // Reduced from 10
-            }
-            
-            // Expandable Content
-            if isExpanded {
-                VStack(alignment: .leading, spacing: 8) { // Reduced spacing from 15 to 8
-                    ForEach(itemManager.items) { item in
-                        itemGroup(
-                            image: item.img,
-                            foundCount: item.foundCount,
-                            totalCount: itemdata.totalNumber,
-                            color: .blue
-                        )
+//            VStack {
+                Button(action: {
+                    withAnimation(.spring()) {
+                        isExpanded.toggle()
                     }
+                }) {
+                    HStack {
+                        Image(systemName: "list.bullet")
+                            .font(.system(size: 18)) // Reduced from 20
+                        Text("ターゲット")
+                            .font(.subheadline) // Changed from headline to subheadline
+                        Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                    }
+                    .foregroundColor(.white)
+                    .padding(.vertical, 6) // Reduced from 8
+                    .padding(.horizontal, 10) // Reduced from 12
+                    .background(Color.black.opacity(0.6))
+                    .cornerRadius(8) // Reduced from 10
                 }
-                .padding(8) // Reduced from default padding()
-                .background(Color.black.opacity(0.4))
-                .cornerRadius(12)
-                .transition(.scale.combined(with: .opacity))
-            }
+                
+                // Expandable Content
+                if isExpanded {
+                    VStack(alignment: .leading, spacing: 8) { // Reduced spacing from 15 to 8
+                        ForEach(itemManager.items) { item in
+                            itemGroup(
+                                image: item.img,
+                                foundCount: item.foundCount,
+                                totalCount: itemdata.totalNumber,
+                                color: .blue
+                            )
+                        }
+                    }
+                    .padding(8) // Reduced from default padding()
+                    .background(Color.black.opacity(0.4))
+                    .cornerRadius(12)
+                    .transition(.scale.combined(with: .opacity))
+                }
+//            }
+            Spacer()
         }
-        .frame(width: 200) // Reduced from 220
+        .frame(width:200,height: 200) // Reduced from 220
     }
     
     private func itemGroup(image: String, foundCount: Int, totalCount: Int, color: Color) -> some View {
