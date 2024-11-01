@@ -6,6 +6,7 @@ struct CloudLoadingView: View {
     @Binding var showGameView: Bool
     @Binding var showKindergartenView: Bool
     @State private var cloudsOpening = false
+    @State private var contentVisible = false // 控制内容显示的状态
 
     private let clouds = [
         (name: "cloud1", width: 1400.0, height: 1400.0, initialX: -20.0, initialY: -100.0, offsetX: -800.0),
@@ -19,8 +20,15 @@ struct CloudLoadingView: View {
         (name: "cloud9", width: 1400.0, height: 1400.0, initialX: -140, initialY: 100.0, offsetX: -800.0),
         (name: "cloud10", width: 1400.0, height: 1400.0, initialX: 350.0, initialY: 200.0, offsetX: 800.0)
     ]
+    
     var body: some View {
         ZStack {
+            // 覆盖层防止加载时透视底层内容
+            Color.black.opacity(cloudsOpening ? 0.0 : 1.0)
+                .animation(.easeOut(duration: 0.3), value: cloudsOpening)
+                .ignoresSafeArea()
+
+            // 内容视图（仅在云层打开后可见）
             VStack {
                 Image("logo")
                     .resizable()
@@ -30,7 +38,7 @@ struct CloudLoadingView: View {
                     .fontWeight(.bold)
                     .padding(.top, 20)
             }
-            .opacity(cloudsOpening ? 1.0 : 0.0) // 云层完全打开后显示加载内容
+            .opacity(contentVisible ? 1.0 : 0.0) // 控制内容的显示
             .onAppear {
                 startCloudAnimation()
             }
@@ -65,6 +73,9 @@ struct CloudLoadingView: View {
 
     // 云彩完全展开后自动切换视图
     func startCloudAnimation() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // 提前显示内容
+            contentVisible = true
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { // 延迟3.5秒以延长停留时间
             if selectedLevel == 1 {
                 withAnimation {

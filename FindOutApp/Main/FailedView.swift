@@ -23,19 +23,27 @@ struct FailedView: View {
                 
                 Text("次はもっと上手くいくはずだよ！")
                 
-                Button("続ける") {
+                Button(action: {
+                    // 调用回调函数以返回主页，动画不立即消失
                     onReturnHome?()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                        dismiss()  // 延迟返回
+                        dismiss()  // 延迟 dismiss，以保留动画
                     }
+                }) {
+                    Text("続ける")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity) // 使文字水平居中
                 }
-                .frame(width: 200)
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.purple)
-                .cornerRadius(20)
+                .frame(width: 200) // 按钮宽度
+                .background(Capsule().fill(Color.purple)) // 圆柱形背景
+                
+            }
+
             }
         }
     }
+#Preview{
+    FailedView()
 }
