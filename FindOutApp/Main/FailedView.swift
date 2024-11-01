@@ -15,7 +15,7 @@ struct FailedView: View {
                 Text("残念！")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
                 
                 Image("裂开的奖杯")
                     .resizable()

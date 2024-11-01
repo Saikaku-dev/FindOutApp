@@ -10,8 +10,8 @@ struct item21: Identifiable {
 
 class ItemManager21: ObservableObject {
     @Published var items: [item21] = [
-        item21(img: "yellowKid01", offset: CGSize(width: -280, height: -125), imgSize: 20, foundCount1: 0),
-        item21(img: "yellowKid02", offset: CGSize(width: -180, height: -130), imgSize: 20, foundCount1: 0)
+        item21(img: "yellowKid01", offset: CGSize(width: -270, height: -118), imgSize: 4, foundCount1: 0),//窗户上无头黄色女孩 👌
+        item21(img: "yellowKid02", offset: CGSize(width: -175, height: -123), imgSize: 6, foundCount1: 0)//阳台上完整黄色女孩👌
     ]
 }
 
@@ -25,10 +25,10 @@ struct item22: Identifiable {
 
 class ItemManager22: ObservableObject {
     @Published var items: [item22] = [
-        item22(img: "blackKid01", offset: CGSize(width: 220, height: -150), imgSize: 15, foundCount2: 0),
-        item22(img: "blackKid02", offset: CGSize(width: -200, height: -180), imgSize: 15, foundCount2: 0),
-        item22(img: "blackKid03", offset: CGSize(width: -80, height: -140), imgSize: 15, foundCount2: 0),
-        item22(img: "blackKid04", offset: CGSize(width: -50, height: -180), imgSize: 15, foundCount2: 0)
+        item22(img: "blackKid01", offset: CGSize(width: 210, height: 47), imgSize: 6, foundCount2: 0),  //右侧半截小男孩 👌
+        item22(img: "blackKid02", offset: CGSize(width: -249, height: -95), imgSize: 5, foundCount2: 0),  // 桌边小男孩 👌
+        item22(img: "blackKid03", offset: CGSize(width: -112 ,height: -95), imgSize: 6, foundCount2: 0), //滑梯小男孩
+        item22(img: "blackKid04", offset: CGSize(width: 200, height: -138), imgSize: 6, foundCount2: 0)// 楼顶小男孩 👌
     ]
 }
 
@@ -42,10 +42,11 @@ struct item23: Identifiable {
 
 class ItemManager23: ObservableObject {
     @Published var items: [item23] = [
-        item23(img: "brownKid01", offset: CGSize(width: 10, height: -10), imgSize: 15, foundCount3: 0),
-        item23(img: "brownKid02", offset: CGSize(width: -20, height: -100), imgSize: 15, foundCount3: 0),
-        item23(img: "brownKid03", offset: CGSize(width: -80, height: -60), imgSize: 15, foundCount3: 0),
-        item23(img: "brownKid04", offset: CGSize(width: -110, height: -130), imgSize: 15, foundCount3: 0)
+        item23(img: "brownKid01", offset: CGSize(width: -19, height: -128), imgSize: 8, foundCount3: 0),  //上方正窗小女孩 👌
+        item23(img: "brownKid02", offset: CGSize(width: -9, height: 50), imgSize: 9, foundCount3: 0),//正门小女孩👌
+        item23(img: "brownKid03", offset: CGSize(width: 200, height: 120), imgSize: 15, foundCount3: 0),   //空地小女孩 👌
+        item23(img: "brownKid04", offset: CGSize(width: 315, height: 133), imgSize: 7
+               , foundCount3: 0)  //只有头小女孩 👌
     ]
 }
 
@@ -293,6 +294,8 @@ struct KindergartenTest: View {
     }
     
     private func checkGameResult() {
+        let totalFoundItems = foundCount1 + foundCount2 + foundCount3
+        findCount = totalFoundItems
         if findCount == totalCount {
             gameTime.countDownTimer?.invalidate()
             showSuccessView = true
@@ -305,6 +308,7 @@ struct KindergartenTest: View {
     }
     
     private func resetGame() {
+        
         gameTime.countDownTimer?.invalidate()
         findCount = 0
         totalCount = 10
@@ -315,6 +319,9 @@ struct KindergartenTest: View {
         showSuccessView = false
         showFailedView = false
         foundItems.removeAll()
+        foundCount1 = 0
+        foundCount2 = 0
+        foundCount3 = 0
     }
 }
 

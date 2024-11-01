@@ -20,11 +20,48 @@ struct ConfettiParticle {
 }
 
 // 成功页面视图
+// AudioPlayer.swift
+import AVFoundation
+
+class SuccessAudioPlayer: ObservableObject {
+    private var audioPlayer: AVAudioPlayer?
+    
+    init() {
+        setupAudio()
+    }
+    
+    private func setupAudio() {
+        guard let path = Bundle.main.path(forResource: "歓声と拍手1", ofType: "mp3") else {
+            print("音频文件未找到")
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = 0 // 只播放一次
+        } catch {
+            print("音频播放器创建失败: \(error)")
+        }
+    }
+    
+    func play() {
+        audioPlayer?.play()
+    }
+    
+    func stop() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+}
+
+// SuccessView.swift
 import SwiftUI
 
 struct SuccessView: View {
-    @Environment(\.dismiss) var dismiss  // 使用 dismiss 环境变量控制视图消失
+    @Environment(\.dismiss) var dismiss
     @State private var showConfetti = true
+    @StateObject private var audioPlayer = SuccessAudioPlayer()
     var onReturnHome: (() -> Void)?
 
     var body: some View {
@@ -64,16 +101,25 @@ struct SuccessView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        .frame(maxWidth: .infinity) // 使文字水平居中
+                        .frame(maxWidth: .infinity)
                 }
-                .frame(width: 200) // 按钮宽度
-                .background(Capsule().fill(Color.purple)) // 圆柱形背景
-
-
+                .frame(width: 200)
+                .background(Capsule().fill(Color.purple))
             }
+        }
+        .onAppear {
+            // 视图出现时播放音乐
+            audioPlayer.play()
+        }
+        .onDisappear {
+            // 视图消失时停止音乐
+            audioPlayer.stop()
         }
     }
 }
+
+// 其余代码保持不变...
+    
 
 
 // 彩带喷发效果视图

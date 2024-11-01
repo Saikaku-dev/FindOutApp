@@ -27,10 +27,10 @@ struct ItemListView: View {
                             .font(.subheadline) // Changed from headline to subheadline
                         Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .padding(.vertical, 6) // Reduced from 8
                     .padding(.horizontal, 10) // Reduced from 12
-                    .background(Color.black.opacity(0.6))
+                    .background(Color.white.opacity(1))
                     .cornerRadius(8) // Reduced from 10
                 }
                 
@@ -48,14 +48,14 @@ struct ItemListView: View {
                         }
                     }
                     .padding(8) // Reduced from default padding()
-                    .background(Color.black.opacity(0.6))
+                    .background(Color.white.opacity(1))
                     .cornerRadius(12)
                     .transition(.scale.combined(with: .opacity))
                     
                 }
             Spacer()
         }
-        .frame(width:200,height: 250) // Reduced from 220
+        .frame(width:150,height: 250) // Reduced from 220
     }
     
     private func itemGroup(image: String, foundCount: Int, totalCount: Int, color: Color) -> some View {
@@ -67,10 +67,6 @@ struct ItemListView: View {
                 .frame(width: 24, height: 24) // Reduced from 30x30
                 .background(color.opacity(0.2))
                 .cornerRadius(6) // Reduced from 8
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(color, lineWidth: 1)
-                )
             
             // Progress Bar
             GeometryReader { geometry in
@@ -92,7 +88,7 @@ struct ItemListView: View {
             // Counter
             Text("\(foundCount)/\(totalCount)")
                 .font(.caption2) // Changed from caption to caption2
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .monospacedDigit()
         }
         .padding(.horizontal, 6) // Reduced from 8

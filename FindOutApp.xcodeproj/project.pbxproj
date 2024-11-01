@@ -14,6 +14,7 @@
 		7F2770A82CAAD1D8002CBC45 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */; };
 		7F2AF5BB2CC737A4002651A8 /* ItemCountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */; };
 		7F4AA1C52CCA0BDD00271E87 /* GameTimeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */; };
+		7F5DF6C42CD4A34700C153D8 /* 歓声と拍手1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7F5DF6C32CD4A34700C153D8 /* 歓声と拍手1.mp3 */; };
 		7F6C46982CD333C8003841EA /* bgm1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7F6C46962CD333C8003841EA /* bgm1.mp3 */; };
 		7F6C46992CD333C8003841EA /* bgm2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7F6C46972CD333C8003841EA /* bgm2.mp3 */; };
 		7F84A18C2CD2B02C0051C2E4 /* kindergartenText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F84A18B2CD2B02C0051C2E4 /* kindergartenText.swift */; };
@@ -36,6 +37,7 @@
 		7F2770A72CAAD1D8002CBC45 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F2AF5BA2CC737A4002651A8 /* ItemCountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCountData.swift; sourceTree = "<group>"; };
 		7F4AA1C42CCA0BDD00271E87 /* GameTimeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTimeCountView.swift; sourceTree = "<group>"; };
+		7F5DF6C32CD4A34700C153D8 /* 歓声と拍手1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "歓声と拍手1.mp3"; path = "../../歓声と拍手1.mp3"; sourceTree = "<group>"; };
 		7F6C46962CD333C8003841EA /* bgm1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm1.mp3; sourceTree = "<group>"; };
 		7F6C46972CD333C8003841EA /* bgm2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgm2.mp3; sourceTree = "<group>"; };
 		7F84A18B2CD2B02C0051C2E4 /* kindergartenText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kindergartenText.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				7F2770A22CAAD1D5002CBC45 /* ContentView.swift */,
 				7F2AF5B92CC7281C002651A8 /* Main */,
 				7F2770A42CAAD1D7002CBC45 /* Assets.xcassets */,
+				7F5DF6C32CD4A34700C153D8 /* 歓声と拍手1.mp3 */,
 				7F6C46962CD333C8003841EA /* bgm1.mp3 */,
 				7F6C46972CD333C8003841EA /* bgm2.mp3 */,
 				7F2770A62CAAD1D8002CBC45 /* Preview Content */,
@@ -179,6 +182,7 @@
 				7F6C46982CD333C8003841EA /* bgm1.mp3 in Resources */,
 				7F6C46992CD333C8003841EA /* bgm2.mp3 in Resources */,
 				7F2770A52CAAD1D7002CBC45 /* Assets.xcassets in Resources */,
+				7F5DF6C42CD4A34700C153D8 /* 歓声と拍手1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,7 +340,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D9BL4WP6X7;
+				DEVELOPMENT_TEAM = 5L822369X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "名探偵は君だ";
@@ -367,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FindOutApp/Preview Content\"";
-				DEVELOPMENT_TEAM = D9BL4WP6X7;
+				DEVELOPMENT_TEAM = 5L822369X6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "名探偵は君だ";
