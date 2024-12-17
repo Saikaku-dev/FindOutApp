@@ -20,10 +20,48 @@ struct ConfettiParticle {
 }
 
 // 成功页面视图
-struct SuccessView: View {
-    @State private var showConfetti = true
+// AudioPlayer.swift
+import AVFoundation
 
-    @State  var moveToHomeView:Bool = false
+class SuccessAudioPlayer: ObservableObject {
+    private var audioPlayer: AVAudioPlayer?
+    
+    init() {
+        setupAudio()
+    }
+    
+    private func setupAudio() {
+        guard let path = Bundle.main.path(forResource: "歓声と拍手1", ofType: "mp3") else {
+            print("音频文件未找到")
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.numberOfLoops = 0 // 只播放一次
+        } catch {
+            print("音频播放器创建失败: \(error)")
+        }
+    }
+    
+    func play() {
+        audioPlayer?.play()
+    }
+    
+    func stop() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+}
+
+// SuccessView.swift
+import SwiftUI
+
+struct SuccessView: View {
+    @Environment(\.dismiss) var dismiss
+    @State private var showConfetti = true
+    @StateObject private var audioPlayer = SuccessAudioPlayer()
     var onReturnHome: (() -> Void)?
 
     var body: some View {
@@ -34,7 +72,7 @@ struct SuccessView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-         //    彩带喷发效果
+            // 彩带喷发效果
             if showConfetti {
                 ConfettiView()
                     .ignoresSafeArea()
@@ -42,42 +80,47 @@ struct SuccessView: View {
             
             // 主内容
             VStack(spacing: 0) {
-                // 显示成功的标题文本
                 Image("彩带")
                     .resizable()
-                    .frame(width: 530,height: 130)
-
-                
-                     
-                // 带阴影和圆角效果的图片
-               
+                    .frame(width: 530, height: 130)
                 
                 Image("奖杯")
                     .resizable()
-                    .frame(width: 130,height: 130)
+                    .frame(width: 130, height: 130)
                     .padding()
+                
                 // 返回主页的按钮
-                Button("続ける") {
-                    
-                    // 返回主页操作，游戏完成一定回到主界面
-                    moveToHomeView = true
-                    onReturnHome?() // 调用重置闭包
+                Button(action: {
+                    // 调用回调函数以返回主页，动画不立即消失
+                    onReturnHome?()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        dismiss()  // 延迟 dismiss，以保留动画
+                    }
+                }) {
+                    Text("続ける")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
                 }
                 .frame(width: 200)
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.purple)
-                .cornerRadius(20)
+                .background(Capsule().fill(Color.purple))
             }
-
         }
-        .fullScreenCover(isPresented: $moveToHomeView ) {
-            HomeView()
+        .onAppear {
+            // 视图出现时播放音乐
+            audioPlayer.play()
         }
-
+        .onDisappear {
+            // 视图消失时停止音乐
+            audioPlayer.stop()
+        }
     }
 }
+
+// 其余代码保持不变...
+    
+
 
 // 彩带喷发效果视图
 struct ConfettiView: View {
