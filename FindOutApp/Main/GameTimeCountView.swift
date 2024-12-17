@@ -5,7 +5,6 @@ struct GameTimeCountView: View {
     
     var body: some View {
         ZStack {
-            
             HStack(spacing: 20) {
                 Spacer()
                 // 自定义渐变进度条

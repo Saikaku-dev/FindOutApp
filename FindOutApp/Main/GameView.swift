@@ -26,7 +26,7 @@ struct GameView: View {
    @GestureState private var dragOffset: CGSize = .zero
    @State private var defaultScale: CGFloat = 1.5
    @GestureState private var dragScale: CGFloat = 1.0
-   
+
    @State private var isStarted: Bool = true
    @State private var foundAllitems: Bool = false
    @State private var touchObject: Bool = true
