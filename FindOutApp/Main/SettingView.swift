@@ -76,9 +76,9 @@ struct SettingView: View {
                 title: Text("お問い合わせ"),
                 message: Text("以下のメールアドレスからご連絡ください。"),
                 buttons: [
-                    .default(Text("王瑛琦 24CM0105@gmail.jec.ac.jp")) ,
-                    .default(Text("李宰赫 24CM0139@gmail.jec.ac.jp")) ,
-                    .default(Text("趙普湘 24CM0123@gmail.jec.ac.jp")) ,
+                    .default(Text("王瑛琦 24CM0105@jec.ac.jp")) ,
+                    .default(Text("李宰赫 24CM0139@jec.ac.jp")) ,
+                    .default(Text("趙普湘 24CM0123@jec.ac.jp")) ,
                     .cancel()
                 ]
             )
