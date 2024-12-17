@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct SettingView: View {
     @Environment(\.presentationMode) var presentationMode // 用于关闭视图
     @ObservedObject var audioManager = AudioManager.shared // 🎶 引入 AudioManager 单例
@@ -45,13 +44,7 @@ struct SettingView: View {
                     Toggle(isOn: $audioManager.isMusicOn) { // 使用 AudioManager 的 isMusicOn 状态
                         Label("音楽", systemImage: "music.note")
                     }
-                    .onChange(of: audioManager.isMusicOn) { isOn in
-                        if isOn {
-                            audioManager.playBackgroundMusic(for: 1) // 开启时播放背景音乐
-                        } else {
-                            audioManager.stopMusic() // 关闭时停止音乐
-                        }
-                    }
+                    // 在 SettingView 中切换开关不会立即播放或停止音乐，控制在关卡内实现
 
                     // 🎶 音量进度条
                     VStack(alignment: .leading, spacing: 10) {

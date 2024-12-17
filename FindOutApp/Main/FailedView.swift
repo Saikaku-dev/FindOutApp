@@ -1,11 +1,7 @@
 import SwiftUI
 
- 
-
-import SwiftUI
-
 struct FailedView: View {
-    @State private var moveToHomeView: Bool = false
+    @Environment(\.dismiss) var dismiss
     var onReturnHome: (() -> Void)?
     
     var body: some View {
@@ -15,41 +11,39 @@ struct FailedView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
             
-            VStack (spacing:20){
-                
+            VStack(spacing: 20) {
                 Text("残念！")
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2)
-)
-                    
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(.white)
+                    .foregroundColor(.gray)
+                
                 Image("裂开的奖杯")
                     .resizable()
-                    .frame(width: 160,height: 160)
+                    .frame(width: 160, height: 160)
+                
                 Text("次はもっと上手くいくはずだよ！")
                 
-                Button("続ける") {
-                    onReturnHome?() // 调用重置闭包
-                    moveToHomeView = true
+                Button(action: {
+                    // 调用回调函数以返回主页，动画不立即消失
+                    onReturnHome?()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        dismiss()  // 延迟 dismiss，以保留动画
+                    }
+                }) {
+                    Text("続ける")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity) // 使文字水平居中
                 }
-                .frame(width: 200)
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.purple)
-                .cornerRadius(20)
-               
+                .frame(width: 200) // 按钮宽度
+                .background(Capsule().fill(Color.purple)) // 圆柱形背景
+                
+            }
+
             }
         }
-        .fullScreenCover(isPresented: $moveToHomeView) {
-            HomeView()
-        }
     }
-}
-
-#Preview {
+#Preview{
     FailedView()
 }
-
-
